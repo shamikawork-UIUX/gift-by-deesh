@@ -1,0 +1,48 @@
+.pcard {
+  flex: 0 0 calc(25% - 15px); background: #fff; border-radius: 22px; border: 1px solid var(--line); overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.pcard:hover { transform: translateY(-6px); box-shadow: 0 18px 40px -18px rgba(214, 36, 95, .35); }
+.pcard-img { height: 280px; }
+.pcard .alt { opacity: 0; }
+.pcard:hover .alt { opacity: 1; }
+.pbadge { position: absolute; top: 14px; left: 14px; color: #fff; font-size: 12px; font-weight: 700; padding: 6px 11px; border-radius: 999px; }
+
+.pcard .add { position: absolute; left: 12px; right: 12px; bottom: 12px; transform: translateY(130%); transition: transform .3s var(--ease-out); }
+.pcard:hover .add, .pcard:focus-within .add { transform: translateY(0); }
+.pcard .add button {
+  width: 100%; min-height: 48px; border: none; border-radius: 999px; color: #fff; font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+
+.heart {
+  position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; border: none;
+  background: rgba(255, 255, 255, .92); display: flex; align-items: center; justify-content: center; transition: transform .2s ease;
+}
+.heart:active { transform: scale(.85); }
+.heart .tip {
+  position: absolute; right: 52px; top: 50%; transform: translateY(-50%) translateX(6px); opacity: 0;
+  background: var(--ink); color: #fff; font-size: 12px; font-weight: 600; padding: 6px 10px; border-radius: 999px;
+  white-space: nowrap; transition: all .2s ease; pointer-events: none;
+}
+.heart:hover .tip { opacity: 1; transform: translateY(-50%); }
+.heart.sent svg { animation: heartPop .45s cubic-bezier(.3, 1.8, .5, 1); }
+@keyframes heartPop { 0% { transform: scale(.6); } 100% { transform: scale(1); } }
+
+.pcard-body { padding: 18px 20px 20px; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.pcard-body h3 { margin: 0; font-size: 16px; font-weight: 700; }
+.pcard-note { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.pcard-price { text-align: right; flex: 0 0 auto; }
+.pcard-amt { font-weight: 700; font-size: 15px; }
+.pcard-koko { padding: 0 20px 18px; margin-top: -8px; }
+
+@media (hover: none) { .pcard .add { transform: none; } }
+@media (max-width: 900px) { .pcard { flex-basis: 72%; scroll-snap-align: start; } }
+@media (hover: none) { .pcard:hover { transform: none; box-shadow: none; } .heart .tip { display: none; } }
+@media (max-width: 600px) {
+  .pcard { flex-basis: 66%; border-radius: 20px; }
+  .pcard-img { height: auto; aspect-ratio: 1 / 1; }
+  .pcard-body { padding: 14px 16px 16px; }
+  .pcard-body h3 { font-size: 15px; }
+  .pcard-koko { padding: 0 16px 14px; }
+}

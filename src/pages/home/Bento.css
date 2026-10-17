@@ -1,0 +1,48 @@
+.bento-sec { padding-top: var(--sec-y); padding-bottom: 40px; }
+.bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 250px 250px; gap: 20px; }
+.bento-tile { position: relative; border-radius: 24px; overflow: hidden; text-decoration: none; display: block; min-height: 220px; color: var(--ink); }
+.bento-tile:hover { color: var(--ink); }
+.bento-tile.big { grid-column: span 2; grid-row: span 2; }
+.bento-tile.wide { grid-column: span 2; }
+.bento-tile:hover .ph-in { transform: scale(1.06); }
+.bento-fill { position: absolute; inset: 0; }
+.bento-right { position: absolute; top: 0; bottom: 0; right: 0; width: 55%; }
+.bento-t { font-family: var(--font-display); font-weight: 700; line-height: 1.1; color: var(--ink); }
+.bento-card {
+  position: absolute; left: 20px; right: 20px; bottom: 20px; background: #fff; border-radius: 20px; padding: 22px 24px;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+}
+.bento-pill { display: inline-block; background: var(--pink-soft); color: var(--pink-dark); font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; margin-bottom: 10px; }
+.bento-side { position: absolute; left: 28px; top: 28px; bottom: 28px; width: 42%; display: flex; flex-direction: column; justify-content: space-between; }
+.bento-foot { position: absolute; left: 22px; right: 22px; bottom: 22px; }
+.bento-tile .reveal { font-size: 14px; color: var(--body); margin-top: 6px; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .35s ease, opacity .35s ease; }
+.bento-tile:hover .reveal, .bento-tile:focus-visible .reveal { max-height: 40px; opacity: 1; }
+
+.go { border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; transform: rotate(-45deg); transition: transform .3s ease; }
+.go-lg { flex: 0 0 52px; width: 52px; height: 52px; background: var(--pink); }
+.go-ink { width: 44px; height: 44px; background: var(--ink); }
+.bento-tile:hover .go { transform: translateX(4px) rotate(-45deg); }
+
+@media (hover: none) { .bento-tile .reveal { max-height: 40px; opacity: 1; } }
+@media (max-width: 900px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
+  .bento-tile, .bento-tile.wide { grid-column: auto; grid-row: auto; }
+  .bento-tile.big { grid-column: 1 / -1; grid-row: auto; min-height: 300px; }
+}
+@media (max-width: 600px) {
+  .bento-sec .sec-head { margin-bottom: 20px !important; }
+  .bento { gap: 12px; }
+  .bento-tile { min-height: 180px; border-radius: 22px; }
+  .bento-tile.big { min-height: 280px; }
+  .bento-tile.wide { grid-column: 1 / -1; min-height: 160px; }
+  .bento-tile.wide .bento-right { width: 46%; }
+  .bento-side { left: 20px; top: 20px; bottom: 20px; width: 50%; }
+  .bento-card { left: 12px; right: 12px; bottom: 12px; padding: 16px; border-radius: 18px; }
+  .bento-card .bento-t { font-size: 22px !important; }
+  .bento-side .bento-t { font-size: 22px !important; }
+  .bento-foot { left: 16px; right: 16px; bottom: 16px; }
+  .bento-foot .bento-t { font-size: 19px !important; }
+  .bento-tile .reveal { font-size: 13px; }
+  .go-lg { flex-basis: 44px; width: 44px; height: 44px; }
+  .bento-tile .ph-in { font-size: 11px; }
+}

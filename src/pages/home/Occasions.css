@@ -1,0 +1,57 @@
+.occ-sec { background: #fff; margin-top: var(--sec-y-sm); }
+.occ-wrap { padding-top: var(--sec-y); padding-bottom: var(--sec-y); display: flex; gap: 56px; align-items: stretch; }
+.occ-list { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+.occ {
+  display: flex; align-items: center; gap: 18px; width: 100%; text-align: left; background: none; border: none;
+  border-bottom: 1px solid #EAD7DD; padding: 22px 4px; color: #9C8790; transition: color .25s ease, padding .25s ease;
+}
+.occ .num { font-size: 13px; font-weight: 700; letter-spacing: .08em; width: 28px; }
+.occ .t { font-family: var(--font-display); font-weight: 600; font-size: 40px; line-height: 1.05; flex: 1; }
+.occ .ar {
+  width: 48px; height: 48px; flex: 0 0 48px; border-radius: 50%; background: var(--pink); color: #fff;
+  display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateX(-8px); transition: all .25s ease;
+}
+.occ:hover { color: #6E5560; }
+.occ.on { color: var(--ink); padding-left: 14px; }
+.occ.on .ar { opacity: 1; transform: none; }
+.occ.on .num { color: var(--pink); }
+
+.occ-ph { flex: 1.1 1 0; min-width: 0; min-height: 520px; border-radius: 32px; transition: background .4s ease; }
+.occ-card {
+  position: absolute; left: 24px; right: 24px; bottom: 24px; background: rgba(255, 255, 255, .96);
+  border-radius: 22px; padding: 22px 24px; animation: occIn .4s var(--ease-out);
+}
+@keyframes occIn { 0% { opacity: 0; transform: translateY(12px); } 100% { opacity: 1; transform: none; } }
+.occ-card-t { font-family: var(--font-display); font-weight: 700; font-size: 26px; }
+.occ-card-s { font-size: 15px; color: var(--body); margin-top: 4px; }
+.occ-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+.occ-chip { font-size: 13px; font-weight: 600; background: var(--pink-hover); color: #8A1E43; padding: 8px 12px; border-radius: 999px; }
+.occ-cta { margin-left: auto; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; min-height: 44px; }
+
+@media (max-width: 900px) {
+  .occ-wrap { flex-direction: column; gap: 20px; }
+  .occ .t { font-size: 28px; }
+  .occ-ph { min-height: 440px; }
+}
+
+/* Phones: occasions become a swipeable chip row right above the panel */
+@media (max-width: 600px) {
+  .occ-list .h2 { margin-bottom: 18px !important; }
+  .occ-list [role="tablist"] {
+    display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x proximity;
+    margin: 0 calc(var(--gutter) * -1); padding: 2px var(--gutter); scrollbar-width: none;
+  }
+  .occ-list [role="tablist"]::-webkit-scrollbar { display: none; }
+  .occ {
+    flex: 0 0 auto; width: auto; min-height: 44px; padding: 10px 16px; gap: 6px; scroll-snap-align: start;
+    border: 1.5px solid var(--line-2); border-radius: 999px; color: var(--ink); background: #fff;
+  }
+  .occ .num, .occ .ar { display: none; }
+  .occ .t { font-family: var(--font-body); font-size: 14px; font-weight: 600; }
+  .occ.on { padding-left: 16px; background: var(--ink); border-color: var(--ink); color: #fff; }
+  .occ-ph { min-height: 360px; border-radius: 24px; }
+  .occ-card { left: 12px; right: 12px; bottom: 12px; padding: 18px; border-radius: 18px; }
+  .occ-card-t { font-size: 22px; }
+  .occ-card-s { font-size: 14px; }
+  .occ-cta { margin-left: 0; width: 100%; }
+}

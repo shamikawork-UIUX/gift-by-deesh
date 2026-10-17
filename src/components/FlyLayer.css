@@ -1,0 +1,10 @@
+/* X moves linearly while Y uses an overshooting curve, so the token travels in an arc. */
+.fly-x { position: fixed; z-index: 70; pointer-events: none; transition: transform .78s linear; }
+.fly-y { transition: transform .78s cubic-bezier(.45, -0.9, .8, .85); }
+.fly-tok {
+  width: 56px; height: 56px; border-radius: 50%; border: 3px solid #fff; color: var(--pink-dark);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 12px 24px -8px rgba(27, 31, 59, .45);
+  animation: flyS .8s ease-in forwards;
+}
+@keyframes flyS { 0% { transform: scale(.3); } 15% { transform: scale(1.18); } 30% { transform: scale(1); } 75% { transform: scale(.85); } 100% { transform: scale(.3); opacity: .6; } }

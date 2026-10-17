@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shop Gifts — GiftsByDeesh</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFF8F3}
+a{color:#D6245F}a:hover{color:#A8173F}
+*{box-sizing:border-box}
+button,select,input{font-family:inherit}
+button{cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1.5px solid #EBD9DF;background:#fff;color:#1B1F3B;border-radius:999px;padding:10px 16px;min-height:44px;font-size:14px;font-weight:600;transition:all .2s ease}
+.chip:hover{border-color:#D6245F;transform:translateY(-1px)}
+.chip.on{background:#1B1F3B;border-color:#1B1F3B;color:#fff;animation:chipPop .35s cubic-bezier(.3,1.8,.5,1)}
+@keyframes chipPop{0%{transform:scale(.9)}100%{transform:none}}
+.vibe{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:999px;padding:10px 18px;min-height:44px;font-size:14px;font-weight:700;background:transparent;color:#4A4F66;transition:all .25s ease}
+.vibe:hover{background:rgba(255,255,255,.7);color:#1B1F3B}
+.vibe.on{background:#fff;color:#1B1F3B;box-shadow:0 8px 20px -12px rgba(27,31,59,.35)}
+.vibe .dot{width:10px;height:10px;border-radius:50%}
+.range{width:100%;accent-color:#D6245F;height:28px;cursor:pointer}
+.sgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.cell{opacity:0}
+.cell.inA{animation:cellA .55s cubic-bezier(.2,.8,.2,1) forwards}
+.cell.inB{animation:cellB .55s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes cellA{0%{opacity:0;transform:translateY(24px) scale(.96)}100%{opacity:1;transform:none}}
+@keyframes cellB{0%{opacity:0;transform:translateY(24px) scale(.96)}100%{opacity:1;transform:none}}
+.cell.wide{grid-column:span 2}
+.scard{background:#fff;border-radius:22px;border:1px solid #F1E3E8;overflow:hidden;height:100%;display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease}
+.scard:hover{transform:translateY(-6px);box-shadow:0 20px 40px -20px rgba(214,36,95,.4)}
+.simg{position:relative;height:250px;overflow:hidden}
+.simg-btn{position:absolute;inset:0;border:none;background:none;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#5E4A52;font-size:13px;font-weight:600;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.scard:hover .simg-btn{transform:scale(1.05)}
+.qv-hint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.9);opacity:0;background:rgba(27,31,59,.88);color:#fff;font-size:13px;font-weight:700;padding:9px 14px;border-radius:999px;pointer-events:none;transition:all .25s ease;white-space:nowrap}
+.scard:hover .qv-hint{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.wrapov{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.55) 2px,transparent 2.5px);background-size:18px 18px;animation:paperIn .4s ease}
+@keyframes paperIn{0%{clip-path:inset(0 100% 0 0)}100%{clip-path:inset(0 0 0 0)}}
+.wrapov .rv{position:absolute;top:0;bottom:0;left:50%;width:22px;margin-left:-11px;transform-origin:top;animation:ribV .35s .3s cubic-bezier(.3,1.2,.5,1) both}
+.wrapov .rh{position:absolute;left:0;right:0;top:50%;height:22px;margin-top:-11px;transform-origin:left;animation:ribH .35s .42s cubic-bezier(.3,1.2,.5,1) both}
+@keyframes ribV{0%{transform:scaleY(0)}100%{transform:none}}
+@keyframes ribH{0%{transform:scaleX(0)}100%{transform:none}}
+.wrapov .bow{position:absolute;left:50%;top:50%;width:96px;height:62px;margin:-40px 0 0 -48px;animation:bowIn .5s .6s cubic-bezier(.3,1.8,.5,1) both}
+@keyframes bowIn{0%{transform:scale(0) rotate(-30deg)}100%{transform:none}}
+.wtog{position:absolute;left:12px;bottom:12px;display:flex;background:rgba(255,255,255,.94);border-radius:999px;padding:4px;box-shadow:0 6px 14px -8px rgba(27,31,59,.4)}
+.wtog button{border:none;background:none;border-radius:999px;padding:8px 12px;min-height:36px;font-size:12px;font-weight:700;color:#6B6F85;transition:all .25s ease}
+.wtog button.on{background:#1B1F3B;color:#fff}
+.heart{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center}
+.heart.liked svg{animation:chipPop .45s cubic-bezier(.3,1.8,.5,1)}
+.addbtn{width:46px;height:46px;flex:0 0 46px;border-radius:50%;border:none;color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .2s ease}
+.addbtn:hover{transform:rotate(90deg) scale(1.06)}
+.addbtn:active{transform:scale(.85)}
+.name-btn{border:none;background:none;padding:0;text-align:left;color:#1B1F3B;font-weight:700;font-size:16px;line-height:1.3}
+.name-btn:hover{color:#A8173F}
+.mini-box{position:relative;width:150px;height:110px;margin:0 auto}
+.mini-box .base{position:absolute;left:0;right:0;bottom:0;height:62px;border-radius:12px}
+.mini-box .tk{position:absolute;bottom:40px;width:34px;height:34px;border-radius:50%;border:3px solid #fff}
+.mini-box .t1{left:18px;animation:mbDrop 2.4s 0s infinite cubic-bezier(.3,1.4,.5,1)}
+.mini-box .t2{left:58px;animation:mbDrop 2.4s .4s infinite cubic-bezier(.3,1.4,.5,1)}
+.mini-box .t3{left:98px;animation:mbDrop 2.4s .8s infinite cubic-bezier(.3,1.4,.5,1)}
+@keyframes mbDrop{0%{transform:translateY(-70px);opacity:0}25%{transform:none;opacity:1}75%{transform:none;opacity:1}100%{transform:translateY(-6px);opacity:0}}
+.mini-box .front{position:absolute;left:0;right:0;bottom:0;height:44px;border-radius:0 0 12px 12px;z-index:2}
+.tile-link{display:flex;flex-direction:column;justify-content:space-between;height:100%;min-height:420px;border-radius:22px;padding:28px;text-decoration:none;transition:transform .3s ease}
+.tile-link:hover{transform:translateY(-6px)}
+.guide-btn{display:flex;align-items:center;gap:32px;width:100%;height:100%;min-height:420px;border:none;border-radius:22px;padding:36px;text-align:left;color:#fff;transition:transform .3s ease;overflow:hidden;position:relative}
+.guide-btn:hover{transform:translateY(-6px)}
+.guide-btn .float{animation:floaty 3.2s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+.pa{display:inline-block;animation:pA .4s cubic-bezier(.3,1.6,.5,1)}.pb{display:inline-block;animation:pB .4s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pA{0%{transform:scale(1.3)}100%{transform:none}}
+@keyframes pB{0%{transform:scale(1.3)}100%{transform:none}}
+.empty-bear{animation:sway 2.6s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.qv-layer{position:fixed;inset:0;z-index:55;display:flex;align-items:center;justify-content:center;padding:24px}
+.qv-back{position:absolute;inset:0;border:none;background:rgba(27,31,59,.42);animation:fadeIn .3s ease;cursor:default}
+@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+.qv{position:relative;width:min(960px,100%);max-height:100%;overflow-y:auto;background:#FFF8F3;border-radius:30px;padding:28px;box-shadow:0 40px 80px -30px rgba(27,31,59,.6);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;animation:qvPop .45s cubic-bezier(.3,1.4,.5,1)}
+@keyframes qvPop{0%{opacity:0;transform:translateY(30px) scale(.92)}100%{opacity:1;transform:none}}
+.qv-close{position:absolute;top:16px;right:16px;z-index:3;width:44px;height:44px;border-radius:50%;border:1.5px solid #EBD9DF;background:#fff;color:#1B1F3B;display:flex;align-items:center;justify-content:center;transition:transform .25s ease}
+.qv-close:hover{transform:rotate(90deg)}
+.qv-img{position:relative;min-height:460px;border-radius:22px;overflow:hidden}
+.qv-info{padding-top:8px}
+.qv-info > *{animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
+.qv-info > *:nth-child(2){animation-delay:.08s}.qv-info > *:nth-child(3){animation-delay:.14s}.qv-info > *:nth-child(4){animation-delay:.2s}.qv-info > *:nth-child(5){animation-delay:.26s}
+@media (max-width:760px){.qv-layer{padding:12px}.qv{grid-template-columns:1fr;gap:18px;padding:18px;border-radius:24px}.qv-img{min-height:260px}}
+@keyframes slideIn{0%{transform:translateX(100%)}100%{transform:none}}
+@keyframes rise{0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:none}}
+.seg{display:flex;gap:10px}
+.seg button{flex:1;border:1.5px solid #EBD9DF;background:#fff;border-radius:16px;padding:12px;min-height:56px;text-align:left;color:#1B1F3B;transition:all .2s ease}
+.seg button.on{border-color:#1B1F3B;box-shadow:inset 0 0 0 1px #1B1F3B}
+.addon{display:flex;align-items:center;gap:12px;width:100%;border:1.5px solid #EBD9DF;background:#fff;border-radius:16px;padding:12px 14px;min-height:56px;color:#1B1F3B;text-align:left;transition:all .2s ease}
+.addon .box{width:24px;height:24px;border-radius:8px;border:2px solid #D9C4CC;display:flex;align-items:center;justify-content:center;color:#fff;transition:all .2s ease}
+.addon.on{border-color:#F2A7BE;background:#FFF5F8}
+.addon.on .box{background:#D6245F;border-color:#D6245F;animation:chipPop .3s cubic-bezier(.3,1.8,.5,1)}
+.stp{width:44px;height:44px;border-radius:50%;border:1.5px solid #EBD9DF;background:#fff;color:#1B1F3B;display:flex;align-items:center;justify-content:center}
+.stp:disabled{opacity:.3;cursor:default}
+.big-add{flex:1;min-height:56px;border:none;border-radius:999px;color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .2s ease}
+.big-add:hover{transform:translateY(-2px)}
+.site-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid #F1E3E8;transition:box-shadow .3s ease}
+.site-head .head-in{padding:16px 24px;transition:padding .3s ease}
+.site-head.shrunk{box-shadow:0 12px 30px -20px rgba(27,31,59,.4)}
+.site-head.shrunk .head-in{padding:8px 24px}
+.site-head .logo-sub{display:block;max-height:16px;overflow:hidden;transition:max-height .3s ease,opacity .3s ease}
+.site-head.shrunk .logo-sub{max-height:0;opacity:0}
+.cart-btn{position:relative;width:44px;height:44px;border:none;background:none;color:#1B1F3B;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s ease}
+.cart-btn:hover{background:#FDEDF2}
+.cart-btn.cA{animation:cartA .6s cubic-bezier(.3,1.6,.5,1)}.cart-btn.cB{animation:cartB .6s cubic-bezier(.3,1.6,.5,1)}
+.cart-btn .plus1{position:absolute;left:50%;top:100%;margin-left:-12px;font-size:12px;font-weight:800;color:#D6245F;opacity:0;pointer-events:none}
+.cart-btn.cA .plus1{animation:plusDA .9s ease-out}.cart-btn.cB .plus1{animation:plusDB .9s ease-out}
+@keyframes plusDA{0%{opacity:0;transform:translateY(-6px)}20%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+@keyframes plusDB{0%{opacity:0;transform:translateY(-6px)}20%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+.fly-x{position:absolute;z-index:70;pointer-events:none;transition:transform .78s linear}
+.fly-y{transition:transform .78s cubic-bezier(.45,-0.9,.8,.85)}
+.fly-tok{width:56px;height:56px;border-radius:50%;border:3px solid #fff;display:flex;align-items:center;justify-content:center;color:#A8173F;box-shadow:0 12px 24px -8px rgba(27,31,59,.45);animation:flyS .8s ease-in forwards}
+@keyframes flyS{0%{transform:scale(.3)}15%{transform:scale(1.18)}30%{transform:scale(1)}75%{transform:scale(.85)}100%{transform:scale(.3);opacity:.6}}
+.fcart{position:relative;display:flex;align-items:center;gap:10px;background:#1B1F3B;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:10px 18px 10px 12px;border-radius:999px;min-height:52px;box-shadow:0 18px 36px -14px rgba(27,31,59,.6);transition:transform .45s cubic-bezier(.3,1.6,.5,1),opacity .3s ease}
+.fcart:hover{color:#fff}
+.fcart.hidden{transform:scale(0);opacity:0;pointer-events:none}
+.fcart.cA{animation:cartA .6s cubic-bezier(.3,1.6,.5,1)}.fcart.cB{animation:cartB .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes cartA{25%{transform:scale(1.14) rotate(-6deg)}50%{transform:scale(.96) rotate(4deg)}75%{transform:scale(1.04) rotate(-2deg)}100%{transform:none}}
+@keyframes cartB{25%{transform:scale(1.14) rotate(-6deg)}50%{transform:scale(.96) rotate(4deg)}75%{transform:scale(1.04) rotate(-2deg)}100%{transform:none}}
+.fcart .plus1{position:absolute;right:14px;top:-6px;font-size:13px;font-weight:800;color:#F7A9C1;opacity:0}
+.fcart.cA .plus1{animation:plA .9s ease-out}.fcart.cB .plus1{animation:plB .9s ease-out}
+@keyframes plA{0%{opacity:0;transform:translateY(6px)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px)}}
+@keyframes plB{0%{opacity:0;transform:translateY(6px)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px)}}
+.badge.bA{display:inline-flex;animation:pA .5s cubic-bezier(.3,1.8,.5,1)}.badge.bB{display:inline-flex;animation:pB .5s cubic-bezier(.3,1.8,.5,1)}
+@media (hover:none){.qv-hint{display:none}}
+@media (max-width:1100px){.sgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){
+.sgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.cell.wide{grid-column:1 / -1}
+.simg{height:190px}
+.finder{grid-template-columns:1fr !important}
+.nav-links{display:none !important}
+.guide-btn{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){.cell.inA,.cell.inB,.wrapov,.wrapov .rv,.wrapov .rh,.wrapov .bow,.mini-box .tk,.guide-btn .float,.empty-bear,.qv,.qv-info > *{animation-duration:.01s;animation-delay:0s}}
+.koko{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#4A4F66;flex-wrap:wrap}
+.koko-tag{background:#1B1F3B;color:#fff;font-weight:800;font-size:10px;letter-spacing:.08em;padding:3px 7px;border-radius:6px}
+.cd-layer{position:fixed;inset:0;z-index:58}
+.cd-back{position:absolute;inset:0;border:none;background:rgba(27,31,59,.42);animation:cdFade .3s ease;cursor:default}
+@keyframes cdFade{0%{opacity:0}100%{opacity:1}}
+.cdr{position:absolute;top:0;right:0;bottom:0;width:min(440px,100%);background:#FFF8F3;overflow-y:auto;box-shadow:-24px 0 48px -24px rgba(27,31,59,.45);animation:cdIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes cdIn{0%{transform:translateX(100%)}100%{transform:none}}
+.cd-head{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid #F1E3E8;background:#fff}
+.cd-x{width:44px;height:44px;border-radius:50%;border:1.5px solid #EBD9DF;background:#fff;color:#1B1F3B;display:flex;align-items:center;justify-content:center;margin-left:auto}
+.cd-body{padding:18px 22px;display:flex;flex-direction:column;gap:12px}
+.cl{background:#fff;border:1px solid #F1E3E8;border-radius:18px;padding:12px;animation:clIn .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes clIn{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:none}}
+.cl.out{animation:clOut .32s ease forwards}
+@keyframes clOut{0%{opacity:1;transform:none}100%{opacity:0;transform:translateX(70px) scale(.95)}}
+.cl-row{display:flex;gap:12px;align-items:flex-start}
+.cl-th{width:62px;height:62px;flex:0 0 62px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#7A3A50}
+.cq{display:flex;align-items:center;gap:4px;background:#FBF4F6;border-radius:999px;padding:3px}
+.cq button{width:44px;height:44px;border-radius:50%;border:none;background:#fff;color:#1B1F3B;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px -3px rgba(27,31,59,.3);transition:transform .15s ease}
+.cq button:active:not(:disabled){transform:scale(.85)}
+.cq button:disabled{opacity:.35;cursor:default}
+.cq .n{min-width:24px;text-align:center;font-weight:700;font-size:15px}
+.cl-del{width:44px;height:44px;flex:0 0 44px;border:none;background:none;color:#8C7E84;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s ease}
+.cl-del:hover{background:#FDEDF2;color:#B42318}
+.det-btn{border:none;background:none;padding:4px 0;min-height:36px;font-size:13px;font-weight:700;color:#A8173F;display:flex;align-items:center;gap:6px}
+.det-btn svg{transition:transform .3s ease}
+.det-btn.on svg{transform:rotate(180deg)}
+.det{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.det.on{grid-template-rows:1fr}
+.det > div{overflow:hidden}
+.det ul{margin:8px 0 0;padding:10px 12px 10px 28px;background:#FBF4F6;border-radius:12px;font-size:13px;color:#4A4F66;line-height:1.7}
+.cd-sec{background:#fff;border:1px solid #F1E3E8;border-radius:18px;padding:14px}
+.cd-lab{font-size:14px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.dchips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px}
+.dchip{flex:0 0 auto;min-width:74px;min-height:56px;border:1.5px solid #EBD9DF;background:#fff;border-radius:14px;padding:6px 10px;color:#1B1F3B;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .2s ease}
+.dchip .w{font-size:12px;font-weight:800}.dchip .d{font-size:12px;color:#6B6F85}
+.dchip.on{background:#1B1F3B;border-color:#1B1F3B;color:#fff;animation:cpop .3s cubic-bezier(.3,1.8,.5,1)}
+.dchip.on .d{color:#C9CCE0}
+@keyframes cpop{0%{transform:scale(.88)}100%{transform:none}}
+.pchips{display:flex;gap:8px}
+.pchip{flex:1;min-height:56px;border:1.5px solid #EBD9DF;background:#fff;border-radius:14px;padding:8px 12px;text-align:left;color:#1B1F3B;font-size:14px;font-weight:700;transition:all .2s ease}
+.pchip .s{display:block;font-size:12px;font-weight:500;color:#6B6F85;margin-top:2px}
+.pchip.on{border-color:#1B1F3B;box-shadow:inset 0 0 0 1px #1B1F3B;animation:cpop .3s cubic-bezier(.3,1.8,.5,1)}
+.cd-note{width:100%;min-height:72px;border:1.5px solid #EBD9DF;border-radius:12px;padding:10px 12px;font:inherit;font-size:14px;resize:vertical;outline:none;color:#1B1F3B;background:#fff}
+.cd-note:focus{border-color:#D6245F}
+.undo{display:flex;align-items:center;gap:10px;margin:0 0 12px;background:#1B1F3B;color:#fff;border-radius:14px;padding:8px 8px 8px 14px;font-size:13px;animation:clIn .3s ease both}
+.undo button{margin-left:auto;min-height:40px;border:none;border-radius:10px;background:#fff;color:#1B1F3B;font-weight:700;font-size:13px;padding:0 14px}
+.cd-foot{position:sticky;bottom:0;z-index:3;background:#fff;border-top:1px solid #F1E3E8;padding:14px 22px 18px;box-shadow:0 -12px 24px -20px rgba(27,31,59,.35)}
+.send{width:100%;min-height:56px;border-radius:999px;background:#25D366;color:#0B2E17;text-decoration:none;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .2s ease}
+.send:hover{transform:translateY(-2px);color:#0B2E17}
+.sending{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);z-index:6;background:rgba(255,248,243,.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;animation:cdFade .25s ease}
+.plane{animation:plane 1.4s cubic-bezier(.5,0,.3,1) forwards}
+@keyframes plane{0%{transform:translate(-70px,70px) scale(.6) rotate(12deg);opacity:0}20%{opacity:1;transform:none}65%{transform:translate(30px,-24px) rotate(-6deg)}100%{transform:translate(220px,-280px) scale(.4) rotate(-20deg);opacity:0}}
+.trail{stroke-dasharray:6 8;animation:trail 1.4s linear forwards}
+@keyframes trail{0%{stroke-dashoffset:200;opacity:0}20%{opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.sent-ic{width:100px;height:100px;border-radius:32px;background:#E3F6EA;color:#17663A;display:flex;align-items:center;justify-content:center;animation:cpop .55s cubic-bezier(.3,1.8,.5,1)}
+.cd-sway{animation:cdSway 2.6s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes cdSway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.cd-cta{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 24px;border-radius:999px;color:#fff;text-decoration:none;font-weight:700;font-size:15px;border:none}
+.cd-cta:hover{color:#fff}
+@media (prefers-reduced-motion:reduce){.cdr,.cl,.plane,.cd-sway{animation-duration:.01s}}
+</style>
+</helmet>
+
+<div ref="{{setRoot}}" style="position: relative; font-family: 'Plus Jakarta Sans', sans-serif; color: #1B1F3B; background: {{vibeBg}}; transition: background .5s ease; width: 100%">
+
+<div style="background: {{accent}}; color: #fff; text-align: center; font-size: 13px; font-weight: 600; padding: 10px 16px">Order by [TIME] for next-day delivery in [AREA]</div>
+
+<header class="site-head {{headCls}}">
+<div class="head-in" style="max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1B1F3B">
+<span style="width: 40px; height: 40px; border-radius: 12px; background: {{accent}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg></span>
+<span style="display: flex; flex-direction: column"><span style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 20px; line-height: 1">GiftsBy<span style="color: {{accent}}">Deesh</span></span><span class="logo-sub" style="font-size: 11px; color: #6B6F85">House of Deesh (Pvt) Ltd</span></span>
+</a>
+<nav class="nav-links" style="display: flex; gap: 30px; font-size: 14px; font-weight: 600">
+<a href="Main.dc.html" style="color: #1B1F3B; text-decoration: none">Home</a>
+<a href="#top" style="color: {{accent}}; text-decoration: none">Shop Gifts</a>
+<a href="#top" style="color: #1B1F3B; text-decoration: none">Chocolate Bouquets</a>
+<a href="#top" style="color: #1B1F3B; text-decoration: none">Teddy Bears</a>
+<a href="Offers.dc.html" style="color: #1B1F3B; text-decoration: none">Offers</a>
+<a href="About.dc.html" style="color: #1B1F3B; text-decoration: none">About Us</a>
+</nav>
+<div style="display: flex; gap: 8px">
+<button aria-label="Search" style="width: 44px; height: 44px; border: none; background: none; color: #1B1F3B; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
+<button aria-label="Basket, {{basket}} items" ref="{{setCart}}" class="cart-btn {{navCartCls}}" onClick="{{openCart}}"><span class="plus1" aria-hidden="true">+{{lastAdd}}</span><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h14l-1.4 9.1a2 2 0 0 1-2 1.9H8.4a2 2 0 0 1-2-1.9z"></path><path d="m9 10 3-6 3 6"></path></svg><span class="badge {{badgeCls}}" style="position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; border-radius: 9px; background: {{accent}}; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; padding: 0 4px">{{basket}}</span></button>
+</div>
+</div>
+</header>
+
+<!-- Page title -->
+<section id="top" style="max-width: 1240px; margin: 0 auto; padding: 44px 24px 0">
+<div style="font-size: 13px; color: #6B6F85"><a href="Main.dc.html" style="color: #6B6F85">Home</a> / <span style="color: #1B1F3B; font-weight: 600">Shop Gifts</span></div>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-top: 14px">
+<h1 style="margin: 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 56px; line-height: 1.02">Find their perfect <span style="color: {{accent}}">gift</span></h1>
+<p style="margin: 0; font-size: 16px; color: #4A4F66; max-width: 380px; line-height: 1.55">Answer three quick questions, or just browse. Every gift is hand-wrapped and delivered islandwide.</p>
+</div>
+</section>
+
+<!-- Gift Finder -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 32px 24px 0">
+<div style="background: #fff; border-radius: 28px; border: 1px solid #F1E3E8; padding: 28px; box-shadow: 0 24px 48px -36px rgba(214,36,95,.45)">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="width: 40px; height: 40px; border-radius: 12px; background: #FDE7EE; color: {{accent}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4z"></path><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"></path></svg></span>
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 24px">Gift Finder</div>
+</div>
+<button onClick="{{reset}}" style="border: none; background: none; color: #A8173F; font-weight: 700; font-size: 14px; min-height: 44px; display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path></svg>Start over</button>
+</div>
+<div class="finder" style="display: grid; grid-template-columns: 1.15fr 1fr 0.9fr; gap: 28px">
+<div>
+<div style="font-size: 13px; font-weight: 700; color: #6B6F85; letter-spacing: .06em; margin-bottom: 12px">1 · WHO'S IT FOR?</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-for list="{{whoOpts}}" as="o" hint-placeholder-count="5">
+<button class="chip {{o.cls}}" onClick="{{o.pick}}">{{o.label}}</button>
+</sc-for>
+</div>
+</div>
+<div>
+<div style="font-size: 13px; font-weight: 700; color: #6B6F85; letter-spacing: .06em; margin-bottom: 12px">2 · WHAT'S THE OCCASION?</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-for list="{{occOpts}}" as="o" hint-placeholder-count="4">
+<button class="chip {{o.cls}}" onClick="{{o.pick}}">{{o.label}}</button>
+</sc-for>
+</div>
+</div>
+<div>
+<label for="budget" style="display: block; font-size: 13px; font-weight: 700; color: #6B6F85; letter-spacing: .06em; margin-bottom: 12px">3 · BUDGET</label>
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 26px; margin-bottom: 6px">Up to <span class="{{countCls}}" style="color: {{accent}}">{{budgetLabel}}</span></div>
+<input id="budget" class="range" type="range" min="2000" max="15000" step="500" value="{{budget}}" onChange="{{onBudget}}">
+<div style="display: flex; justify-content: space-between; font-size: 12px; color: #6B6F85"><span>LKR 2,000</span><span>LKR 15,000</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Toolbar -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 28px 24px 0">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+<div style="display: flex; gap: 6px; flex-wrap: wrap; background: rgba(27,31,59,.04); padding: 6px; border-radius: 999px">
+<sc-for list="{{vibes}}" as="v" hint-placeholder-count="5">
+<button class="vibe {{v.cls}}" onClick="{{v.pick}}"><span class="dot" style="background: {{v.dot}}"></span>{{v.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+<div role="status" style="font-size: 15px; color: #4A4F66"><strong class="{{countCls}}" style="color: #1B1F3B; font-size: 18px">{{count}}</strong> {{countWord}}</div>
+<label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600">Sort
+<select value="{{sort}}" onChange="{{onSort}}" style="min-height: 44px; border: 1.5px solid #EBD9DF; border-radius: 999px; padding: 0 14px; background: #fff; font-size: 14px; font-weight: 600; color: #1B1F3B">
+<option value="pop">Most loved</option>
+<option value="low">Price: low to high</option>
+<option value="high">Price: high to low</option>
+</select>
+</label>
+</div>
+</div>
+</section>
+
+<!-- Grid -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 24px 24px 96px">
+<sc-if value="{{hasResults}}" hint-placeholder-val="{{true}}">
+<div class="sgrid">
+<sc-for list="{{cells}}" as="c" hint-placeholder-count="8">
+<div class="cell {{c.anim}} {{c.wideCls}}" style="animation-delay: {{c.delay}}">
+
+<sc-if value="{{c.isProd}}" hint-placeholder-val="{{true}}">
+<article class="scard">
+<div class="simg" style="background: {{c.tint}}">
+<button class="simg-btn" aria-label="Quick view {{c.name}}" onClick="{{c.open}}">
+<svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="3"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path></svg>Photo — {{c.name}}
+</button>
+<sc-if value="{{c.isWrapped}}" hint-placeholder-val="{{false}}">
+<div class="wrapov" style="background-color: {{c.paper}}">
+<div class="rv" style="background: {{accent}}"></div>
+<div class="rh" style="background: {{accent}}"></div>
+<svg class="bow" aria-hidden="true" viewBox="0 0 120 76"><path d="M60 38C38 8 8 10 12 32c3 16 30 14 48 6z" fill="{{accent}}"></path><path d="M60 38C82 8 112 10 108 32c-3 16-30 14-48 6z" fill="{{accent}}"></path><path d="M56 42 42 74l9-4 5 6 6-32z" fill="{{accent}}"></path><path d="M64 42l14 32-9-4-5 6-6-32z" fill="{{accent}}"></path><circle cx="60" cy="39" r="9" fill="{{accent}}" stroke="rgba(0,0,0,.18)" stroke-width="2"></circle></svg>
+</div>
+</sc-if>
+<span class="qv-hint">Quick view</span>
+<sc-if value="{{c.hasBadge}}" hint-placeholder-val="{{false}}">
+<span style="position: absolute; top: 14px; left: 14px; background: {{c.badgeBg}}; color: #fff; font-size: 12px; font-weight: 700; padding: 6px 11px; border-radius: 999px">{{c.badge}}</span>
+</sc-if>
+<button class="heart {{c.heartCls}}" aria-label="Send {{c.name}} as a hint" onClick="{{c.like}}" style="color: {{c.heartColor}}"><svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="{{c.heartFill}}" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.7 7.5 3.8 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.2 0 5.3 3 4.2 6.2C19.5 15.4 12 20 12 20z"></path></svg></button>
+<div class="wtog" role="group" aria-label="View">
+<button class="{{c.unCls}}" onClick="{{c.showUn}}">Gift</button>
+<button class="{{c.wrCls}}" onClick="{{c.showWr}}">Wrapped</button>
+</div>
+</div>
+<div style="padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1">
+<div>
+<button class="name-btn" onClick="{{c.open}}">{{c.name}}</button>
+<div style="font-size: 13px; color: #6B6F85; margin-top: 4px">{{c.meta}}</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto">
+<div><div style="font-size: 11px; color: #6B6F85">from</div><div style="font-weight: 700; font-size: 17px">{{c.priceLabel}}</div><div class="koko" style="margin-top: 5px">{{c.koko}} with <span class="koko-tag">KOKO</span></div></div>
+<button class="addbtn" aria-label="Add {{c.name}} to basket" onClick="{{c.add}}" style="background: {{accent}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+</div>
+</article>
+</sc-if>
+
+<sc-if value="{{c.isBox}}" hint-placeholder-val="{{false}}">
+<a href="Main.dc.html" class="tile-link" style="background: #1B1F3B; color: #fff">
+<div>
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #F7A9C1">CAN'T DECIDE?</p>
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 30px; line-height: 1.08">Build your own gift box</div>
+<p style="margin: 10px 0 0; font-size: 14px; line-height: 1.55; color: #D7D9E8">Mix their favourite treats and plushies into one box.</p>
+</div>
+<div class="mini-box" aria-hidden="true">
+<div class="base" style="background: #F2B4C8"></div>
+<div class="tk t1" style="background: #E8463B"></div>
+<div class="tk t2" style="background: #D9A441"></div>
+<div class="tk t3" style="background: #C68E5E"></div>
+<div class="front" style="background: #F7C6D5"></div>
+</div>
+<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: #fff">Start packing <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</a>
+</sc-if>
+
+<sc-if value="{{c.isGuide}}" hint-placeholder-val="{{false}}">
+<button class="guide-btn" onClick="{{c.open}}" style="background: {{accent}}">
+<div style="flex: 1 1 auto; min-width: 0">
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #FFD6E2">GIFT GUIDE</p>
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 40px; line-height: 1.04">Sweet gifts under LKR 5,000</div>
+<p style="margin: 12px 0 22px; font-size: 15px; line-height: 1.55; color: #FFE4EC; max-width: 340px">Big smiles, small budget. Tap to filter the shop to our favourite little treats.</p>
+<span style="display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #A8173F; font-weight: 700; font-size: 15px; padding: 13px 22px; border-radius: 999px">Show me <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</div>
+<div class="float" aria-hidden="true" style="flex: 0 0 170px; height: 170px; border-radius: 40px; background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center">
+<svg width="110" height="110" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg>
+</div>
+</button>
+</sc-if>
+
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{noResults}}" hint-placeholder-val="{{false}}">
+<div style="text-align: center; padding: 64px 24px; background: #fff; border-radius: 28px; border: 1px solid #F1E3E8">
+<svg class="empty-bear" aria-hidden="true" width="120" height="120" viewBox="0 0 40 40"><circle cx="11" cy="12" r="5.5" fill="#D9A77C"></circle><circle cx="29" cy="12" r="5.5" fill="#D9A77C"></circle><circle cx="20" cy="22" r="12" fill="#D9A77C"></circle><ellipse cx="20" cy="27" rx="6" ry="4.5" fill="#F6E3D1"></ellipse><path d="M14 19.5q1.5-1.4 3 0M23 19.5q1.5-1.4 3 0" stroke="#3B2A22" stroke-width="1.3" fill="none" stroke-linecap="round"></path><path d="M17.5 29q2.5-2 5 0" stroke="#3B2A22" stroke-width="1.3" fill="none" stroke-linecap="round"></path><ellipse cx="14" cy="23.5" rx="1" ry="1.6" fill="#7FB4E8"></ellipse></svg>
+<h2 style="margin: 18px 0 8px; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 30px">Nothing here yet…</h2>
+<p style="margin: 0 auto 22px; font-size: 15px; color: #4A4F66; max-width: 380px; line-height: 1.55">Try a bigger budget or a different occasion. Or build a box that fits exactly.</p>
+<div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap">
+<button onClick="{{reset}}" style="border: none; background: {{accent}}; color: #fff; font-weight: 700; font-size: 15px; min-height: 48px; padding: 0 24px; border-radius: 999px">Show all gifts</button>
+<a href="Main.dc.html" style="display: inline-flex; align-items: center; background: #fff; border: 1.5px solid #EBD9DF; color: #1B1F3B; text-decoration: none; font-weight: 700; font-size: 15px; min-height: 48px; padding: 0 24px; border-radius: 999px">Build a box</a>
+</div>
+</div>
+</sc-if>
+</section>
+
+<footer style="background: #1B1F3B; color: #D7D9E8">
+<div style="max-width: 1240px; margin: 0 auto; padding: 40px 24px; display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between; align-items: center">
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 22px; color: #fff">GiftsBy<span style="color: #F7A9C1">Deesh</span></div>
+<div style="font-size: 14px">Gifts: 072 177 0653 · Chocolate: 072 896 2797</div>
+<div style="font-size: 13px">© 2026 House of Deesh (Pvt) Ltd.</div>
+</div>
+</footer>
+
+<!-- Quick view modal -->
+<sc-if value="{{qvOpen}}" hint-placeholder-val="{{false}}">
+<div class="qv-layer">
+<button class="qv-back" aria-label="Close quick view" onClick="{{closeQv}}"></button>
+<div class="qv" role="dialog" aria-modal="true" aria-label="{{qv.name}}">
+<button class="qv-close" onClick="{{closeQv}}" aria-label="Close"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+<div class="qv-img" style="background: {{qv.tint}}">
+<div class="simg-btn" style="cursor: default"><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="3"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path></svg>Photo — {{qv.name}}</div>
+<sc-if value="{{qv.isWrapped}}" hint-placeholder-val="{{false}}">
+<div class="wrapov" style="background-color: {{qv.paper}}">
+<div class="rv" style="background: {{accent}}"></div>
+<div class="rh" style="background: {{accent}}"></div>
+<svg class="bow" aria-hidden="true" viewBox="0 0 120 76"><path d="M60 38C38 8 8 10 12 32c3 16 30 14 48 6z" fill="{{accent}}"></path><path d="M60 38C82 8 112 10 108 32c-3 16-30 14-48 6z" fill="{{accent}}"></path><path d="M56 42 42 74l9-4 5 6 6-32z" fill="{{accent}}"></path><path d="M64 42l14 32-9-4-5 6-6-32z" fill="{{accent}}"></path><circle cx="60" cy="39" r="9" fill="{{accent}}" stroke="rgba(0,0,0,.18)" stroke-width="2"></circle></svg>
+</div>
+</sc-if>
+<div class="wtog" role="group" aria-label="View">
+<button class="{{qv.unCls}}" onClick="{{qv.showUn}}">Gift</button>
+<button class="{{qv.wrCls}}" onClick="{{qv.showWr}}">Wrapped</button>
+</div>
+</div>
+<div class="qv-info">
+<div style="padding-right: 52px">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: .14em; color: {{accent}}">QUICK VIEW</span>
+<h2 style="margin: 6px 0 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 32px; line-height: 1.1">{{qv.name}}</h2>
+<div style="font-size: 14px; color: #6B6F85; margin-top: 6px">{{qv.meta}}</div>
+</div>
+<div style="margin-top: 22px">
+<div style="font-size: 14px; font-weight: 700; margin-bottom: 10px">Size</div>
+<div class="seg">
+<sc-for list="{{qvSizes}}" as="z" hint-placeholder-count="2">
+<button class="{{z.cls}}" onClick="{{z.pick}}"><div style="font-weight: 700; font-size: 15px">{{z.label}}</div><div style="font-size: 12px; color: #6B6F85; margin-top: 2px">{{z.note}}</div></button>
+</sc-for>
+</div>
+</div>
+<div style="margin-top: 22px">
+<div style="font-size: 14px; font-weight: 700; margin-bottom: 10px">Make it extra special</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{qvAddons}}" as="a" hint-placeholder-count="3">
+<button class="addon {{a.cls}}" aria-pressed="{{a.on}}" onClick="{{a.toggle}}">
+<span class="box"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></span>
+<span style="flex: 1; font-weight: 600; font-size: 15px">{{a.label}}</span>
+<span style="font-size: 14px; color: #6B6F85">{{a.priceLabel}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="margin-top: 26px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<div style="display: flex; align-items: center; gap: 10px">
+<button class="stp" aria-label="Fewer" onClick="{{qvMinus}}" disabled="{{qvMinusOff}}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14"></path></svg></button>
+<span style="min-width: 20px; text-align: center; font-weight: 700; font-size: 17px">{{qvQty}}</span>
+<button class="stp" aria-label="More" onClick="{{qvPlus}}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+<div style="text-align: right"><div style="font-size: 12px; color: #6B6F85">Total</div><div class="{{qvTotalCls}}" style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 28px">{{qvTotal}}</div><div class="koko" style="justify-content: flex-end; margin-top: 2px">{{qvKoko}} with <span class="koko-tag">KOKO</span></div></div>
+</div>
+<div style="display: flex; gap: 10px">
+<button class="big-add" onClick="{{qvAdd}}" style="background: {{accent}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h14l-1.4 9.1a2 2 0 0 1-2 1.9H8.4a2 2 0 0 1-2-1.9z"></path><path d="m9 10 3-6 3 6"></path></svg>Add to basket</button>
+<button onClick="{{qv.like}}" aria-label="Send as a hint" style="width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid #EBD9DF; background: #fff; color: {{qv.heartColor}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="{{qv.heartFill}}" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.7 7.5 3.8 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.2 0 5.3 3 4.2 6.2C19.5 15.4 12 20 12 20z"></path></svg></button>
+</div>
+<p style="margin: 0; font-size: 13px; color: #6B6F85; text-align: center">Hand-wrapped and confirmed with you on WhatsApp at checkout.</p>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- Cart drawer -->
+<sc-if value="{{cartOpen}}" hint-placeholder-val="{{false}}">
+<div class="cd-layer">
+<button class="cd-back" aria-label="Close basket" onClick="{{closeCart}}"></button>
+<aside class="cdr" role="dialog" aria-label="Your basket">
+<div class="cd-head">
+<span style="width: 42px; height: 42px; border-radius: 12px; background: #FDE7EE; color: {{accent}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h14l-1.4 9.1a2 2 0 0 1-2 1.9H8.4a2 2 0 0 1-2-1.9z"></path><path d="m9 10 3-6 3 6"></path></svg></span>
+<div><div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 22px; line-height: 1">Your basket</div><div class="{{cartTotalCls}}" style="font-size: 13px; color: #6B6F85; margin-top: 4px">{{cartCountLabel}}</div></div>
+<button class="cd-x" aria-label="Close basket" onClick="{{closeCart}}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+</div>
+
+<sc-if value="{{cartEmptyView}}" hint-placeholder-val="{{false}}">
+<div style="padding: 64px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px">
+<svg class="cd-sway" aria-hidden="true" width="140" height="140" viewBox="0 0 60 60"><circle cx="18" cy="13" r="6" fill="#C68E5E"></circle><circle cx="42" cy="13" r="6" fill="#C68E5E"></circle><circle cx="30" cy="24" r="14" fill="#C68E5E"></circle><ellipse cx="30" cy="29" rx="7" ry="5" fill="#F3DFC9"></ellipse><circle cx="25" cy="21.5" r="1.8" fill="#3B2A22"></circle><circle cx="35" cy="21.5" r="1.8" fill="#3B2A22"></circle><circle cx="30" cy="27" r="1.6" fill="#3B2A22"></circle><path d="M27 32q3-1.6 6 0" stroke="#3B2A22" stroke-width="1.2" fill="none" stroke-linecap="round"></path><path d="M14 40h32l-3 15H17z" fill="#F2B4C8" stroke="#D6245F" stroke-width="1.5" stroke-linejoin="round"></path><path d="M21 40c0-7 18-7 18 0" stroke="#D6245F" stroke-width="2" fill="none"></path></svg>
+<h3 style="margin: 6px 0 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 26px">Nothing here yet…</h3>
+<p style="margin: 0; font-size: 15px; color: #4A4F66; line-height: 1.55; max-width: 280px">Your basket is feeling a little lonely. Let's find something sweet for it.</p>
+<a href="Shop.dc.html" class="cd-cta" style="margin-top: 8px; background: {{accent}}">Browse gifts</a>
+</div>
+</sc-if>
+
+<sc-if value="{{cartSentView}}" hint-placeholder-val="{{false}}">
+<div style="padding: 64px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px">
+<div class="sent-ic"><svg aria-hidden="true" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></div>
+<h3 style="margin: 10px 0 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 28px">Your order is on its way to WhatsApp!</h3>
+<p style="margin: 0; font-size: 15px; color: #4A4F66; line-height: 1.6; max-width: 320px">Just press send in WhatsApp. We'll reply to confirm availability, delivery and payment.</p>
+<button class="cd-cta" onClick="{{keepShopping}}" style="margin-top: 8px; background: #1B1F3B">Keep shopping</button>
+<a href="{{waRetry}}" target="_blank" rel="noopener" style="font-size: 14px; font-weight: 700; min-height: 44px; display: inline-flex; align-items: center">WhatsApp didn't open? Try again</a>
+</div>
+</sc-if>
+
+<sc-if value="{{cartFull}}" hint-placeholder-val="{{false}}">
+<div class="cd-body">
+<sc-for list="{{cartLines}}" as="l" hint-placeholder-count="2">
+<div class="cl {{l.cls}}" style="animation-delay: {{l.delay}}">
+<div class="cl-row">
+<span class="cl-th" style="background: {{l.tint}}"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg></span>
+<div style="flex: 1; min-width: 0">
+<div style="font-weight: 700; font-size: 15px; line-height: 1.3">{{l.name}}</div>
+<div style="font-size: 13px; color: #6B6F85; margin-top: 2px">{{l.unitLabel}}</div>
+<sc-if value="{{l.hasDetails}}" hint-placeholder-val="{{false}}">
+<button class="det-btn {{l.detBtnCls}}" onClick="{{l.toggleDet}}" aria-expanded="{{l.detExp}}">{{l.detLabel}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+</sc-if>
+</div>
+<button class="cl-del" aria-label="Remove {{l.name}}" onClick="{{l.remove}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"></path></svg></button>
+</div>
+<sc-if value="{{l.hasDetails}}" hint-placeholder-val="{{false}}">
+<div class="det {{l.detCls}}"><div><ul>
+<sc-for list="{{l.details}}" as="d" hint-placeholder-count="2"><li>{{d}}</li></sc-for>
+</ul></div></div>
+</sc-if>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px">
+<div class="cq"><button aria-label="One less {{l.name}}" onClick="{{l.dec}}" disabled="{{l.decOff}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h14"></path></svg></button><span class="n">{{l.qty}}</span><button aria-label="One more {{l.name}}" onClick="{{l.inc}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button></div>
+<div style="font-weight: 800; font-size: 16px">{{l.lineTotal}}</div>
+</div>
+</div>
+</sc-for>
+
+<div class="cd-sec">
+<div class="cd-lab"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>When should it arrive?</div>
+<div class="dchips">
+<sc-for list="{{dates}}" as="d" hint-placeholder-count="5">
+<button class="dchip {{d.cls}}" onClick="{{d.pick}}"><span class="w">{{d.w}}</span><span class="d">{{d.d}}</span></button>
+</sc-for>
+</div>
+</div>
+
+<div class="cd-sec">
+<label for="cd-note" class="cd-lab"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.7 7.5 3.8 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.2 0 5.3 3 4.2 6.2C19.5 15.4 12 20 12 20z"></path></svg>Gift note (optional)</label>
+<textarea id="cd-note" class="cd-note" placeholder="Happy birthday! Love you lots." value="{{cNote}}" onChange="{{onCNote}}"></textarea>
+</div>
+
+<div class="cd-sec">
+<div class="cd-lab"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>How would you like to pay?</div>
+<div class="pchips">
+<sc-for list="{{payOpts}}" as="p" hint-placeholder-count="2">
+<button class="pchip {{p.cls}}" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}">{{p.label}}<span class="s">{{p.sub}}</span></button>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div class="cd-foot">
+<sc-if value="{{hasUndo}}" hint-placeholder-val="{{false}}">
+<div class="undo" role="status"><span>Removed {{undoName}}</span><button onClick="{{undoIt}}">Undo</button></div>
+</sc-if>
+<div style="display: flex; justify-content: space-between; font-size: 14px; color: #4A4F66"><span>Delivery</span><span>Confirmed on WhatsApp</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px">
+<span style="font-weight: 700; font-size: 15px">Total</span>
+<span class="{{cartTotalCls}}" style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 28px">{{cartTotal}}</span>
+</div>
+<div style="text-align: right; margin: 2px 0 12px"><span class="koko">{{cartKoko}} with <span class="koko-tag">KOKO</span></span></div>
+<a class="send" href="{{waHref}}" target="_blank" rel="noopener" onClick="{{sendOrder}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"></path></svg>Send order on WhatsApp</a>
+<p style="margin: 10px 0 0; font-size: 12px; color: #6B6F85; text-align: center; line-height: 1.5">No payment now. We'll confirm availability, delivery fee and payment in the chat.</p>
+</div>
+</sc-if>
+
+<sc-if value="{{cartSending}}" hint-placeholder-val="{{false}}">
+<div class="sending" role="status">
+<svg aria-hidden="true" width="260" height="200" viewBox="0 0 260 200" style="overflow: visible">
+<path class="trail" d="M20 180 C 80 150, 120 120, 150 100" stroke="#D6245F" stroke-width="3" fill="none" stroke-linecap="round"></path>
+<g class="plane" style="transform-origin: 150px 100px"><path d="M110 100 L190 70 L160 130 L148 108 Z" fill="#25D366"></path><path d="M148 108 L190 70 L140 104 Z" fill="#17A34A"></path><path d="M148 108 L152 124 L160 130 Z" fill="#128C3E"></path></g>
+</svg>
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 22px">Sending your order…</div>
+<div style="font-size: 14px; color: #6B6F85">Opening WhatsApp</div>
+</div>
+</sc-if>
+</aside>
+</div>
+</sc-if>
+
+<sc-for list="{{flights}}" as="f" hint-placeholder-count="0">
+<div class="fly-x" aria-hidden="true" style="left: {{f.sx}}px; top: {{f.sy}}px; transform: {{f.tx}}">
+<div class="fly-y" style="transform: {{f.ty}}">
+<div class="fly-tok" style="background: {{f.tint}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg></div>
+</div>
+</div>
+</sc-for>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#D6245F","options":["#D6245F","#E5336B","#B8235A"]},"$preview":{"width":1440,"height":3200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cart: [], cartOpen: false, cartGen: 0, removing: {}, undo: null, boxDet: {}, cNote: '', cDate: 0, cPay: 'full', sending: false, sent: false, lastWa: '', 
+      who: 'any', occ: 'any', budget: 15000, vibe: 'all', sort: 'pop', gen: 1,
+      wrapped: {}, liked: {}, basket: 0, lastAdd: 1, flights: [],
+      qv: null, qvSize: 'reg', qvAddons: {}, qvQty: 1, qvGen: 0
+    };
+    this.setRoot = (el) => { this._root = el; };
+    this.setCart = (el) => { this._cart = el; };
+    this._timers = [];
+    this.products = [
+      { id: 'kjb', name: 'Kinder Joy Bouquet', price: 4000, who: ['her', 'kids', 'friend'], occ: ['birthday', 'just'], vibe: 'sweet', tint: '#F7D3DE', paper: '#E9A3BA', badge: 'Bestseller', pop: 1 },
+      { id: 'gtb', name: 'Giant Teddy Bear', price: 12000, who: ['her'], occ: ['anniversary', 'birthday'], vibe: 'cuddly', tint: '#F4E6D6', paper: '#D9B48A', badge: 'Bestseller', pop: 2 },
+      { id: 'kgb', name: 'Kinder Gift Box', price: 3500, who: ['her', 'him', 'kids', 'friend'], occ: ['birthday', 'just'], vibe: 'sweet', tint: '#FCE6CF', paper: '#EDB98A', badge: '', pop: 3 },
+      { id: 'hws', name: 'Hot Wheels Gift Set', price: 5500, who: ['kids', 'him'], occ: ['birthday'], vibe: 'playful', tint: '#DCE4F3', paper: '#2A3058', badge: '', pop: 4 },
+      { id: 'fhb', name: 'Ferrero Heart Box', price: 6500, who: ['her'], occ: ['anniversary'], vibe: 'fancy', tint: '#EADDF2', paper: '#B79BD0', badge: 'New', pop: 5 },
+      { id: 'apl', name: 'Avocado Plushie', price: 2800, who: ['her', 'kids', 'friend'], occ: ['just', 'birthday'], vibe: 'cuddly', tint: '#D8EDE2', paper: '#8FC7A9', badge: 'New', pop: 6 },
+      { id: 'mtd', name: 'Mini Teddy Duo', price: 3800, who: ['her', 'friend'], occ: ['anniversary', 'just'], vibe: 'cuddly', tint: '#FCE4EC', paper: '#EFA3BB', badge: '', pop: 7 },
+      { id: 'frb', name: 'Ferrero Rocher Bouquet', price: 9500, who: ['her'], occ: ['anniversary', 'birthday'], vibe: 'fancy', tint: '#FBF0D2', paper: '#D9A441', badge: '', pop: 8 },
+      { id: 'chh', name: 'Chocolate Hamper for Him', price: 7500, who: ['him'], occ: ['birthday', 'anniversary'], vibe: 'sweet', tint: '#E6E2F0', paper: '#2A3058', badge: '', pop: 9 },
+      { id: 'kbt', name: 'Kinder Bueno Tower', price: 4800, who: ['friend', 'him', 'kids'], occ: ['birthday', 'just'], vibe: 'sweet', tint: '#F6E7D3', paper: '#B9875C', badge: '', pop: 10 },
+      { id: 'hwt', name: 'Hot Wheels Track Set', price: 8900, who: ['kids'], occ: ['birthday'], vibe: 'playful', tint: '#DDE9F7', paper: '#E8463B', badge: '', pop: 11 },
+      { id: 'btc', name: 'Balloon & Teddy Combo', price: 6900, who: ['her', 'kids'], occ: ['birthday'], vibe: 'playful', tint: '#FDE7E4', paper: '#F2B4C8', badge: '', pop: 12 }
+    ];
+  }
+  later(fn, ms) {
+    this._timers.push(setTimeout(fn, ms));
+  }
+  componentDidMount() {
+    this.onScroll = () => {
+      const sc = (window.scrollY || 0) > 40;
+      if (sc !== !!this.state.scrolled) this.setState({ scrolled: sc });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+  componentWillUnmount() {
+    this._timers.forEach((t) => clearTimeout(t));
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+  }
+  setFilter(patch) {
+    this.setState({ ...patch, gen: this.state.gen + 1 });
+  }
+  fly(line, el) {
+    const tint = line.tint;
+    const root = this._root;
+    const cart = this._cart;
+    if (!el || !root || !cart) {
+      this.cartAdd(line);
+      return;
+    }
+    const r = root.getBoundingClientRect();
+    const b = el.getBoundingClientRect();
+    const c = cart.getBoundingClientRect();
+    const bx = b.left + b.width / 2;
+    const by = b.top + b.height / 2;
+    const id = (this._fid = (this._fid || 0) + 1);
+    const f = {
+      id, tint, moved: false,
+      sx: Math.round(bx - r.left - 28), sy: Math.round(by - r.top - 28),
+      dx: Math.round(c.left + c.width / 2 - bx), dy: Math.round(c.top + c.height / 2 - by)
+    };
+    this.setState({ flights: this.state.flights.concat([f]) });
+    this.later(() => this.setState({ flights: this.state.flights.map((x) => (x.id === id ? { ...x, moved: true } : x)) }), 30);
+    this.later(() => this.cartAdd(line), 790);
+    this.later(() => this.setState({ flights: this.state.flights.filter((x) => x.id !== id) }), 900);
+  }
+  cartAdd(line) {
+    const cart = this.state.cart.slice();
+    const i = cart.findIndex((x) => x.key === line.key);
+    if (i >= 0) cart[i] = { ...cart[i], qty: cart[i].qty + line.qty };
+    else cart.push({ ...line });
+    this.setState({ cart, basket: this.state.basket + 1, lastAdd: line.qty, cartGen: this.state.cartGen + 1, sent: false });
+  }
+  cartSet(key, fn) {
+    this.setState({ cart: this.state.cart.map((x) => (x.key === key ? fn(x) : x)), cartGen: this.state.cartGen + 1 });
+  }
+  cartRemove(key) {
+    if (this.state.removing[key]) return;
+    this.setState({ removing: { ...this.state.removing, [key]: true } });
+    this.later(() => {
+      const idx = this.state.cart.findIndex((x) => x.key === key);
+      if (idx < 0) return;
+      const line = this.state.cart[idx];
+      const removing = { ...this.state.removing };
+      delete removing[key];
+      this.setState({ cart: this.state.cart.filter((x) => x.key !== key), removing, undo: { line, idx }, cartGen: this.state.cartGen + 1 });
+      clearTimeout(this._undoT);
+      this._undoT = setTimeout(() => this.setState({ undo: null }), 4500);
+    }, 320);
+  }
+  cartUndo() {
+    const u = this.state.undo;
+    if (!u) return;
+    const cart = this.state.cart.slice();
+    cart.splice(Math.min(u.idx, cart.length), 0, u.line);
+    clearTimeout(this._undoT);
+    this.setState({ cart, undo: null, cartGen: this.state.cartGen + 1 });
+  }
+  cartVals(accent) {
+    const s = this.state;
+    const money = (n) => 'LKR ' + n.toLocaleString('en-US');
+    const lines = s.cart;
+    const count = lines.reduce((a, l) => a + l.qty, 0);
+    const total = lines.reduce((a, l) => a + l.price * l.qty, 0);
+    const today = new Date();
+    const dates = [];
+    for (let i = 1; i <= 5; i++) {
+      const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() + i);
+      dates.push({
+        w: i === 1 ? 'Tomorrow' : d.toLocaleDateString('en-GB', { weekday: 'short' }),
+        d: d.getDate() + ' ' + d.toLocaleDateString('en-GB', { month: 'short' }),
+        full: d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
+      });
+    }
+    const di = Math.min(s.cDate, 4);
+    const msgLines = lines.map((l, i) => (i + 1) + '. ' + l.name + ' × ' + l.qty + ' — ' + money(l.price * l.qty) +
+      (l.details && l.details.length ? '\n' + l.details.map((d) => '    • ' + d).join('\n') : ''));
+    const text = "Hi GiftsByDeesh! I'd like to place an order:\n\n" + msgLines.join('\n') +
+      '\n\nDelivery date: ' + dates[di].full +
+      (s.cNote.trim() ? '\nGift note: "' + s.cNote.trim() + '"' : '') +
+      '\nPayment: ' + (s.cPay === 'koko' ? 'KOKO (3 instalments)' : 'Pay in full') +
+      '\nTotal: ' + money(total) + ' (+ delivery, to be confirmed)';
+    const waHref = 'https://wa.me/94721770653?text=' + encodeURIComponent(text);
+    return {
+      cartOpen: s.cartOpen,
+      openCart: () => this.setState({ cartOpen: true, sent: false }),
+      closeCart: () => this.setState({ cartOpen: false, sent: false }),
+      keepShopping: () => this.setState({ cartOpen: false, sent: false }),
+      cartCount: count,
+      cartCountLabel: count === 0 ? 'Empty for now' : count + (count === 1 ? ' item' : ' items') + ' · ' + money(total),
+      cartEmptyView: !s.sent && lines.length === 0,
+      cartFull: !s.sent && lines.length > 0,
+      cartSentView: s.sent,
+      cartLines: lines.map((l, i) => {
+        const open = !!s.boxDet[l.key];
+        const hasDet = !!(l.details && l.details.length);
+        return {
+          name: l.name, tint: l.tint, qty: l.qty,
+          unitLabel: l.qty > 1 ? money(l.price) + ' each' : (l.sub || 'Hand-wrapped with love'),
+          lineTotal: money(l.price * l.qty),
+          cls: s.removing[l.key] ? 'out' : '',
+          delay: Math.min(i, 8) * 60 + 'ms',
+          hasDetails: hasDet,
+          details: l.details || [],
+          detLabel: open ? 'Hide details' : 'See what\'s inside',
+          detCls: open ? 'on' : '', detBtnCls: open ? 'on' : '', detExp: open ? 'true' : 'false',
+          toggleDet: () => this.setState({ boxDet: { ...this.state.boxDet, [l.key]: !open } }),
+          inc: () => this.cartSet(l.key, (x) => ({ ...x, qty: x.qty + 1 })),
+          dec: () => this.cartSet(l.key, (x) => ({ ...x, qty: Math.max(1, x.qty - 1) })),
+          decOff: l.qty <= 1,
+          remove: () => this.cartRemove(l.key)
+        };
+      }),
+      dates: dates.map((d, i) => ({ w: d.w, d: d.d, cls: i === di ? 'on' : '', pick: () => this.setState({ cDate: i }) })),
+      payOpts: [
+        { id: 'full', label: 'Pay in full', sub: 'Details shared in chat' },
+        { id: 'koko', label: 'KOKO instalments', sub: '3 × ' + money(Math.ceil(total / 3)) + ', interest-free' }
+      ].map((p) => ({ ...p, cls: s.cPay === p.id ? 'on' : '', pressed: s.cPay === p.id ? 'true' : 'false', pick: () => this.setState({ cPay: p.id }) })),
+      cNote: s.cNote,
+      onCNote: (e) => this.setState({ cNote: e.target.value.slice(0, 200) }),
+      cartTotal: money(total),
+      cartTotalCls: s.cartGen ? (s.cartGen % 2 ? 'pa' : 'pb') : '',
+      cartKoko: 'or 3 × ' + money(Math.ceil(total / 3)),
+      hasUndo: !!s.undo,
+      undoName: s.undo ? s.undo.line.name : '',
+      undoIt: () => this.cartUndo(),
+      waHref,
+      waRetry: s.lastWa || waHref,
+      cartSending: s.sending,
+      sendOrder: () => {
+        this.setState({ sending: true, lastWa: waHref });
+        this.later(() => this.setState({ sending: false, sent: true, cart: [], cNote: '', boxDet: {}, undo: null, cartGen: this.state.cartGen + 1 }), 1500);
+      }
+    };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#D6245F';
+    const s = this.state;
+    const money = (n) => 'LKR ' + n.toLocaleString('en-US');
+    const pop = s.gen % 2 ? 'pa' : 'pb';
+    const whoDefs = [
+      { id: 'any', label: 'Anyone' }, { id: 'her', label: 'Her' }, { id: 'him', label: 'Him' },
+      { id: 'kids', label: 'Kids' }, { id: 'friend', label: 'A friend' }
+    ];
+    const occDefs = [
+      { id: 'any', label: 'Any' }, { id: 'birthday', label: 'Birthday' },
+      { id: 'anniversary', label: 'Anniversary' }, { id: 'just', label: 'Just because' }
+    ];
+    const vibeDefs = [
+      { id: 'all', label: 'All vibes', dot: '#1B1F3B', bg: '#FFF8F3' },
+      { id: 'sweet', label: 'Sweet', dot: '#B9875C', bg: '#FFF4EA' },
+      { id: 'cuddly', label: 'Cuddly', dot: '#EFA3BB', bg: '#FFF1F4' },
+      { id: 'playful', label: 'Playful', dot: '#5B8BD9', bg: '#F1F5FC' },
+      { id: 'fancy', label: 'Fancy', dot: '#B79BD0', bg: '#F7F2FB' }
+    ];
+    const whoName = { her: 'For her', him: 'For him', kids: 'For kids', friend: 'For a friend' };
+    const occName = { birthday: 'Birthday', anniversary: 'Anniversary', just: 'Just because' };
+    const metaOf = (p) => whoName[p.who[0]] + ' · ' + occName[p.occ[0]];
+    let list = this.products.filter((p) =>
+      (s.who === 'any' || p.who.indexOf(s.who) >= 0) &&
+      (s.occ === 'any' || p.occ.indexOf(s.occ) >= 0) &&
+      p.price <= s.budget &&
+      (s.vibe === 'all' || p.vibe === s.vibe));
+    if (s.sort === 'low') list = list.slice().sort((a, b) => a.price - b.price);
+    else if (s.sort === 'high') list = list.slice().sort((a, b) => b.price - a.price);
+    else list = list.slice().sort((a, b) => a.pop - b.pop);
+    const anim = s.gen % 2 ? 'inA' : 'inB';
+    const prodCell = (p) => {
+      const w = !!s.wrapped[p.id];
+      const liked = !!s.liked[p.id];
+      return {
+        isProd: true, isBox: false, isGuide: false, wideCls: '',
+        name: p.name, tint: p.tint, paper: p.paper, meta: metaOf(p), priceLabel: money(p.price),
+        hasBadge: !!p.badge, badge: p.badge, badgeBg: p.badge === 'New' ? '#1B1F3B' : accent,
+        isWrapped: w, unCls: w ? '' : 'on', wrCls: w ? 'on' : '',
+        showUn: () => this.setState({ wrapped: { ...this.state.wrapped, [p.id]: false } }),
+        showWr: () => this.setState({ wrapped: { ...this.state.wrapped, [p.id]: true } }),
+        heartFill: liked ? accent : 'none', heartColor: liked ? accent : '#1B1F3B', heartCls: liked ? 'liked' : '',
+        like: () => this.setState({ liked: { ...this.state.liked, [p.id]: !liked } }),
+        open: () => this.setState({ qv: p.id, qvSize: 'reg', qvAddons: {}, qvQty: 1 }),
+        koko: 'or 3 × ' + money(Math.ceil(p.price / 3)),
+        add: (e) => this.fly({ key: p.id + '-reg-', name: p.name, price: p.price, qty: 1, tint: p.tint }, e && e.currentTarget)
+      };
+    };
+    const cells = [];
+    list.forEach((p, i) => {
+      cells.push(prodCell(p));
+      if (i === 2 && list.length >= 4) cells.push({ isProd: false, isBox: true, isGuide: false, wideCls: '' });
+      if (i === 7 && list.length >= 9) cells.push({ isProd: false, isBox: false, isGuide: true, wideCls: 'wide', open: () => this.setFilter({ budget: 5000, vibe: 'sweet', who: 'any', occ: 'any' }) });
+    });
+    cells.forEach((c, i) => { c.anim = anim; c.delay = Math.min(i, 12) * 55 + 'ms'; });
+
+    const qp = s.qv ? this.products.find((p) => p.id === s.qv) : null;
+    const sizeDefs = [
+      { id: 'reg', label: 'Regular', extra: 0 },
+      { id: 'lg', label: 'Large', extra: 1500 }
+    ];
+    const addonDefs = [
+      { id: 'balloon', label: 'Helium balloon', price: 500 },
+      { id: 'card', label: 'Greeting card', price: 250 },
+      { id: 'teddy', label: 'Mini teddy', price: 1500 }
+    ];
+    let qv = { name: '', tint: '', paper: '', meta: '', isWrapped: false, unCls: 'on', wrCls: '', heartFill: 'none', heartColor: '#1B1F3B' };
+    let qvTotalN = 0;
+    if (qp) {
+      const c = prodCell(qp);
+      qv = c;
+      const size = sizeDefs.find((z) => z.id === s.qvSize);
+      const addSum = addonDefs.reduce((a, x) => a + (s.qvAddons[x.id] ? x.price : 0), 0);
+      qvTotalN = (qp.price + size.extra + addSum) * s.qvQty;
+    }
+    const bumpQv = () => ({ qvGen: this.state.qvGen + 1 });
+
+    return {
+      ...this.cartVals(accent),
+      accent,
+      vibeBg: vibeDefs.find((v) => v.id === s.vibe).bg,
+      whoOpts: whoDefs.map((o) => ({ label: o.label, cls: s.who === o.id ? 'on' : '', pick: () => this.setFilter({ who: o.id }) })),
+      occOpts: occDefs.map((o) => ({ label: o.label, cls: s.occ === o.id ? 'on' : '', pick: () => this.setFilter({ occ: o.id }) })),
+      vibes: vibeDefs.map((v) => ({ label: v.label, dot: v.dot, cls: s.vibe === v.id ? 'on' : '', pick: () => this.setFilter({ vibe: v.id }) })),
+      budget: s.budget,
+      budgetLabel: money(s.budget),
+      onBudget: (e) => this.setFilter({ budget: Number(e.target.value) }),
+      sort: s.sort,
+      onSort: (e) => this.setFilter({ sort: e.target.value }),
+      reset: () => this.setFilter({ who: 'any', occ: 'any', budget: 15000, vibe: 'all', sort: 'pop' }),
+      count: list.length,
+      countWord: list.length === 1 ? 'gift matches' : 'gifts match',
+      countCls: pop,
+      hasResults: list.length > 0,
+      noResults: list.length === 0,
+      cells,
+      qvOpen: !!qp,
+      qv,
+      closeQv: () => this.setState({ qv: null }),
+      qvSizes: qp ? sizeDefs.map((z) => ({
+        label: z.label,
+        note: z.extra ? '+ ' + money(z.extra) : 'As pictured',
+        cls: s.qvSize === z.id ? 'on' : '',
+        pick: () => this.setState({ qvSize: z.id, ...bumpQv() })
+      })) : [],
+      qvAddons: addonDefs.map((a) => {
+        const on = !!s.qvAddons[a.id];
+        return {
+          label: a.label, priceLabel: '+ ' + money(a.price), on: on ? 'true' : 'false', cls: on ? 'on' : '',
+          toggle: () => this.setState({ qvAddons: { ...this.state.qvAddons, [a.id]: !on }, ...bumpQv() })
+        };
+      }),
+      qvQty: s.qvQty,
+      qvMinusOff: s.qvQty <= 1,
+      qvMinus: () => this.setState({ qvQty: Math.max(1, s.qvQty - 1), ...bumpQv() }),
+      qvPlus: () => this.setState({ qvQty: s.qvQty + 1, ...bumpQv() }),
+      qvTotal: money(qvTotalN),
+      qvTotalCls: s.qvGen ? (s.qvGen % 2 ? 'pa' : 'pb') : '',
+      qvKoko: 'or 3 × ' + money(Math.ceil(qvTotalN / 3)),
+      qvAdd: (e) => {
+        if (!qp) return;
+        const el = e && e.currentTarget;
+        const qty = s.qvQty;
+        const picked = addonDefs.filter((a) => s.qvAddons[a.id]);
+        const line = {
+          key: qp.id + '-' + s.qvSize + '-' + picked.map((a) => a.id).join('.'),
+          name: qp.name + (s.qvSize === 'lg' ? ' (Large)' : ''),
+          price: Math.round(qvTotalN / qty), qty, tint: qp.tint,
+          details: picked.map((a) => 'Add-on: ' + a.label)
+        };
+        this.setState({ qv: null });
+        this.fly(line, el);
+      },
+      basket: s.cart.reduce((a, l) => a + l.qty, 0),
+      lastAdd: s.lastAdd,
+      badgeCls: s.basket ? (s.basket % 2 ? 'bA' : 'bB') : '',
+      navCartCls: s.basket ? (s.basket % 2 ? 'cA' : 'cB') : '',
+      headCls: s.scrolled ? 'shrunk' : '',
+      setRoot: this.setRoot,
+      setCart: this.setCart,
+      flights: s.flights.map((f) => ({
+        sx: f.sx, sy: f.sy, tint: f.tint,
+        tx: 'translateX(' + (f.moved ? f.dx : 0) + 'px)',
+        ty: 'translateY(' + (f.moved ? f.dy : 0) + 'px)'
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

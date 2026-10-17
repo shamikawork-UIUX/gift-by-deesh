@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>About &amp; Contact — GiftsByDeesh</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Caveat:wght@600;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFF8F3}
+a{color:#D6245F}a:hover{color:#A8173F}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+.site-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid #F1E3E8;transition:box-shadow .3s ease}
+.site-head .head-in{padding:16px 24px;transition:padding .3s ease}
+.site-head.shrunk{box-shadow:0 12px 30px -20px rgba(27,31,59,.4)}
+.site-head.shrunk .head-in{padding:8px 24px}
+.site-head .logo-sub{display:block;max-height:16px;overflow:hidden;transition:max-height .3s ease,opacity .3s ease}
+.site-head.shrunk .logo-sub{max-height:0;opacity:0}
+.cart-btn{position:relative;width:44px;height:44px;border:none;background:none;color:#1B1F3B;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none}
+.cart-btn:hover{background:#FDEDF2;color:#1B1F3B}
+.hand{font-family:Caveat,cursive;font-weight:700}
+.eyebrow{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.14em}
+.h2{margin:0;font-family:Fredoka,sans-serif;font-weight:700;font-size:44px;line-height:1.05}
+.pol-stack{position:relative;height:440px}
+.pol{position:absolute;top:50%;left:50%;width:250px;padding:12px 12px 44px;background:#fff;border-radius:6px;box-shadow:0 18px 36px -16px rgba(27,31,59,.45);transition:transform .6s cubic-bezier(.3,1.3,.5,1)}
+.pol .ph{height:220px;border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:600;color:#5E4A52;text-align:center;padding:12px}
+.pol .cap{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:22px;color:#1B1F3B}
+.pol.p1{transform:translate(-50%,-50%) rotate(-8deg) translate(-30px,6px)}
+.pol.p2{transform:translate(-50%,-50%) rotate(5deg) translate(26px,-4px)}
+.pol.p3{transform:translate(-50%,-50%) rotate(-1deg)}
+.pol-stack:hover .pol.p1,.pol-stack.fan .pol.p1{transform:translate(-50%,-50%) rotate(-14deg) translate(-190px,30px)}
+.pol-stack:hover .pol.p2,.pol-stack.fan .pol.p2{transform:translate(-50%,-50%) rotate(12deg) translate(190px,24px)}
+.pol-stack:hover .pol.p3,.pol-stack.fan .pol.p3{transform:translate(-50%,-50%) rotate(-2deg) translateY(-20px) scale(1.04)}
+.tape{position:absolute;top:-12px;left:50%;width:80px;height:24px;margin-left:-40px;background:rgba(247,197,72,.55);transform:rotate(-4deg)}
+.squig{animation:draw 2.4s ease forwards}
+@keyframes draw{0%{stroke-dashoffset:400}100%{stroke-dashoffset:0}}
+.wave-hi{display:inline-block;transform-origin:70% 80%;animation:hi 2.2s ease-in-out infinite}
+@keyframes hi{0%,60%,100%{transform:none}10%,30%{transform:rotate(16deg)}20%,40%{transform:rotate(-8deg)}}
+.book{position:relative;perspective:1400px}
+.page{background:#FFFDF8;border-radius:8px 24px 24px 8px;box-shadow:0 30px 60px -32px rgba(27,31,59,.45),inset 14px 0 18px -14px rgba(27,31,59,.18);padding:40px;display:flex;gap:36px;align-items:center;min-height:360px;transform-origin:left center}
+.page.tA{animation:turnA .7s cubic-bezier(.3,.7,.3,1)}.page.tB{animation:turnB .7s cubic-bezier(.3,.7,.3,1)}
+@keyframes turnA{0%{transform:rotateY(-70deg);opacity:.2}100%{transform:none;opacity:1}}
+@keyframes turnB{0%{transform:rotateY(-70deg);opacity:.2}100%{transform:none;opacity:1}}
+.chap-dot{display:flex;align-items:center;gap:10px;border:none;background:none;padding:6px 4px;min-height:44px;font-size:14px;font-weight:700;color:#9A8C92;text-align:left;transition:color .2s ease}
+.chap-dot .n{width:34px;height:34px;border-radius:50%;border:2px solid #E6D3DA;display:flex;align-items:center;justify-content:center;font-size:13px;background:#fff;transition:all .3s ease}
+.chap-dot:hover{color:#1B1F3B}
+.chap-dot.on{color:#1B1F3B}
+.chap-dot.on .n{background:#D6245F;border-color:#D6245F;color:#fff;transform:scale(1.1)}
+.chap-dot.done .n{border-color:#D6245F;color:#D6245F}
+.arrow{width:48px;height:48px;border-radius:50%;border:1.5px solid #EBD9DF;background:#fff;color:#1B1F3B;display:flex;align-items:center;justify-content:center;transition:all .2s ease}
+.arrow:hover:not(:disabled){background:#1B1F3B;color:#fff;border-color:#1B1F3B}
+.arrow:disabled{opacity:.35;cursor:default}
+.machine{position:relative;height:340px;border-radius:28px;background:#FDF1F4;overflow:hidden}
+.belt{position:absolute;left:0;right:0;bottom:56px;height:14px;background:repeating-linear-gradient(90deg,#E6D3DA 0 18px,#F2E4E9 18px 36px);animation:belt 1s linear infinite}
+.belt.still{animation-play-state:paused}
+@keyframes belt{to{background-position:36px 0}}
+.mbox-wrap{position:absolute;left:50%;bottom:70px;width:170px;margin-left:-85px;transition:transform 1.2s cubic-bezier(.6,0,.4,1)}
+.mbox-wrap.go{transform:translateX(560px)}
+.mbox{position:relative;width:170px;height:130px}
+.mbox .tray{position:absolute;inset:0;border-radius:16px;background:#F2B4C8;box-shadow:0 16px 24px -16px rgba(27,31,59,.5)}
+.mbox .itm{position:absolute;bottom:62px;width:46px;height:46px;border-radius:50%;border:3px solid #fff;animation:itmIn .55s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes itmIn{0%{transform:translateY(-140px) rotate(-20deg);opacity:0}100%{transform:none;opacity:1}}
+.mbox .paper{position:absolute;inset:-4px;border-radius:18px;background-color:#EFA3BB;background-image:radial-gradient(rgba(255,255,255,.6) 2px,transparent 2.5px);background-size:16px 16px;animation:paperIn .55s ease both;z-index:2}
+@keyframes paperIn{0%{clip-path:inset(0 100% 0 0)}100%{clip-path:inset(0 0 0 0)}}
+.mbox .rv{position:absolute;top:-4px;bottom:-4px;left:50%;width:22px;margin-left:-11px;transform-origin:top;animation:ribV .35s cubic-bezier(.3,1.2,.5,1) both;z-index:3}
+.mbox .rh{position:absolute;left:-4px;right:-4px;top:50%;height:22px;margin-top:-11px;transform-origin:left;animation:ribH .35s .12s cubic-bezier(.3,1.2,.5,1) both;z-index:3}
+@keyframes ribV{0%{transform:scaleY(0)}100%{transform:none}}
+@keyframes ribH{0%{transform:scaleX(0)}100%{transform:none}}
+.mbox .bow{position:absolute;left:50%;top:-38px;width:96px;height:62px;margin-left:-48px;z-index:4;animation:bowIn .5s .3s cubic-bezier(.3,1.8,.5,1) both}
+@keyframes bowIn{0%{transform:scale(0) rotate(-30deg)}100%{transform:none}}
+.scooter{position:absolute;left:-60px;bottom:-46px;width:290px;height:120px;z-index:0;animation:scootIn .5s cubic-bezier(.3,1.3,.5,1) both}
+@keyframes scootIn{0%{transform:translateX(-200px);opacity:0}100%{transform:none;opacity:1}}
+.mbox-wrap.go .scooter .wheel{animation:spinW .3s linear infinite}
+@keyframes spinW{to{transform:rotate(360deg)}}
+.speed{position:absolute;left:-120px;bottom:10px;width:110px;opacity:0}
+.mbox-wrap.go .speed{animation:speed .4s linear infinite}
+@keyframes speed{0%{opacity:.8;transform:translateX(0)}100%{opacity:0;transform:translateX(-40px)}}
+.stage-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;border:none;background:none;padding:8px 4px;min-height:44px;font-size:14px;font-weight:700;color:#9A8C92;transition:color .2s ease}
+.stage-btn .ic{width:52px;height:52px;border-radius:16px;background:#fff;border:2px solid #EBD9DF;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.3,1.5,.5,1)}
+.stage-btn:hover{color:#1B1F3B}
+.stage-btn.on{color:#1B1F3B}
+.stage-btn.on .ic{background:#D6245F;border-color:#D6245F;color:#fff;transform:translateY(-4px) scale(1.08)}
+.stage-btn.done .ic{border-color:#D6245F;color:#D6245F}
+.prog{position:absolute;left:12%;right:12%;top:34px;height:3px;background:#EBD9DF;border-radius:3px;overflow:hidden}
+.prog span{display:block;height:100%;background:#D6245F;transition:width .5s ease}
+.flip{perspective:1000px;border:none;background:none;padding:0;width:100%;height:260px;text-align:left}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,1.2,.5,1);transform-style:preserve-3d}
+.flip:hover .flip-in,.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:24px;padding:26px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.face.back{transform:rotateY(180deg)}
+.chat-card{background:#fff;border-radius:26px;border:1px solid #F1E3E8;padding:26px;display:flex;flex-direction:column;gap:18px;transition:transform .3s ease,box-shadow .3s ease}
+.chat-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -26px rgba(214,36,95,.5)}
+.wa-btn{flex:1;min-height:52px;border-radius:999px;background:#25D366;color:#0B2E17;text-decoration:none;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .2s ease}
+.wa-btn:hover{transform:translateY(-2px);color:#0B2E17}
+.wa-btn .bub{animation:bubble 2.4s ease-in-out infinite}
+@keyframes bubble{0%,70%,100%{transform:none}80%{transform:scale(1.2) rotate(-8deg)}90%{transform:scale(.95)}}
+.cp-btn{min-height:52px;border:1.5px solid #EBD9DF;background:#fff;border-radius:999px;padding:0 18px;font-weight:700;font-size:14px;color:#1B1F3B;display:flex;align-items:center;gap:8px;transition:all .2s ease}
+.cp-btn.on{background:#E3F6EA;border-color:#25D366;color:#17663A}
+.cp-btn:active{transform:scale(.94)}
+.open-dot{width:10px;height:10px;border-radius:50%;background:#25D366;box-shadow:0 0 0 0 rgba(37,211,102,.6);animation:live 1.8s ease-out infinite}
+@keyframes live{0%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}100%{box-shadow:0 0 0 10px rgba(37,211,102,0)}}
+.faq{background:#fff;border:1px solid #F1E3E8;border-radius:20px;overflow:hidden;transition:box-shadow .3s ease}
+.faq.on{box-shadow:0 18px 36px -24px rgba(214,36,95,.5)}
+.faq-q{width:100%;display:flex;align-items:center;gap:16px;border:none;background:none;padding:20px 22px;min-height:64px;text-align:left;font-size:17px;font-weight:700;color:#1B1F3B}
+.faq-q .pm{margin-left:auto;width:36px;height:36px;flex:0 0 36px;border-radius:50%;background:#FDEDF2;color:#D6245F;display:flex;align-items:center;justify-content:center;transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+.faq.on .faq-q .pm{transform:rotate(135deg);background:#D6245F;color:#fff}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.faq.on .faq-a{grid-template-rows:1fr}
+.faq-a > div{overflow:hidden}
+.faq-a p{margin:0;padding:0 22px 22px 74px;font-size:15px;line-height:1.6;color:#4A4F66}
+.faq-ic{width:38px;height:38px;flex:0 0 38px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+@media (max-width:900px){
+.nav-links{display:none !important}
+.hero,.split{flex-direction:column !important}
+.page{flex-direction:column;padding:26px}
+.promises{grid-template-columns:1fr !important}
+.chats{grid-template-columns:1fr !important}
+.pol-stack:hover .pol.p1,.pol-stack.fan .pol.p1{transform:translate(-50%,-50%) rotate(-12deg) translate(-90px,20px)}
+.pol-stack:hover .pol.p2,.pol-stack.fan .pol.p2{transform:translate(-50%,-50%) rotate(10deg) translate(90px,20px)}
+.mbox-wrap.go{transform:translateX(320px)}
+.chapters{display:none !important}
+.faq-a p{padding-left:22px}
+}
+@media (prefers-reduced-motion:reduce){.wave-hi,.belt,.wa-btn .bub,.open-dot,.page.tA,.page.tB{animation:none}}
+</style>
+</helmet>
+
+<div style="position: relative; font-family: 'Plus Jakarta Sans', sans-serif; color: #1B1F3B; background: #FFF8F3; width: 100%">
+
+<div style="background: {{accent}}; color: #fff; text-align: center; font-size: 13px; font-weight: 600; padding: 10px 16px">Thoughtful gifts, delivered with love across Sri Lanka</div>
+
+<header class="site-head {{headCls}}">
+<div class="head-in" style="max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1B1F3B">
+<span style="width: 40px; height: 40px; border-radius: 12px; background: {{accent}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg></span>
+<span style="display: flex; flex-direction: column"><span style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 20px; line-height: 1">GiftsBy<span style="color: {{accent}}">Deesh</span></span><span class="logo-sub" style="font-size: 11px; color: #6B6F85">House of Deesh (Pvt) Ltd</span></span>
+</a>
+<nav class="nav-links" style="display: flex; gap: 30px; font-size: 14px; font-weight: 600">
+<a href="Main.dc.html" style="color: #1B1F3B; text-decoration: none">Home</a>
+<a href="Shop.dc.html" style="color: #1B1F3B; text-decoration: none">Shop Gifts</a>
+<a href="Shop.dc.html" style="color: #1B1F3B; text-decoration: none">Chocolate Bouquets</a>
+<a href="Shop.dc.html" style="color: #1B1F3B; text-decoration: none">Teddy Bears</a>
+<a href="Offers.dc.html" style="color: #1B1F3B; text-decoration: none">Offers</a>
+<a href="#top" style="color: {{accent}}; text-decoration: none">About Us</a>
+</nav>
+<div style="display: flex; gap: 8px">
+<button aria-label="Search" style="width: 44px; height: 44px; border: none; background: none; color: #1B1F3B; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
+<a href="Shop.dc.html" class="cart-btn" aria-label="Basket"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h14l-1.4 9.1a2 2 0 0 1-2 1.9H8.4a2 2 0 0 1-2-1.9z"></path><path d="m9 10 3-6 3 6"></path></svg></a>
+</div>
+</div>
+</header>
+
+<!-- HERO -->
+<section id="top" style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 56px">
+<div class="hero" style="display: flex; align-items: center; gap: 48px">
+<div style="flex: 1 1 0; min-width: 0">
+<p class="eyebrow" style="color: {{accent}}">ABOUT US</p>
+<h1 style="margin: 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 64px; line-height: 1.02">Hi, we're House of Deesh <span class="wave-hi" aria-hidden="true"><svg width="52" height="52" viewBox="0 0 24 24" fill="{{accent}}" style="vertical-align: -4px"><path d="M12 20s-7.5-4.6-9.2-9.3C1.7 7.5 3.8 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.2 0 5.3 3 4.2 6.2C19.5 15.4 12 20 12 20z"></path></svg></span></h1>
+<svg aria-hidden="true" width="260" height="22" viewBox="0 0 260 22" style="display: block; margin-top: 6px"><path class="squig" d="M4 14 Q 24 2 44 14 T 84 14 T 124 14 T 164 14 T 204 14 T 252 12" stroke="{{accent}}" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="400" stroke-dashoffset="400"></path></svg>
+<p style="margin: 20px 0 0; font-size: 18px; line-height: 1.65; color: #4A4F66; max-width: 480px">A small Sri Lankan gift studio that turns chocolates, teddies and toys into little moments of happiness. Every single gift is hand-picked, hand-wrapped and sent off with love.</p>
+<p class="hand" style="margin: 22px 0 0; font-size: 30px; color: #A8173F; transform: rotate(-2deg)">— [Founder name], founder &amp; chief bow-tier</p>
+</div>
+<div style="flex: 1 1 0; min-width: 0">
+<button class="pol-stack {{fanCls}}" onClick="{{toggleFan}}" aria-label="Fan out photos from our studio" style="display: block; width: 100%; border: none; background: none; padding: 0; font: inherit; color: inherit">
+
+<div class="pol p1"><span class="tape"></span><div class="ph" style="background: #FCE6CF"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="3"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path></svg>Photo — our very first bouquet</div><div class="cap hand">the first one!</div></div>
+<div class="pol p2"><span class="tape"></span><div class="ph" style="background: #DCE4F3"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="3"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path></svg>Photo — packing day chaos</div><div class="cap hand">packing day</div></div>
+<div class="pol p3"><span class="tape"></span><div class="ph" style="background: #F7D3DE"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="3"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path></svg>Photo — Deesh at the wrapping table</div><div class="cap hand">hello from the studio</div></div>
+</button>
+<p style="margin: 6px 0 0; text-align: center; font-size: 13px; color: #6B6F85">Hover (or tap) the photos</p>
+</div>
+</div>
+</section>
+
+<!-- STORY BOOK -->
+<section style="background: #FDF1F4">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 32px">
+<div>
+<p class="eyebrow" style="color: {{accent}}">OUR STORY</p>
+<h2 class="h2">A little scrapbook</h2>
+</div>
+<div style="display: flex; gap: 10px">
+<button class="arrow" aria-label="Previous chapter" onClick="{{prevChap}}" disabled="{{prevOff}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></button>
+<button class="arrow" aria-label="Next chapter" onClick="{{nextChap}}" disabled="{{nextOff}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+<div class="split" style="display: flex; gap: 36px; align-items: stretch">
+<div class="chapters" style="flex: 0 0 230px; display: flex; flex-direction: column; gap: 6px; padding-top: 20px">
+<sc-for list="{{chapters}}" as="c" hint-placeholder-count="4">
+<button class="chap-dot {{c.cls}}" onClick="{{c.pick}}"><span class="n">{{c.num}}</span>{{c.short}}</button>
+</sc-for>
+</div>
+<div class="book" style="flex: 1 1 0; min-width: 0">
+<div class="page {{pageCls}}">
+<div style="flex: 0 0 260px; height: 260px; border-radius: 18px; background: {{chap.tint}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #5E4A52; font-size: 13px; font-weight: 600; text-align: center; padding: 16px; transform: rotate(-2deg); box-shadow: 0 12px 24px -16px rgba(27,31,59,.4)"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="3"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path></svg>{{chap.photo}}</div>
+<div style="flex: 1 1 0; min-width: 0">
+<div class="hand" style="font-size: 28px; color: {{accent}}">Chapter {{chap.num}} · {{chap.when}}</div>
+<h3 style="margin: 4px 0 12px; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 34px; line-height: 1.08">{{chap.title}}</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.7; color: #4A4F66">{{chap.body}}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- GIFT MACHINE -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 96px 24px">
+<div style="text-align: center; margin-bottom: 36px">
+<p class="eyebrow" style="color: {{accent}}">HOW A GIFT IS MADE</p>
+<h2 class="h2">From our hands to theirs</h2>
+<p style="margin: 14px auto 0; font-size: 16px; color: #4A4F66; max-width: 480px; line-height: 1.55">Tap each step, or press play and watch a gift come together.</p>
+</div>
+<div class="machine">
+<div class="belt {{beltCls}}"></div>
+<div class="mbox-wrap {{goCls}}">
+<sc-if value="{{showScooter}}" hint-placeholder-val="{{false}}">
+<svg class="scooter" aria-hidden="true" viewBox="0 0 290 120"><path d="M40 70h150l30-26h30" stroke="#1B1F3B" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M236 44l-10-26h22" stroke="#1B1F3B" stroke-width="7" fill="none" stroke-linecap="round"></path><rect x="60" y="62" width="120" height="16" rx="8" fill="{{accent}}"></rect><g class="wheel" style="transform-origin: 60px 92px"><circle cx="60" cy="92" r="22" fill="#1B1F3B"></circle><circle cx="60" cy="92" r="8" fill="#fff"></circle><path d="M60 72v40M40 92h40" stroke="#5B6080" stroke-width="3"></path></g><g class="wheel" style="transform-origin: 240px 92px"><circle cx="240" cy="92" r="22" fill="#1B1F3B"></circle><circle cx="240" cy="92" r="8" fill="#fff"></circle><path d="M240 72v40M220 92h40" stroke="#5B6080" stroke-width="3"></path></g></svg>
+<svg class="speed" aria-hidden="true" viewBox="0 0 110 60"><path d="M10 14h70M0 30h90M20 46h60" stroke="#D6245F" stroke-width="5" stroke-linecap="round"></path></svg>
+</sc-if>
+<div class="mbox">
+<div class="tray"></div>
+<sc-if value="{{s1}}" hint-placeholder-val="{{false}}">
+<span class="itm" style="left: 14px; background: #E8463B"></span>
+<span class="itm" style="left: 62px; background: #D9A441; animation-delay: .12s"></span>
+<span class="itm" style="left: 110px; background: #C68E5E; animation-delay: .24s"></span>
+</sc-if>
+<sc-if value="{{s2}}" hint-placeholder-val="{{false}}"><div class="paper"></div></sc-if>
+<sc-if value="{{s3}}" hint-placeholder-val="{{false}}">
+<div class="rv" style="background: {{accent}}"></div>
+<div class="rh" style="background: {{accent}}"></div>
+<svg class="bow" aria-hidden="true" viewBox="0 0 120 76"><path d="M60 38C38 8 8 10 12 32c3 16 30 14 48 6z" fill="{{accent}}"></path><path d="M60 38C82 8 112 10 108 32c-3 16-30 14-48 6z" fill="{{accent}}"></path><circle cx="60" cy="39" r="9" fill="{{accent}}" stroke="rgba(0,0,0,.18)" stroke-width="2"></circle></svg>
+</sc-if>
+</div>
+</div>
+<div role="status" style="position: absolute; left: 24px; top: 22px; background: #fff; border-radius: 999px; padding: 10px 16px; font-weight: 700; font-size: 14px; box-shadow: 0 8px 18px -12px rgba(27,31,59,.4)">{{stageMsg}}</div>
+<button onClick="{{playToggle}}" style="position: absolute; right: 22px; top: 18px; min-height: 48px; border: none; border-radius: 999px; padding: 0 20px; background: #1B1F3B; color: #fff; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 8px">
+<sc-if value="{{playing}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="4" width="5" height="16" rx="1.5"></rect><rect x="14" y="4" width="5" height="16" rx="1.5"></rect></svg>Pause</sc-if>
+<sc-if value="{{notPlaying}}" hint-placeholder-val="{{true}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"></path></svg>{{playLabel}}</sc-if>
+</button>
+</div>
+<div style="position: relative; display: flex; margin-top: 22px">
+<div class="prog" aria-hidden="true"><span style="width: {{progPct}}"></span></div>
+<sc-for list="{{stages}}" as="t" hint-placeholder-count="4">
+<button class="stage-btn {{t.cls}}" onClick="{{t.pick}}" style="position: relative">
+<span class="ic">
+<sc-if value="{{t.i1}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"></path><path d="M4 19h16"></path></svg></sc-if>
+<sc-if value="{{t.i2}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="14" rx="2"></rect><path d="M4 9h16M9 5v14"></path></svg></sc-if>
+<sc-if value="{{t.i3}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12C8 5 3 6 4 10s6 3 8 2zM12 12c4-7 9-6 8-2s-6 3-8 2z"></path><path d="M11 13l-3 7M13 13l3 7"></path></svg></sc-if>
+<sc-if value="{{t.i4}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3"></circle><circle cx="18" cy="17" r="3"></circle><path d="M9 17h6M6 14l3-7h5l4 7"></path></svg></sc-if>
+</span>
+{{t.label}}
+</button>
+</sc-for>
+</div>
+</section>
+
+<!-- PROMISES -->
+<section style="background: #fff">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
+<div style="margin-bottom: 32px">
+<p class="eyebrow" style="color: {{accent}}">OUR LITTLE PROMISES</p>
+<h2 class="h2">What you can count on</h2>
+</div>
+<div class="promises" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+<sc-for list="{{promises}}" as="p" hint-placeholder-count="3">
+<button class="flip {{p.cls}}" onClick="{{p.toggle}}" aria-pressed="{{p.pressed}}">
+<div class="flip-in">
+<div class="face" style="background: {{p.tint}}">
+<span style="width: 60px; height: 60px; border-radius: 18px; background: #fff; color: {{p.color}}; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{p.i1}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 16 0v-2a2 2 0 0 0-4 0"></path></svg></sc-if>
+<sc-if value="{{p.i2}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></sc-if>
+<sc-if value="{{p.i3}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"></path></svg></sc-if>
+</span>
+<div>
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 26px; color: #1B1F3B">{{p.title}}</div>
+<div style="font-size: 13px; font-weight: 600; color: #6B5560; margin-top: 6px; display: flex; align-items: center; gap: 6px">Flip me <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"></path><path d="M21 3v5h-5"></path></svg></div>
+</div>
+</div>
+<div class="face back" style="background: #1B1F3B; color: #fff">
+<div class="hand" style="font-size: 26px; color: #F7A9C1">{{p.title}}</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #E4E6F2">{{p.back}}</p>
+</div>
+</div>
+</button>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- SAY HI -->
+<section id="contact" style="max-width: 1240px; margin: 0 auto; padding: 96px 24px 72px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 32px">
+<div>
+<p class="eyebrow" style="color: {{accent}}">CONTACT</p>
+<h2 class="h2">Say hi — we reply fast</h2>
+</div>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #4A4F66"><span class="open-dot" aria-hidden="true"></span>Open [DAYS], [HOURS]</div>
+</div>
+<div class="chats" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
+<sc-for list="{{chats}}" as="c" hint-placeholder-count="2">
+<div class="chat-card">
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="width: 58px; height: 58px; border-radius: 18px; background: {{c.tint}}; color: {{c.color}}; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{c.isGift}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg></sc-if>
+<sc-if value="{{c.isChoc}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 4-8 5-8 10a8 8 0 0 0 16 0c0-5-5-6-8-10z"></path><path d="M9 14c1 1.5 5 1.5 6 0"></path></svg></sc-if>
+</span>
+<div>
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 24px">{{c.title}}</div>
+<div style="font-size: 14px; color: #6B6F85">{{c.sub}}</div>
+</div>
+</div>
+<div style="font-family: Fredoka, sans-serif; font-weight: 600; font-size: 32px; letter-spacing: .02em">{{c.number}}</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<a class="wa-btn" href="{{c.wa}}" target="_blank" rel="noopener"><svg class="bub" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"></path></svg>Chat on WhatsApp</a>
+<button class="cp-btn {{c.cpCls}}" onClick="{{c.copy}}">{{c.cpLabel}}</button>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 20px">
+<div style="background: #fff; border: 1px solid #F1E3E8; border-radius: 20px; padding: 20px; display: flex; gap: 14px; align-items: flex-start">
+<span style="width: 44px; height: 44px; flex: 0 0 44px; border-radius: 14px; background: #E6EEFA; color: #3B6CC0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
+<div><div style="font-weight: 700; font-size: 16px">Islandwide delivery</div><div style="font-size: 14px; color: #4A4F66; margin-top: 4px; line-height: 1.5">Next-day in [AREA] if you order by [TIME].</div></div>
+</div>
+<a href="#ig" style="background: #fff; border: 1px solid #F1E3E8; border-radius: 20px; padding: 20px; display: flex; gap: 14px; align-items: center; text-decoration: none; color: #1B1F3B">
+<span style="width: 44px; height: 44px; flex: 0 0 44px; border-radius: 14px; background: #FDE7EE; color: #D6245F; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"></circle></svg></span>
+<div><div style="font-weight: 700; font-size: 16px">@gifts_by_deesh</div><div style="font-size: 14px; color: #4A4F66">Behind-the-scenes on Instagram</div></div>
+</a>
+<a href="#tt" style="background: #fff; border: 1px solid #F1E3E8; border-radius: 20px; padding: 20px; display: flex; gap: 14px; align-items: center; text-decoration: none; color: #1B1F3B">
+<span style="width: 44px; height: 44px; flex: 0 0 44px; border-radius: 14px; background: #1B1F3B; color: #fff; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.5 2.8 2.4 4.6 5 5"></path></svg></span>
+<div><div style="font-weight: 700; font-size: 16px">@giftsbydeesh</div><div style="font-size: 14px; color: #4A4F66">Wrapping videos on TikTok</div></div>
+</a>
+</div>
+</section>
+
+<!-- FAQ -->
+<section style="max-width: 900px; margin: 0 auto; padding: 24px 24px 104px">
+<div style="text-align: center; margin-bottom: 32px">
+<p class="eyebrow" style="color: {{accent}}">GOOD QUESTIONS</p>
+<h2 class="h2">Things people often ask</h2>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{faqs}}" as="f" hint-placeholder-count="5">
+<div class="faq {{f.cls}}">
+<button class="faq-q" onClick="{{f.toggle}}" aria-expanded="{{f.expanded}}">
+<span class="faq-ic" style="background: {{f.tint}}; color: {{f.color}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"></path></svg></span>
+{{f.q}}
+<span class="pm"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>
+</button>
+<div class="faq-a"><div><p>{{f.a}}</p></div></div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<footer style="background: #1B1F3B; color: #D7D9E8">
+<div style="max-width: 1240px; margin: 0 auto; padding: 40px 24px; display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between; align-items: center">
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 22px; color: #fff">GiftsBy<span style="color: #F7A9C1">Deesh</span></div>
+<div class="hand" style="font-size: 24px; color: #F7A9C1">Made with love in Sri Lanka</div>
+<div style="font-size: 13px">© 2026 House of Deesh (Pvt) Ltd.</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#D6245F","options":["#D6245F","#E5336B","#B8235A"]},"$preview":{"width":1440,"height":4300}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { fan: false, chap: 0, chapGen: 0, stage: 0, playing: false, flipped: {}, copied: '', faq: 0, scrolled: false };
+    this._timers = [];
+  }
+  later(fn, ms) {
+    this._timers.push(setTimeout(fn, ms));
+  }
+  componentDidMount() {
+    this.onScroll = () => {
+      const sc = (window.scrollY || 0) > 40;
+      if (sc !== this.state.scrolled) this.setState({ scrolled: sc });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+  componentWillUnmount() {
+    clearInterval(this._play);
+    this._timers.forEach((t) => clearTimeout(t));
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+  }
+  setStage(n) {
+    this.setState({ stage: n });
+  }
+  startPlay() {
+    clearInterval(this._play);
+    this.setState({ playing: true, stage: this.state.stage >= 4 ? 0 : this.state.stage });
+    this._play = setInterval(() => {
+      const next = this.state.stage + 1;
+      if (next > 4) {
+        clearInterval(this._play);
+        this.setState({ playing: false });
+        return;
+      }
+      this.setState({ stage: next });
+    }, 1500);
+  }
+  stopPlay() {
+    clearInterval(this._play);
+    this.setState({ playing: false });
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#D6245F';
+    const s = this.state;
+
+    const chapDefs = [
+      { short: 'The first bouquet', when: '[YEAR]', title: 'It started with one bouquet', tint: '#FCE6CF', photo: 'Photo — the very first Kinder bouquet', body: '[Founder story: who made the first bouquet, who it was for, and what happened when they saw it. Keep it to two or three warm sentences.]' },
+      { short: 'Friends asked', when: '[YEAR]', title: '"Can you make one for me too?"', tint: '#F7D3DE', photo: 'Photo — orders piling up on the table', body: '[How word spread: friends, family, then friends of friends. Mention Instagram if that is where it took off.]' },
+      { short: 'House of Deesh', when: '[YEAR]', title: 'A little studio becomes a company', tint: '#DCE4F3', photo: 'Photo — the studio or wrapping corner', body: 'The hobby grew up and became House of Deesh (Pvt) Ltd. [Add a line about the studio, the team or the first big order.]' },
+      { short: 'Today', when: 'Now', title: 'Gifts, all across Sri Lanka', tint: '#D8EDE2', photo: 'Photo — a delivery on its way', body: 'Today we hand-wrap chocolate bouquets, teddies and toy gifts and send them islandwide — still one bow at a time, still with a little note of love.' }
+    ];
+    const ci = s.chap;
+    const goChap = (i) => this.setState({ chap: i, chapGen: this.state.chapGen + 1 });
+
+    const stageDefs = [
+      { label: 'Pick', msg: 'Picking their favourites…' },
+      { label: 'Wrap', msg: 'Wrapping it up nice and snug…' },
+      { label: 'Ribbon', msg: 'Tying the bow (the best part)…' },
+      { label: 'Deliver', msg: 'Off it goes! Vroom!' }
+    ];
+    const st = s.stage;
+
+    const promDefs = [
+      { title: 'Hand-wrapped', tint: '#FDE7EE', color: '#D6245F', back: 'Every gift is wrapped by hand in our studio — no machines, no shortcuts, just care (and a lot of ribbon).', icon: 1 },
+      { title: 'Islandwide delivery', tint: '#E6EEFA', color: '#3B6CC0', back: 'From [CITY] to wherever they are in Sri Lanka. We keep you posted until it lands in their hands.', icon: 2 },
+      { title: 'Real humans', tint: '#E3F6EA', color: '#17663A', back: 'Questions, custom ideas or a last-minute panic? Message us on WhatsApp and a real person replies.', icon: 3 }
+    ];
+
+    const chatDefs = [
+      { id: 'g', title: 'Gifts & teddies', sub: 'Bouquets, teddies, toys and custom boxes', number: '072 177 0653', intl: '94721770653', tint: '#FDE7EE', color: '#D6245F', isGift: true, isChoc: false, msg: 'Hi GiftsByDeesh! I\'d like to ask about a gift.' },
+      { id: 'c', title: 'Chocolate orders', sub: 'Chocolate bouquets and hampers', number: '072 896 2797', intl: '94728962797', tint: '#F6E7D3', color: '#7A4528', isGift: false, isChoc: true, msg: 'Hi GiftsByDeesh! I\'d like to ask about a chocolate bouquet.' }
+    ];
+
+    const faqDefs = [
+      { q: 'How long does delivery take?', a: 'Next-day delivery in [AREA] for orders placed before [TIME]. Other areas usually take [X–Y] working days. We confirm the exact date with you on WhatsApp.', tint: '#E6EEFA', color: '#3B6CC0' },
+      { q: 'Can I add a personal note?', a: 'Of course! Every gift comes with a free gift tag — just tell us what to write when you order, or type it in the gift box builder.', tint: '#FDE7EE', color: '#D6245F' },
+      { q: 'Can you make something custom?', a: 'Yes, that\'s our favourite kind of order. Build your own box on the homepage, or message us your idea, colours and budget on WhatsApp.', tint: '#FBF0D2', color: '#9A6A12' },
+      { q: 'How do I pay?', a: '[Payment methods — e.g. bank transfer, card, cash on delivery]. We share the details when we confirm your order on WhatsApp.', tint: '#E3F6EA', color: '#17663A' },
+      { q: 'What if the chocolates melt?', a: '[Your policy for heat and handling — e.g. we pack with cool packs and deliver within X hours.]', tint: '#F1EAF8', color: '#7A57A0' }
+    ];
+
+    return {
+      accent,
+      headCls: s.scrolled ? 'shrunk' : '',
+      fanCls: s.fan ? 'fan' : '',
+      toggleFan: () => this.setState({ fan: !this.state.fan }),
+
+      chapters: chapDefs.map((c, i) => ({
+        num: i + 1, short: c.short,
+        cls: i === ci ? 'on' : i < ci ? 'done' : '',
+        pick: () => goChap(i)
+      })),
+      chap: { ...chapDefs[ci], num: ci + 1 },
+      pageCls: s.chapGen ? (s.chapGen % 2 ? 'tA' : 'tB') : '',
+      prevOff: ci === 0,
+      nextOff: ci === chapDefs.length - 1,
+      prevChap: () => goChap(Math.max(0, ci - 1)),
+      nextChap: () => goChap(Math.min(chapDefs.length - 1, ci + 1)),
+
+      s1: st >= 1, s2: st >= 2, s3: st >= 3,
+      showScooter: st >= 4,
+      goCls: st >= 4 ? 'go' : '',
+      beltCls: s.playing ? '' : 'still',
+      stageMsg: st === 0 ? 'An empty box, full of potential…' : stageDefs[st - 1].msg,
+      progPct: (st <= 1 ? 0 : Math.round((st - 1) / 3 * 100)) + '%',
+      stages: stageDefs.map((t, i) => ({
+        label: t.label,
+        cls: st === i + 1 ? 'on' : st > i + 1 ? 'done' : '',
+        i1: i === 0, i2: i === 1, i3: i === 2, i4: i === 3,
+        pick: () => { this.stopPlay(); this.setStage(i + 1); }
+      })),
+      playing: s.playing,
+      notPlaying: !s.playing,
+      playLabel: st >= 4 ? 'Play again' : st > 0 ? 'Continue' : 'Play',
+      playToggle: () => (this.state.playing ? this.stopPlay() : this.startPlay()),
+
+      promises: promDefs.map((p, i) => {
+        const on = !!s.flipped[i];
+        return {
+          ...p, i1: p.icon === 1, i2: p.icon === 2, i3: p.icon === 3,
+          cls: on ? 'on' : '', pressed: on ? 'true' : 'false',
+          toggle: () => this.setState({ flipped: { ...this.state.flipped, [i]: !on } })
+        };
+      }),
+
+      chats: chatDefs.map((c) => {
+        const copied = s.copied === c.id;
+        return {
+          ...c,
+          wa: 'https://wa.me/' + c.intl + '?text=' + encodeURIComponent(c.msg),
+          cpCls: copied ? 'on' : '',
+          cpLabel: copied ? 'Copied!' : 'Copy number',
+          copy: () => {
+            try { if (navigator.clipboard) navigator.clipboard.writeText(c.number); } catch (e) {}
+            this.setState({ copied: c.id });
+            this.later(() => { if (this.state.copied === c.id) this.setState({ copied: '' }); }, 1800);
+          }
+        };
+      }),
+
+      faqs: faqDefs.map((f, i) => {
+        const on = s.faq === i;
+        return {
+          ...f, cls: on ? 'on' : '', expanded: on ? 'true' : 'false',
+          toggle: () => this.setState({ faq: on ? -1 : i })
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

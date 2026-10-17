@@ -1,0 +1,81 @@
+// Product catalogue. Many prices are SAMPLE values — edit them here.
+// `image` can point at /images/<file> once real photos are in public/images/.
+
+export type Who = 'her' | 'him' | 'kids' | 'friend';
+export type Occasion = 'birthday' | 'anniversary' | 'just';
+export type Vibe = 'sweet' | 'cuddly' | 'playful' | 'fancy';
+
+export interface Product {
+  id: string;
+  name: string;
+  note: string;
+  price: number;
+  who: Who[];
+  occ: Occasion[];
+  vibe: Vibe;
+  /** Placeholder photo colour */
+  tint: string;
+  /** Second placeholder colour (hover / "in hand" photo) */
+  tint2: string;
+  /** Wrapping paper colour for the "Wrapped" preview */
+  paper: string;
+  badge?: 'Bestseller' | 'New';
+  /** Lower = more popular ("Most loved" sort) */
+  pop: number;
+  image?: string;
+}
+
+export const products: Product[] = [
+  { id: 'kjb', name: 'Kinder Joy Bouquet', note: '75 pcs, hand-wrapped', price: 4000, who: ['her', 'kids', 'friend'], occ: ['birthday', 'just'], vibe: 'sweet', tint: '#F7D3DE', tint2: '#F2C0D0', paper: '#E9A3BA', badge: 'Bestseller', pop: 1 },
+  { id: 'gtb', name: 'Giant Teddy Bear', note: 'Soft & extra huggable', price: 12000, who: ['her'], occ: ['anniversary', 'birthday'], vibe: 'cuddly', tint: '#F4E6D6', tint2: '#EED8C1', paper: '#D9B48A', badge: 'Bestseller', pop: 2 },
+  { id: 'kgb', name: 'Kinder Gift Box', note: 'Mixed Kinder treats', price: 3500, who: ['her', 'him', 'kids', 'friend'], occ: ['birthday', 'just'], vibe: 'sweet', tint: '#FCE6CF', tint2: '#F8D6B4', paper: '#EDB98A', pop: 3 },
+  { id: 'hws', name: 'Hot Wheels Gift Set', note: '20-car gift pack', price: 5500, who: ['kids', 'him'], occ: ['birthday'], vibe: 'playful', tint: '#DCE4F3', tint2: '#C8D4EC', paper: '#2A3058', pop: 4 },
+  { id: 'fhb', name: 'Ferrero Heart Box', note: 'Wrapped heart box', price: 6500, who: ['her'], occ: ['anniversary'], vibe: 'fancy', tint: '#EADDF2', tint2: '#DCCBEA', paper: '#B79BD0', badge: 'New', pop: 5 },
+  { id: 'apl', name: 'Avocado Plushie', note: 'Cute & squishy', price: 2800, who: ['her', 'kids', 'friend'], occ: ['just', 'birthday'], vibe: 'cuddly', tint: '#D8EDE2', tint2: '#C3E3D2', paper: '#8FC7A9', badge: 'New', pop: 6 },
+  { id: 'mtd', name: 'Mini Teddy Duo', note: 'Matching pair', price: 3800, who: ['her', 'friend'], occ: ['anniversary', 'just'], vibe: 'cuddly', tint: '#FCE4EC', tint2: '#F8D2DF', paper: '#EFA3BB', pop: 7 },
+  { id: 'frb', name: 'Ferrero Rocher Bouquet', note: 'Golden & glam', price: 9500, who: ['her'], occ: ['anniversary', 'birthday'], vibe: 'fancy', tint: '#FBF0D2', tint2: '#F5E3B3', paper: '#D9A441', pop: 8 },
+  { id: 'chh', name: 'Chocolate Hamper for Him', note: 'Dark, milk & crunchy', price: 7500, who: ['him'], occ: ['birthday', 'anniversary'], vibe: 'sweet', tint: '#E6E2F0', tint2: '#D7D1E6', paper: '#2A3058', pop: 9 },
+  { id: 'kbt', name: 'Kinder Bueno Tower', note: 'Stacked sky-high', price: 4800, who: ['friend', 'him', 'kids'], occ: ['birthday', 'just'], vibe: 'sweet', tint: '#F6E7D3', tint2: '#EFD8BB', paper: '#B9875C', pop: 10 },
+  { id: 'hwt', name: 'Hot Wheels Track Set', note: 'Loops & launchers', price: 8900, who: ['kids'], occ: ['birthday'], vibe: 'playful', tint: '#DDE9F7', tint2: '#C9DBF1', paper: '#E8463B', pop: 11 },
+  { id: 'btc', name: 'Balloon & Teddy Combo', note: 'Party-ready', price: 6900, who: ['her', 'kids'], occ: ['birthday'], vibe: 'playful', tint: '#FDE7E4', tint2: '#F9D3CE', paper: '#F2B4C8', pop: 12 },
+];
+
+export const productById = (id: string) => products.find((p) => p.id === id);
+
+export const whoOptions: { id: Who | 'any'; label: string }[] = [
+  { id: 'any', label: 'Anyone' },
+  { id: 'her', label: 'Her' },
+  { id: 'him', label: 'Him' },
+  { id: 'kids', label: 'Kids' },
+  { id: 'friend', label: 'A friend' },
+];
+
+export const occasionOptions: { id: Occasion | 'any'; label: string }[] = [
+  { id: 'any', label: 'Any' },
+  { id: 'birthday', label: 'Birthday' },
+  { id: 'anniversary', label: 'Anniversary' },
+  { id: 'just', label: 'Just because' },
+];
+
+export const vibeOptions: { id: Vibe | 'all'; label: string; dot: string; bg: string }[] = [
+  { id: 'all', label: 'All vibes', dot: '#1B1F3B', bg: '#FFF8F3' },
+  { id: 'sweet', label: 'Sweet', dot: '#B9875C', bg: '#FFF4EA' },
+  { id: 'cuddly', label: 'Cuddly', dot: '#EFA3BB', bg: '#FFF1F4' },
+  { id: 'playful', label: 'Playful', dot: '#5B8BD9', bg: '#F1F5FC' },
+  { id: 'fancy', label: 'Fancy', dot: '#B79BD0', bg: '#F7F2FB' },
+];
+
+export const whoName: Record<Who, string> = { her: 'For her', him: 'For him', kids: 'For kids', friend: 'For a friend' };
+export const occName: Record<Occasion, string> = { birthday: 'Birthday', anniversary: 'Anniversary', just: 'Just because' };
+
+/** Quick view options */
+export const sizeOptions = [
+  { id: 'reg', label: 'Regular', extra: 0 },
+  { id: 'lg', label: 'Large', extra: 1500 },
+] as const;
+
+export const addOns = [
+  { id: 'balloon', label: 'Helium balloon', price: 500 },
+  { id: 'card', label: 'Greeting card', price: 250 },
+  { id: 'teddy', label: 'Mini teddy', price: 1500 },
+] as const;

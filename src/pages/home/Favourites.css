@@ -1,0 +1,24 @@
+.fav-sec { position: relative; padding-top: var(--sec-y-sm); padding-bottom: 40px; }
+.fav-tabs { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.fav-nav { display: flex; align-items: center; gap: 10px; }
+.fav-all { font-size: 14px; font-weight: 700; margin-right: 10px; min-height: 44px; display: inline-flex; align-items: center; }
+.icon-btn.arrow { width: 46px; height: 46px; }
+.car-view { overflow: hidden; padding: 6px 4px 14px; }
+.track { display: flex; gap: 20px; transition: transform .5s var(--ease-out); }
+.fav-foot { margin: 14px 0 0; text-align: center; font-size: 14px; color: var(--body); }
+
+@media (max-width: 900px) {
+  .car-view { overflow-x: auto; scroll-snap-type: x mandatory; }
+  .track { transform: none !important; }
+  .hide-sm { display: none !important; }
+}
+
+@media (max-width: 600px) {
+  .fav-sec .sec-head { margin-bottom: 16px !important; }
+  .fav-tabs { flex-wrap: nowrap; overflow-x: auto; margin: 16px calc(var(--gutter) * -1) 0; padding: 2px var(--gutter); scrollbar-width: none; }
+  .fav-tabs::-webkit-scrollbar { display: none; }
+  .fav-tabs .tab { flex: 0 0 auto; }
+  .car-view { margin: 0 calc(var(--gutter) * -1); padding: 6px var(--gutter) 14px; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .car-view::-webkit-scrollbar { display: none; }
+  .track { gap: 12px; }
+}

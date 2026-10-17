@@ -1,0 +1,28 @@
+.tabbar { display: none; }
+
+@media (max-width: 960px) {
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 48;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+    padding: 0 8px env(safe-area-inset-bottom);
+    background: rgba(255, 255, 255, .94);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px); backdrop-filter: saturate(1.6) blur(14px);
+    border-top: 1px solid var(--line);
+  }
+  .tab-item {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    min-height: 44px; color: var(--muted); text-decoration: none; font-size: 11px; font-weight: 600;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tab-item:hover { color: var(--ink); }
+  .tab-ic {
+    width: 56px; height: 30px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
+    transition: background .25s ease, transform .2s ease;
+  }
+  .tab-item:active .tab-ic { transform: scale(.9); }
+  .tab-item.on { color: var(--pink-dark); }
+  .tab-item.on .tab-ic { background: var(--pink-soft); }
+  .tab-item.on .tab-l { font-weight: 700; }
+  .tab-item:focus-visible { outline-offset: -4px; border-radius: 14px; }
+}

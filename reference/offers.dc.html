@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Offers — GiftsByDeesh</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFF8F3}
+a{color:#D6245F}a:hover{color:#A8173F}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+.site-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid #F1E3E8;transition:box-shadow .3s ease}
+.site-head .head-in{padding:16px 24px;transition:padding .3s ease}
+.site-head.shrunk{box-shadow:0 12px 30px -20px rgba(27,31,59,.4)}
+.site-head.shrunk .head-in{padding:8px 24px}
+.site-head .logo-sub{display:block;max-height:16px;overflow:hidden;transition:max-height .3s ease,opacity .3s ease}
+.site-head.shrunk .logo-sub{max-height:0;opacity:0}
+.cart-btn{position:relative;width:44px;height:44px;border:none;background:none;color:#1B1F3B;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s ease}
+.cart-btn:hover{background:#FDEDF2}
+.cart-btn.cA{animation:cartA .6s cubic-bezier(.3,1.6,.5,1)}.cart-btn.cB{animation:cartB .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes cartA{25%{transform:scale(1.14) rotate(-6deg)}50%{transform:scale(.96) rotate(4deg)}75%{transform:scale(1.04) rotate(-2deg)}100%{transform:none}}
+@keyframes cartB{25%{transform:scale(1.14) rotate(-6deg)}50%{transform:scale(.96) rotate(4deg)}75%{transform:scale(1.04) rotate(-2deg)}100%{transform:none}}
+.cart-btn .plus1{position:absolute;left:50%;top:100%;margin-left:-12px;font-size:12px;font-weight:800;color:#D6245F;opacity:0;pointer-events:none}
+.cart-btn.cA .plus1{animation:plusDA .9s ease-out}.cart-btn.cB .plus1{animation:plusDB .9s ease-out}
+@keyframes plusDA{0%{opacity:0;transform:translateY(-6px)}20%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+@keyframes plusDB{0%{opacity:0;transform:translateY(-6px)}20%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+.badge.bA{display:inline-flex;animation:pA .5s cubic-bezier(.3,1.8,.5,1)}.badge.bB{display:inline-flex;animation:pB .5s cubic-bezier(.3,1.8,.5,1)}
+.pa{display:inline-block;animation:pA .4s cubic-bezier(.3,1.6,.5,1)}.pb{display:inline-block;animation:pB .4s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pA{0%{transform:scale(1.3)}100%{transform:none}}
+@keyframes pB{0%{transform:scale(1.3)}100%{transform:none}}
+.fly-x{position:absolute;z-index:70;pointer-events:none;transition:transform .78s linear}
+.fly-y{transition:transform .78s cubic-bezier(.45,-0.9,.8,.85)}
+.fly-tok{width:56px;height:56px;border-radius:50%;border:3px solid #fff;display:flex;align-items:center;justify-content:center;color:#A8173F;box-shadow:0 12px 24px -8px rgba(27,31,59,.45);animation:flyS .8s ease-in forwards}
+@keyframes flyS{0%{transform:scale(.3)}15%{transform:scale(1.18)}30%{transform:scale(1)}75%{transform:scale(.85)}100%{transform:scale(.3);opacity:.6}}
+.tok{display:flex;align-items:center;justify-content:center;border-radius:50%;border:4px solid #fff;box-shadow:0 14px 28px -14px rgba(27,31,59,.45)}
+.tok svg{width:66%;height:66%;display:block}
+.fl{position:absolute}
+.f1{animation:bob1 4.2s ease-in-out infinite}.f2{animation:bob2 3.6s ease-in-out infinite}.f3{animation:bob1 5s ease-in-out infinite .6s}.f4{animation:bob2 4.6s ease-in-out infinite .3s}.f5{animation:bob1 3.9s ease-in-out infinite 1s}
+@keyframes bob1{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-16px) rotate(5deg)}}
+@keyframes bob2{0%,100%{transform:translateY(-8px) rotate(4deg)}50%{transform:translateY(10px) rotate(-6deg)}}
+.spin{animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cd{display:flex;gap:10px}
+.cd-box{background:#1B1F3B;color:#fff;border-radius:14px;width:68px;padding:10px 0 8px;text-align:center}
+.cd-num{font-family:Fredoka,sans-serif;font-weight:700;font-size:28px;line-height:1}
+.cd-lab{font-size:11px;font-weight:600;color:#C9CCE0;margin-top:4px;letter-spacing:.06em}
+.gift{position:relative;display:block;width:260px;height:250px;margin:0 auto;border:none;background:none;padding:0}
+.gift.idle{animation:idle 2.4s ease-in-out infinite}
+@keyframes idle{0%,100%{transform:none}50%{transform:translateY(-6px) scale(1.01)}}
+.gift.shA{animation:shA .55s ease}.gift.shB{animation:shB .55s ease}
+@keyframes shA{0%,100%{transform:none}15%{transform:rotate(-7deg) translateY(-6px)}35%{transform:rotate(6deg)}55%{transform:rotate(-5deg)}75%{transform:rotate(3deg)}}
+@keyframes shB{0%,100%{transform:none}15%{transform:rotate(7deg) translateY(-6px)}35%{transform:rotate(-6deg)}55%{transform:rotate(5deg)}75%{transform:rotate(-3deg)}}
+.g-base{position:absolute;left:14px;right:14px;bottom:0;height:150px;border-radius:16px;z-index:2;overflow:hidden;box-shadow:0 22px 30px -20px rgba(27,31,59,.5)}
+.g-base .rv{position:absolute;top:0;bottom:0;left:50%;width:32px;margin-left:-16px}
+.g-lid{position:absolute;left:0;right:0;top:56px;height:52px;border-radius:12px;z-index:3;box-shadow:0 8px 14px -8px rgba(27,31,59,.4)}
+.g-lid .rv{position:absolute;top:0;bottom:0;left:50%;width:32px;margin-left:-16px}
+.g-lid .bow{position:absolute;left:50%;top:-50px;width:110px;height:70px;margin-left:-55px}
+.gift.open .g-lid{animation:lidOff 1s cubic-bezier(.3,.7,.4,1) forwards}
+@keyframes lidOff{0%{transform:none}25%{transform:translateY(-70px) rotate(-12deg)}100%{transform:translate(190px,-150px) rotate(80deg);opacity:0}}
+.peek{position:absolute;left:50%;bottom:96px;width:110px;height:110px;margin-left:-55px;z-index:1;animation:peek .7s .45s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes peek{0%{transform:translateY(90px)}100%{transform:none}}
+.peek .arm{transform-origin:84px 70px;animation:wave .9s ease-in-out 1.2s infinite}
+@keyframes wave{0%,100%{transform:rotate(0)}50%{transform:rotate(-28deg)}}
+.conf{position:absolute;left:50%;top:45%;width:10px;height:14px;border-radius:3px;opacity:0;z-index:4}
+.k1{animation:k1 1.3s ease-out forwards}.k2{animation:k2 1.3s ease-out forwards}.k3{animation:k3 1.3s ease-out forwards}.k4{animation:k4 1.3s ease-out forwards}.k5{animation:k5 1.3s ease-out forwards}.k6{animation:k6 1.3s ease-out forwards}
+@keyframes k1{0%{opacity:1;transform:none}100%{opacity:0;transform:translate(-180px,-160px) rotate(420deg)}}
+@keyframes k2{0%{opacity:1;transform:none}100%{opacity:0;transform:translate(170px,-180px) rotate(-380deg)}}
+@keyframes k3{0%{opacity:1;transform:none}100%{opacity:0;transform:translate(-120px,-230px) rotate(300deg)}}
+@keyframes k4{0%{opacity:1;transform:none}100%{opacity:0;transform:translate(110px,-240px) rotate(-460deg)}}
+@keyframes k5{0%{opacity:1;transform:none}100%{opacity:0;transform:translate(-220px,-60px) rotate(260deg)}}
+@keyframes k6{0%{opacity:1;transform:none}100%{opacity:0;transform:translate(220px,-80px) rotate(-300deg)}}
+.bubble{position:relative;display:inline-block;background:#fff;border:2px solid #1B1F3B;border-radius:20px;padding:12px 20px;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px;color:#1B1F3B;box-shadow:4px 4px 0 #1B1F3B}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-11px;width:18px;height:18px;margin-left:-9px;background:#fff;border-right:2px solid #1B1F3B;border-bottom:2px solid #1B1F3B;transform:rotate(45deg)}
+.bubble.bA{animation:bub .45s cubic-bezier(.3,1.8,.5,1)}.bubble.bB{animation:bub2 .45s cubic-bezier(.3,1.8,.5,1)}
+@keyframes bub{0%{transform:scale(.7) rotate(-4deg)}100%{transform:none}}
+@keyframes bub2{0%{transform:scale(.7) rotate(4deg)}100%{transform:none}}
+.ticket{position:relative;display:flex;align-items:center;gap:20px;background:#fff;border:2px dashed #F2A7BE;border-radius:20px;padding:20px 26px;max-width:520px;margin:0 auto;animation:ticketUp .6s .9s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes ticketUp{0%{opacity:0;transform:translateY(40px) scale(.9)}100%{opacity:1;transform:none}}
+.ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:26px;height:26px;margin-top:-13px;border-radius:50%;background:#FDF1F4}
+.ticket::before{left:-15px}.ticket::after{right:-15px}
+.copy-btn{min-height:48px;border:none;border-radius:999px;padding:0 20px;font-weight:700;font-size:14px;color:#fff;display:flex;align-items:center;gap:8px;transition:transform .2s ease}
+.copy-btn:active{transform:scale(.9)}
+.combo{background:#fff;border-radius:26px;border:1px solid #F1E3E8;padding:24px;display:flex;flex-direction:column;gap:18px;transition:transform .3s ease,box-shadow .3s ease}
+.combo:hover{transform:translateY(-6px);box-shadow:0 22px 44px -24px rgba(214,36,95,.5)}
+.combo-vis{position:relative;height:170px;border-radius:20px;display:flex;align-items:center;justify-content:center;gap:6px}
+.combo .ta{transition:transform .3s ease}.combo .tb{transition:transform .3s ease}
+.combo:hover .ta{animation:hop .6s ease}.combo:hover .tb{animation:hop .6s .12s ease}
+@keyframes hop{0%,100%{transform:none}40%{transform:translateY(-18px) rotate(-8deg)}70%{transform:translateY(2px)}}
+.plus-sign{font-family:Fredoka,sans-serif;font-weight:700;font-size:30px;color:#1B1F3B;opacity:.5}
+.sticker{position:absolute;top:-12px;right:-10px;background:#FFD84D;color:#1B1F3B;font-weight:800;font-size:13px;padding:10px 12px;border-radius:999px;transform:rotate(10deg);box-shadow:0 6px 12px -6px rgba(27,31,59,.4)}
+.combo:hover .sticker{animation:wob .7s ease}
+@keyframes wob{0%,100%{transform:rotate(10deg)}25%{transform:rotate(-8deg) scale(1.12)}50%{transform:rotate(14deg)}75%{transform:rotate(4deg)}}
+.addbtn{min-height:48px;border:none;border-radius:999px;padding:0 20px;color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;transition:transform .2s ease}
+.addbtn:hover{transform:translateY(-2px)}
+.addbtn:active{transform:scale(.92)}
+.cal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.occ-card{background:#fff;border-radius:22px;border:1px solid #F1E3E8;padding:20px;display:flex;flex-direction:column;gap:12px;transition:transform .3s ease}
+.occ-card:hover{transform:translateY(-4px) rotate(-1deg)}
+.date-chip{align-self:flex-start;display:flex;flex-direction:column;align-items:center;width:64px;border-radius:14px;overflow:hidden;border:1.5px solid #EBD9DF;background:#fff}
+.date-chip .m{width:100%;text-align:center;font-size:11px;font-weight:800;letter-spacing:.08em;color:#fff;padding:4px 0}
+.date-chip .d{font-family:Fredoka,sans-serif;font-weight:700;font-size:24px;padding:4px 0 6px}
+.rem{min-height:44px;border:1.5px solid #EBD9DF;background:#fff;border-radius:999px;padding:0 14px;font-weight:700;font-size:13px;color:#1B1F3B;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:auto;transition:all .25s ease}
+.rem:hover{border-color:#25D366}
+.rem.on{background:#E3F6EA;border-color:#25D366;color:#17663A}
+.rem .bell{transform-origin:50% 2px}
+.rem.on .bell{animation:ring .9s ease}
+@keyframes ring{0%,100%{transform:none}15%{transform:rotate(28deg)}30%{transform:rotate(-24deg)}45%{transform:rotate(18deg)}60%{transform:rotate(-12deg)}75%{transform:rotate(6deg)}}
+.panic-wrap.sqA{animation:quake .5s ease}.panic-wrap.sqB{animation:quake2 .5s ease}
+@keyframes quake{0%,100%{transform:none}20%{transform:translate(-8px,3px)}40%{transform:translate(7px,-4px)}60%{transform:translate(-5px,2px)}80%{transform:translate(3px,-1px)}}
+@keyframes quake2{0%,100%{transform:none}20%{transform:translate(8px,-3px)}40%{transform:translate(-7px,4px)}60%{transform:translate(5px,-2px)}80%{transform:translate(-3px,1px)}}
+.panic-zone{position:relative;width:240px;height:240px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.pring{position:absolute;inset:30px;border-radius:50%;border:3px solid #FF6B7F;animation:pulse 2.2s ease-out infinite}
+.pring.r2{animation-delay:1.1s}
+@keyframes pulse{0%{transform:scale(.9);opacity:.8}100%{transform:scale(1.5);opacity:0}}
+.panic-btn{position:relative;width:180px;height:180px;border-radius:50%;border:8px solid rgba(255,255,255,.18);background:#E23A55;color:#fff;font-family:Fredoka,sans-serif;font-weight:700;font-size:34px;letter-spacing:.04em;box-shadow:inset 0 -10px 0 rgba(0,0,0,.18),0 14px 0 #8A1236,0 24px 40px -10px rgba(0,0,0,.5);transition:transform .1s ease,box-shadow .1s ease}
+.panic-btn:hover{transform:translateY(-2px)}
+.panic-btn:active{transform:translateY(12px);box-shadow:inset 0 -6px 0 rgba(0,0,0,.18),0 2px 0 #8A1236,0 8px 16px -6px rgba(0,0,0,.5)}
+.calm-panel{animation:calmIn .6s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes calmIn{0%{opacity:0;transform:translateY(30px) scale(.96)}100%{opacity:1;transform:none}}
+.sweat{animation:drip 1.4s ease-in infinite}
+@keyframes drip{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(10px);opacity:0}}
+.pick{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:12px 12px 12px 14px;animation:calmIn .5s cubic-bezier(.3,1.4,.5,1) both}
+.pick-add{width:46px;height:46px;flex:0 0 46px;border-radius:50%;border:none;color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .2s ease}
+.pick-add:hover{transform:rotate(90deg)}
+.rm-layer{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px}
+.rm-back{position:absolute;inset:0;border:none;background:rgba(27,31,59,.45);animation:fadeIn .25s ease;cursor:default}
+@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+.rm-card{position:relative;width:min(460px,100%);max-height:calc(100% - 32px);overflow-y:auto;background:#fff;border-radius:28px;padding:30px;box-shadow:0 40px 80px -30px rgba(27,31,59,.6);animation:cardPop .45s cubic-bezier(.3,1.5,.5,1)}
+@keyframes cardPop{0%{opacity:0;transform:translateY(30px) scale(.92)}100%{opacity:1;transform:none}}
+.rm-card.eA{animation:errA .45s ease}.rm-card.eB{animation:errB .45s ease}
+@keyframes errA{0%,100%{transform:none}20%{transform:translateX(-10px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(3px)}}
+@keyframes errB{0%,100%{transform:none}20%{transform:translateX(10px)}40%{transform:translateX(-9px)}60%{transform:translateX(6px)}80%{transform:translateX(-3px)}}
+.rm-bell{width:64px;height:64px;border-radius:20px;display:flex;align-items:center;justify-content:center;flex:0 0 64px}
+.rm-bell svg{transform-origin:50% 3px;animation:ring 1s ease .35s}
+.rm-seg{display:flex;background:#F6EEF1;border-radius:999px;padding:4px;gap:4px}
+.rm-seg button{flex:1;min-height:44px;border:none;border-radius:999px;background:none;font-weight:700;font-size:14px;color:#6B6F85;transition:all .25s ease}
+.rm-seg button.on{background:#fff;color:#1B1F3B;box-shadow:0 4px 10px -6px rgba(27,31,59,.4)}
+.rm-in{width:100%;min-height:52px;border:1.5px solid #EBD9DF;border-radius:14px;padding:0 16px;font:inherit;font-size:16px;color:#1B1F3B;background:#fff;outline:none;transition:border-color .2s ease}
+.rm-in:focus{border-color:#D6245F}
+.rm-in.bad{border-color:#C0392B}
+.rm-pre{display:flex;align-items:center;padding:0 14px;min-height:52px;border:1.5px solid #EBD9DF;border-radius:14px;font-weight:700;color:#4A4F66;background:#FBF7F8}
+.rm-check{display:flex;align-items:center;gap:12px;width:100%;border:none;background:none;padding:6px 0;min-height:44px;text-align:left;font-size:14px;font-weight:600;color:#1B1F3B}
+.rm-check .bx{width:24px;height:24px;flex:0 0 24px;border-radius:8px;border:2px solid #D9C4CC;display:flex;align-items:center;justify-content:center;color:#fff;transition:all .2s ease}
+.rm-check.on .bx{background:#D6245F;border-color:#D6245F;animation:pA .3s cubic-bezier(.3,1.8,.5,1)}
+.rm-go{width:100%;min-height:54px;border:none;border-radius:999px;color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .2s ease}
+.rm-go:hover{transform:translateY(-2px)}
+.rm-done{text-align:center;position:relative}
+.big-bell{position:relative;width:110px;height:110px;margin:6px auto 0;border-radius:34px;display:flex;align-items:center;justify-content:center;animation:cardPop .5s cubic-bezier(.3,1.6,.5,1)}
+.big-bell svg{transform-origin:50% 4px;animation:ring 1s ease .2s 2}
+.big-bell .ok{position:absolute;right:-8px;bottom:-8px;width:40px;height:40px;border-radius:50%;background:#25D366;color:#0B2E17;display:flex;align-items:center;justify-content:center;border:4px solid #fff;animation:okPop .5s .55s cubic-bezier(.3,1.8,.5,1) both}
+@keyframes okPop{0%{transform:scale(0)}100%{transform:none}}
+.rm-done .conf{top:60px}
+@media (max-width:1000px){.cal{grid-template-columns:repeat(2,minmax(0,1fr))}.combos{grid-template-columns:1fr !important}}
+@media (max-width:900px){.hero{flex-direction:column !important}.nav-links{display:none !important}.panic-row{flex-direction:column !important;text-align:center}.hero-art{height:320px !important}}
+@media (prefers-reduced-motion:reduce){.f1,.f2,.f3,.f4,.f5,.spin,.gift.idle,.pring,.peek .arm,.sweat{animation:none}}
+.koko{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#4A4F66;flex-wrap:wrap}
+.koko-tag{background:#1B1F3B;color:#fff;font-weight:800;font-size:10px;letter-spacing:.08em;padding:3px 7px;border-radius:6px}
+.cd-layer{position:fixed;inset:0;z-index:58}
+.cd-back{position:absolute;inset:0;border:none;background:rgba(27,31,59,.42);animation:cdFade .3s ease;cursor:default}
+@keyframes cdFade{0%{opacity:0}100%{opacity:1}}
+.cdr{position:absolute;top:0;right:0;bottom:0;width:min(440px,100%);background:#FFF8F3;overflow-y:auto;box-shadow:-24px 0 48px -24px rgba(27,31,59,.45);animation:cdIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes cdIn{0%{transform:translateX(100%)}100%{transform:none}}
+.cd-head{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid #F1E3E8;background:#fff}
+.cd-x{width:44px;height:44px;border-radius:50%;border:1.5px solid #EBD9DF;background:#fff;color:#1B1F3B;display:flex;align-items:center;justify-content:center;margin-left:auto}
+.cd-body{padding:18px 22px;display:flex;flex-direction:column;gap:12px}
+.cl{background:#fff;border:1px solid #F1E3E8;border-radius:18px;padding:12px;animation:clIn .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes clIn{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:none}}
+.cl.out{animation:clOut .32s ease forwards}
+@keyframes clOut{0%{opacity:1;transform:none}100%{opacity:0;transform:translateX(70px) scale(.95)}}
+.cl-row{display:flex;gap:12px;align-items:flex-start}
+.cl-th{width:62px;height:62px;flex:0 0 62px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#7A3A50}
+.cq{display:flex;align-items:center;gap:4px;background:#FBF4F6;border-radius:999px;padding:3px}
+.cq button{width:44px;height:44px;border-radius:50%;border:none;background:#fff;color:#1B1F3B;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px -3px rgba(27,31,59,.3);transition:transform .15s ease}
+.cq button:active:not(:disabled){transform:scale(.85)}
+.cq button:disabled{opacity:.35;cursor:default}
+.cq .n{min-width:24px;text-align:center;font-weight:700;font-size:15px}
+.cl-del{width:44px;height:44px;flex:0 0 44px;border:none;background:none;color:#8C7E84;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s ease}
+.cl-del:hover{background:#FDEDF2;color:#B42318}
+.det-btn{border:none;background:none;padding:4px 0;min-height:36px;font-size:13px;font-weight:700;color:#A8173F;display:flex;align-items:center;gap:6px}
+.det-btn svg{transition:transform .3s ease}
+.det-btn.on svg{transform:rotate(180deg)}
+.det{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.det.on{grid-template-rows:1fr}
+.det > div{overflow:hidden}
+.det ul{margin:8px 0 0;padding:10px 12px 10px 28px;background:#FBF4F6;border-radius:12px;font-size:13px;color:#4A4F66;line-height:1.7}
+.cd-sec{background:#fff;border:1px solid #F1E3E8;border-radius:18px;padding:14px}
+.cd-lab{font-size:14px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.dchips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px}
+.dchip{flex:0 0 auto;min-width:74px;min-height:56px;border:1.5px solid #EBD9DF;background:#fff;border-radius:14px;padding:6px 10px;color:#1B1F3B;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .2s ease}
+.dchip .w{font-size:12px;font-weight:800}.dchip .d{font-size:12px;color:#6B6F85}
+.dchip.on{background:#1B1F3B;border-color:#1B1F3B;color:#fff;animation:cpop .3s cubic-bezier(.3,1.8,.5,1)}
+.dchip.on .d{color:#C9CCE0}
+@keyframes cpop{0%{transform:scale(.88)}100%{transform:none}}
+.pchips{display:flex;gap:8px}
+.pchip{flex:1;min-height:56px;border:1.5px solid #EBD9DF;background:#fff;border-radius:14px;padding:8px 12px;text-align:left;color:#1B1F3B;font-size:14px;font-weight:700;transition:all .2s ease}
+.pchip .s{display:block;font-size:12px;font-weight:500;color:#6B6F85;margin-top:2px}
+.pchip.on{border-color:#1B1F3B;box-shadow:inset 0 0 0 1px #1B1F3B;animation:cpop .3s cubic-bezier(.3,1.8,.5,1)}
+.cd-note{width:100%;min-height:72px;border:1.5px solid #EBD9DF;border-radius:12px;padding:10px 12px;font:inherit;font-size:14px;resize:vertical;outline:none;color:#1B1F3B;background:#fff}
+.cd-note:focus{border-color:#D6245F}
+.undo{display:flex;align-items:center;gap:10px;margin:0 0 12px;background:#1B1F3B;color:#fff;border-radius:14px;padding:8px 8px 8px 14px;font-size:13px;animation:clIn .3s ease both}
+.undo button{margin-left:auto;min-height:40px;border:none;border-radius:10px;background:#fff;color:#1B1F3B;font-weight:700;font-size:13px;padding:0 14px}
+.cd-foot{position:sticky;bottom:0;z-index:3;background:#fff;border-top:1px solid #F1E3E8;padding:14px 22px 18px;box-shadow:0 -12px 24px -20px rgba(27,31,59,.35)}
+.send{width:100%;min-height:56px;border-radius:999px;background:#25D366;color:#0B2E17;text-decoration:none;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .2s ease}
+.send:hover{transform:translateY(-2px);color:#0B2E17}
+.sending{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);z-index:6;background:rgba(255,248,243,.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;animation:cdFade .25s ease}
+.plane{animation:plane 1.4s cubic-bezier(.5,0,.3,1) forwards}
+@keyframes plane{0%{transform:translate(-70px,70px) scale(.6) rotate(12deg);opacity:0}20%{opacity:1;transform:none}65%{transform:translate(30px,-24px) rotate(-6deg)}100%{transform:translate(220px,-280px) scale(.4) rotate(-20deg);opacity:0}}
+.trail{stroke-dasharray:6 8;animation:trail 1.4s linear forwards}
+@keyframes trail{0%{stroke-dashoffset:200;opacity:0}20%{opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.sent-ic{width:100px;height:100px;border-radius:32px;background:#E3F6EA;color:#17663A;display:flex;align-items:center;justify-content:center;animation:cpop .55s cubic-bezier(.3,1.8,.5,1)}
+.cd-sway{animation:cdSway 2.6s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes cdSway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.cd-cta{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 24px;border-radius:999px;color:#fff;text-decoration:none;font-weight:700;font-size:15px;border:none}
+.cd-cta:hover{color:#fff}
+@media (prefers-reduced-motion:reduce){.cdr,.cl,.plane,.cd-sway{animation-duration:.01s}}
+</style>
+</helmet>
+
+<div ref="{{setRoot}}" style="position: relative; font-family: 'Plus Jakarta Sans', sans-serif; color: #1B1F3B; background: #FFF8F3; width: 100%">
+
+<div style="background: {{accent}}; color: #fff; text-align: center; font-size: 13px; font-weight: 600; padding: 10px 16px">Use code SWEET10 for 10% off your first order</div>
+
+<header class="site-head {{headCls}}">
+<div class="head-in" style="max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1B1F3B">
+<span style="width: 40px; height: 40px; border-radius: 12px; background: {{accent}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg></span>
+<span style="display: flex; flex-direction: column"><span style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 20px; line-height: 1">GiftsBy<span style="color: {{accent}}">Deesh</span></span><span class="logo-sub" style="font-size: 11px; color: #6B6F85">House of Deesh (Pvt) Ltd</span></span>
+</a>
+<nav class="nav-links" style="display: flex; gap: 30px; font-size: 14px; font-weight: 600">
+<a href="Main.dc.html" style="color: #1B1F3B; text-decoration: none">Home</a>
+<a href="Shop.dc.html" style="color: #1B1F3B; text-decoration: none">Shop Gifts</a>
+<a href="Shop.dc.html" style="color: #1B1F3B; text-decoration: none">Chocolate Bouquets</a>
+<a href="Shop.dc.html" style="color: #1B1F3B; text-decoration: none">Teddy Bears</a>
+<a href="#top" style="color: {{accent}}; text-decoration: none">Offers</a>
+<a href="About.dc.html" style="color: #1B1F3B; text-decoration: none">About Us</a>
+</nav>
+<div style="display: flex; gap: 8px">
+<button aria-label="Search" style="width: 44px; height: 44px; border: none; background: none; color: #1B1F3B; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
+<button aria-label="Basket, {{basket}} items" ref="{{setCart}}" class="cart-btn {{navCartCls}}" onClick="{{openCart}}"><span class="plus1" aria-hidden="true">+1</span><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h14l-1.4 9.1a2 2 0 0 1-2 1.9H8.4a2 2 0 0 1-2-1.9z"></path><path d="m9 10 3-6 3 6"></path></svg><span class="badge {{badgeCls}}" style="position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; border-radius: 9px; background: {{accent}}; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; padding: 0 4px">{{basket}}</span></button>
+</div>
+</div>
+</header>
+
+<!-- HERO -->
+<section id="top" style="background: #FBE3EA; overflow: hidden">
+<div class="hero" style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 72px; display: flex; align-items: center; gap: 48px">
+<div style="flex: 1.05 1 0; min-width: 0">
+<p style="margin: 0 0 12px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #A8173F">OFFERS &amp; TREATS</p>
+<h1 style="margin: 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 62px; line-height: 1.02">Sweet deals, wrapped with <span style="color: {{accent}}">love.</span></h1>
+<p style="margin: 18px 0 0; font-size: 17px; line-height: 1.6; color: #4A4F66; max-width: 460px">Combos, seasonal surprises and a gift box full of discounts. Go on, have a look around.</p>
+
+<div style="margin-top: 30px; background: #fff; border-radius: 24px; padding: 22px 24px; box-shadow: 0 24px 44px -30px rgba(214,36,95,.55); max-width: 520px">
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+<span style="background: #FFD84D; color: #1B1F3B; font-size: 12px; font-weight: 800; padding: 6px 11px; border-radius: 999px">THIS WEEK</span>
+<span style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 22px">Bouquet Week · 15% off all bouquets</span>
+</div>
+<sc-if value="{{live}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 16px">
+<div class="cd" role="timer" aria-label="Offer ends in {{cd.d}} days {{cd.h}} hours">
+<div class="cd-box"><div class="cd-num">{{cd.d}}</div><div class="cd-lab">DAYS</div></div>
+<div class="cd-box"><div class="cd-num">{{cd.h}}</div><div class="cd-lab">HRS</div></div>
+<div class="cd-box"><div class="cd-num">{{cd.m}}</div><div class="cd-lab">MIN</div></div>
+<div class="cd-box" style="background: {{accent}}"><div class="cd-num {{secCls}}">{{cd.s}}</div><div class="cd-lab" style="color: #FFE4EC">SEC</div></div>
+</div>
+<a href="Shop.dc.html" style="background: #1B1F3B; color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; padding: 14px 22px; border-radius: 999px">Shop bouquets</a>
+</div>
+</sc-if>
+<sc-if value="{{ended}}" hint-placeholder-val="{{false}}">
+<p style="margin: 14px 0 0; font-size: 15px; color: #4A4F66">This offer has ended — new treats coming soon!</p>
+</sc-if>
+</div>
+</div>
+
+<div class="hero-art" aria-hidden="true" style="flex: 1 1 0; min-width: 0; position: relative; height: 460px">
+<div style="position: absolute; inset: 30px 20px; border-radius: 50%; background: #F6C3D2"></div>
+<div class="fl f1" style="left: 12%; top: 8%"><div class="tok" style="width: 120px; height: 120px; background: #FDE7E4"><svg viewBox="0 0 40 40"><ellipse cx="20" cy="21" rx="11" ry="14" fill="#fff" stroke="#E2D6D9" stroke-width="1.5"></ellipse><path d="M9 21A11 14 0 0 0 31 21Z" fill="#E8463B"></path></svg></div></div>
+<div class="fl f2" style="right: 10%; top: 4%"><div class="tok" style="width: 104px; height: 104px; background: #FBF0D2"><svg viewBox="0 0 40 40"><circle cx="13" cy="24" r="7" fill="#D9A441"></circle><circle cx="27" cy="24" r="7" fill="#D9A441"></circle><circle cx="20" cy="15" r="7" fill="#D9A441"></circle><circle cx="18" cy="13" r="2" fill="#fff" opacity=".55"></circle></svg></div></div>
+<div class="fl f3" style="left: 34%; top: 32%"><div class="tok" style="width: 168px; height: 168px; background: #F4E6D6"><svg viewBox="0 0 40 40"><circle cx="11" cy="12" r="5.5" fill="#C68E5E"></circle><circle cx="29" cy="12" r="5.5" fill="#C68E5E"></circle><circle cx="20" cy="22" r="12" fill="#C68E5E"></circle><ellipse cx="20" cy="26.5" rx="6" ry="4.5" fill="#fff" opacity=".7"></ellipse><circle cx="15.5" cy="20" r="1.6" fill="#3B2A22"></circle><circle cx="24.5" cy="20" r="1.6" fill="#3B2A22"></circle><circle cx="20" cy="25" r="1.6" fill="#3B2A22"></circle><ellipse cx="12.5" cy="24" rx="2.2" ry="1.3" fill="#F2A7BE" opacity=".8"></ellipse><ellipse cx="27.5" cy="24" rx="2.2" ry="1.3" fill="#F2A7BE" opacity=".8"></ellipse></svg></div></div>
+<div class="fl f4" style="left: 6%; bottom: 10%"><div class="tok" style="width: 96px; height: 96px; background: #DCE4F3"><svg viewBox="0 0 40 40"><path d="M15 14h9l4 7H11z" fill="#CFE3FF" stroke="#E8463B" stroke-width="2" stroke-linejoin="round"></path><rect x="5" y="20" width="30" height="8" rx="3.5" fill="#E8463B"></rect><circle cx="12" cy="28.5" r="3.6" fill="#1B1F3B"></circle><circle cx="28" cy="28.5" r="3.6" fill="#1B1F3B"></circle></svg></div></div>
+<div class="fl f5" style="right: 8%; bottom: 14%"><div class="tok" style="width: 110px; height: 110px; background: #fff"><svg viewBox="0 0 24 24" fill="#D6245F"><path d="M12 20s-7.5-4.6-9.2-9.3C1.7 7.5 3.8 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.2 0 5.3 3 4.2 6.2C19.5 15.4 12 20 12 20z"></path></svg></div></div>
+<div class="fl" style="right: 30%; top: 2%"><div class="spin" style="width: 92px; height: 92px; border-radius: 50%; background: #FFD84D; display: flex; align-items: center; justify-content: center; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 28px; color: #1B1F3B; box-shadow: 0 10px 20px -10px rgba(27,31,59,.4)">15%</div></div>
+</div>
+</div>
+</section>
+
+<!-- UNWRAP A DEAL -->
+<section style="background: #FDF1F4">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 24px; text-align: center">
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: {{accent}}">UNWRAP A DEAL</p>
+<h2 style="margin: 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 44px; line-height: 1.05">There's something in this box…</h2>
+<p style="margin: 14px auto 0; font-size: 16px; color: #4A4F66; max-width: 460px; line-height: 1.55">Tap it a few times. We promise it doesn't bite.</p>
+
+<div style="position: relative; margin-top: 44px">
+<div class="bubble {{bubbleCls}}" role="status">{{bubble}}</div>
+<div style="position: relative; margin-top: 30px">
+<button class="gift {{giftCls}}" onClick="{{tapGift}}" aria-label="Tap the gift box to unwrap a deal">
+<sc-if value="{{open}}" hint-placeholder-val="{{false}}">
+<svg class="peek" viewBox="0 0 110 110" aria-hidden="true"><circle cx="30" cy="26" r="13" fill="#C68E5E"></circle><circle cx="80" cy="26" r="13" fill="#C68E5E"></circle><circle cx="30" cy="26" r="6" fill="#E9C3A0"></circle><circle cx="80" cy="26" r="6" fill="#E9C3A0"></circle><circle cx="55" cy="58" r="34" fill="#C68E5E"></circle><ellipse cx="55" cy="70" rx="15" ry="11" fill="#F3DFC9"></ellipse><circle cx="43" cy="52" r="4" fill="#3B2A22"></circle><circle cx="67" cy="52" r="4" fill="#3B2A22"></circle><ellipse cx="55" cy="65" rx="5" ry="3.6" fill="#3B2A22"></ellipse><path d="M49 74q6 5 12 0" stroke="#3B2A22" stroke-width="2.4" fill="none" stroke-linecap="round"></path><ellipse cx="34" cy="64" rx="6" ry="3.5" fill="#F2A7BE" opacity=".85"></ellipse><ellipse cx="76" cy="64" rx="6" ry="3.5" fill="#F2A7BE" opacity=".85"></ellipse><g class="arm"><ellipse cx="96" cy="58" rx="9" ry="14" fill="#C68E5E" transform="rotate(-25 96 58)"></ellipse></g></svg>
+<span class="conf k1" style="background: #D6245F"></span>
+<span class="conf k2" style="background: #FFD84D; animation-delay: .05s"></span>
+<span class="conf k3" style="background: #5B8BD9; animation-delay: .1s"></span>
+<span class="conf k4" style="background: #25D366; animation-delay: .02s"></span>
+<span class="conf k5" style="background: #F2A7BE; animation-delay: .12s"></span>
+<span class="conf k6" style="background: #D9A441; animation-delay: .08s"></span>
+<span class="conf k3" style="background: #FFD84D; animation-delay: .2s"></span>
+<span class="conf k2" style="background: #D6245F; animation-delay: .22s"></span>
+</sc-if>
+<span class="g-base" style="background: #F2B4C8"><span class="rv" style="background: {{accent}}"></span></span>
+<span class="g-lid" style="background: #EFA3BB"><span class="rv" style="background: {{accent}}"></span>
+<svg class="bow" aria-hidden="true" viewBox="0 0 120 76"><path d="M60 38C38 8 8 10 12 32c3 16 30 14 48 6z" fill="{{accent}}"></path><path d="M60 38C82 8 112 10 108 32c-3 16-30 14-48 6z" fill="{{accent}}"></path><circle cx="60" cy="39" r="9" fill="{{accent}}" stroke="rgba(0,0,0,.18)" stroke-width="2"></circle></svg>
+</span>
+</button>
+</div>
+<div style="display: flex; justify-content: center; gap: 8px; margin-top: 22px" aria-hidden="true">
+<sc-for list="{{tapDots}}" as="t" hint-placeholder-count="3">
+<span style="width: 12px; height: 12px; border-radius: 50%; background: {{t.bg}}; transition: background .3s ease"></span>
+</sc-for>
+</div>
+</div>
+
+<sc-if value="{{open}}" hint-placeholder-val="{{false}}">
+<div style="margin-top: 34px">
+<div class="ticket">
+<div style="width: 64px; height: 64px; flex: 0 0 64px; border-radius: 18px; background: #FDE7EE; color: {{accent}}; display: flex; align-items: center; justify-content: center; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 22px">10%</div>
+<div style="flex: 1; text-align: left">
+<div style="font-size: 13px; color: #6B6F85">Your code · 10% off your first order</div>
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 30px; letter-spacing: .08em">SWEET10</div>
+</div>
+<button class="copy-btn" onClick="{{copy}}" style="background: {{copyBg}}">{{copyLabel}}</button>
+</div>
+<button onClick="{{resetGift}}" style="margin-top: 18px; border: none; background: none; color: #A8173F; font-weight: 700; font-size: 14px; min-height: 44px">Wrap it back up</button>
+</div>
+</sc-if>
+</div>
+</section>
+
+<!-- COMBOS -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 96px 24px 40px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px">
+<div>
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: {{accent}}">COMBO DEALS</p>
+<h2 style="margin: 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 44px; line-height: 1.05">Better together</h2>
+</div>
+<p style="margin: 0; font-size: 16px; color: #4A4F66; max-width: 360px; line-height: 1.55">Two gifts that were clearly meant to be. Bundled, wrapped and a little cheaper.</p>
+</div>
+<div class="combos" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px">
+<sc-for list="{{combos}}" as="c" hint-placeholder-count="3">
+<article class="combo">
+<div class="combo-vis" style="background: {{c.tint}}">
+<span class="sticker">Save {{c.save}}</span>
+<div class="tok ta" style="width: 104px; height: 104px; background: {{c.a.bg}}">
+<sc-if value="{{c.a.isEgg}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" viewBox="0 0 40 40"><ellipse cx="20" cy="21" rx="11" ry="14" fill="#fff" stroke="#E2D6D9" stroke-width="1.5"></ellipse><path d="M9 21A11 14 0 0 0 31 21Z" fill="#E8463B"></path></svg></sc-if>
+<sc-if value="{{c.a.isBox}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#D6245F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg></sc-if>
+<sc-if value="{{c.a.isCar}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" viewBox="0 0 40 40"><path d="M15 14h9l4 7H11z" fill="#CFE3FF" stroke="#E8463B" stroke-width="2" stroke-linejoin="round"></path><rect x="5" y="20" width="30" height="8" rx="3.5" fill="#E8463B"></rect><circle cx="12" cy="28.5" r="3.6" fill="#1B1F3B"></circle><circle cx="28" cy="28.5" r="3.6" fill="#1B1F3B"></circle></svg></sc-if>
+</div>
+<span class="plus-sign" aria-hidden="true">+</span>
+<div class="tok tb" style="width: 104px; height: 104px; background: {{c.b.bg}}">
+<sc-if value="{{c.b.isTeddy}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" viewBox="0 0 40 40"><circle cx="11" cy="12" r="5.5" fill="#EFA3BB"></circle><circle cx="29" cy="12" r="5.5" fill="#EFA3BB"></circle><circle cx="20" cy="22" r="12" fill="#EFA3BB"></circle><ellipse cx="20" cy="26.5" rx="6" ry="4.5" fill="#fff" opacity=".7"></ellipse><circle cx="15.5" cy="20" r="1.6" fill="#3B2A22"></circle><circle cx="24.5" cy="20" r="1.6" fill="#3B2A22"></circle><circle cx="20" cy="25" r="1.6" fill="#3B2A22"></circle></svg></sc-if>
+<sc-if value="{{c.b.isBalloon}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" viewBox="0 0 40 40"><ellipse cx="20" cy="16" rx="10" ry="12" fill="#5B8BD9"></ellipse><ellipse cx="16.5" cy="11" rx="2.5" ry="3.5" fill="#fff" opacity=".45"></ellipse><path d="M18.5 28h3l-1.5 2.5z" fill="#5B8BD9"></path><path d="M20 30q-3 4 0 7" stroke="#1B1F3B" stroke-width="1.2" fill="none"></path></svg></sc-if>
+<sc-if value="{{c.b.isEgg}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" viewBox="0 0 40 40"><ellipse cx="20" cy="21" rx="11" ry="14" fill="#fff" stroke="#E2D6D9" stroke-width="1.5"></ellipse><path d="M9 21A11 14 0 0 0 31 21Z" fill="#E8463B"></path></svg></sc-if>
+</div>
+</div>
+<div>
+<h3 style="margin: 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 24px">{{c.name}}</h3>
+<p style="margin: 6px 0 0; font-size: 14px; color: #4A4F66; line-height: 1.5">{{c.desc}}</p>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto">
+<div>
+<div style="font-size: 13px; color: #6B6F85; text-decoration: line-through">{{c.was}}</div>
+<div style="font-weight: 800; font-size: 20px; color: {{accent}}">{{c.now}}</div>
+<div class="koko" style="margin-top: 4px">{{c.koko}} with <span class="koko-tag">KOKO</span></div>
+</div>
+<button class="addbtn" onClick="{{c.add}}" style="background: {{accent}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add combo</button>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+<!-- GIFTING CALENDAR -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 96px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 32px">
+<div>
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: {{accent}}">GIFTING CALENDAR</p>
+<h2 style="margin: 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 44px; line-height: 1.05">Never forget again</h2>
+</div>
+<p style="margin: 0; font-size: 16px; color: #4A4F66; max-width: 380px; line-height: 1.55">Tap "Remind me" and we'll send you a friendly nudge a week before — with that occasion's best offers.</p>
+</div>
+<div class="cal">
+<sc-for list="{{occasions}}" as="o" hint-placeholder-count="5">
+<div class="occ-card">
+<div class="date-chip"><span class="m" style="background: {{o.color}}">{{o.month}}</span><span class="d">{{o.day}}</span></div>
+<div>
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 20px; line-height: 1.15">{{o.name}}</div>
+<div style="font-size: 14px; color: #4A4F66; margin-top: 6px; line-height: 1.45">{{o.joke}}</div>
+</div>
+<button class="rem {{o.cls}}" onClick="{{o.toggle}}" aria-pressed="{{o.pressed}}"><svg class="bell" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>{{o.label}}</button>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- PANIC BUTTON -->
+<section class="panic-wrap {{quakeCls}}" style="background: #1B1F3B; color: #fff">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 24px">
+<div class="panic-row" style="display: flex; align-items: center; gap: 56px">
+<div style="flex: 1 1 0; min-width: 0">
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #F7A9C1">EMERGENCY GIFT MODE</p>
+<h2 style="margin: 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 48px; line-height: 1.04">Forgot someone's birthday?</h2>
+<p style="margin: 16px 0 0; font-size: 17px; line-height: 1.6; color: #D7D9E8; max-width: 460px">It happens to the best of us. Press the big button. Don't overthink it.</p>
+</div>
+<div class="panic-zone">
+<span class="pring" aria-hidden="true"></span>
+<span class="pring r2" aria-hidden="true"></span>
+<button class="panic-btn" onClick="{{panic}}">{{panicLabel}}</button>
+</div>
+</div>
+
+<sc-if value="{{panicOn}}" hint-placeholder-val="{{false}}">
+<div class="calm-panel" style="margin-top: 52px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 28px; padding: 32px; display: flex; gap: 36px; flex-wrap: wrap; align-items: center">
+<div style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px">
+<svg width="130" height="130" viewBox="0 0 40 40" aria-hidden="true"><circle cx="11" cy="12" r="5.5" fill="#C68E5E"></circle><circle cx="29" cy="12" r="5.5" fill="#C68E5E"></circle><circle cx="20" cy="22" r="12" fill="#C68E5E"></circle><ellipse cx="20" cy="27" rx="6" ry="4.5" fill="#F3DFC9"></ellipse><circle cx="15.5" cy="20" r="1.8" fill="#3B2A22"></circle><circle cx="24.5" cy="20" r="1.8" fill="#3B2A22"></circle><circle cx="20" cy="25" r="1.5" fill="#3B2A22"></circle><path d="M17 29.5q3 1.6 6 0" stroke="#3B2A22" stroke-width="1.2" fill="none" stroke-linecap="round"></path><path class="sweat" d="M29 15c0 1.6-1 2.6-1.8 2.6S25.4 16.6 25.4 15c0-1.4 1.8-3.6 1.8-3.6S29 13.6 29 15z" fill="#7FB4E8"></path></svg>
+<span style="font-family: Fredoka, sans-serif; font-weight: 600; font-size: 15px; color: #F7A9C1">Deep breaths.</span>
+</div>
+<div style="flex: 1 1 420px; min-width: 0">
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 30px">Relax. We've got you.</div>
+<p style="margin: 8px 0 20px; font-size: 15px; color: #D7D9E8; line-height: 1.55">Three crowd-pleasers, wrapped and ready. Order by [TIME] for same-day delivery in [AREA].</p>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{picks}}" as="p" hint-placeholder-count="3">
+<div class="pick" style="animation-delay: {{p.delay}}">
+<span style="width: 50px; height: 50px; border-radius: 14px; background: {{p.tint}}; flex: 0 0 50px"></span>
+<div style="flex: 1; min-width: 0"><div style="font-weight: 700; font-size: 16px">{{p.name}}</div><div style="font-size: 13px; color: #C9CCE0">{{p.note}}</div></div>
+<div style="text-align: right; margin-right: 6px"><div style="font-weight: 700; font-size: 15px">{{p.price}}</div><div style="font-size: 11px; color: #C9CCE0; margin-top: 2px">{{p.koko}} with KOKO</div></div>
+<button class="pick-add" aria-label="Add {{p.name}} to basket" onClick="{{p.add}}" style="background: {{accent}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+</sc-for>
+</div>
+<button onClick="{{calm}}" style="margin-top: 18px; border: none; background: none; color: #F7A9C1; font-weight: 700; font-size: 14px; min-height: 44px; padding: 0">Okay, I'm calm now</button>
+</div>
+</div>
+</sc-if>
+</div>
+</section>
+
+<footer style="background: #141833; color: #D7D9E8">
+<div style="max-width: 1240px; margin: 0 auto; padding: 36px 24px; display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between; align-items: center">
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 22px; color: #fff">GiftsBy<span style="color: #F7A9C1">Deesh</span></div>
+<div style="font-size: 13px">Offers can't be combined unless stated. © 2026 House of Deesh (Pvt) Ltd.</div>
+</div>
+</footer>
+
+<!-- Reminder popup -->
+<sc-if value="{{remOpen}}" hint-placeholder-val="{{false}}">
+<div class="rm-layer">
+<button class="rm-back" aria-label="Close" onClick="{{closeRem}}"></button>
+<div class="rm-card {{rmShake}}" role="dialog" aria-label="Set a reminder for {{rem.name}}">
+<button onClick="{{closeRem}}" aria-label="Close" style="position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid #EBD9DF; background: #fff; color: #1B1F3B; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+
+<sc-if value="{{remForm}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; align-items: center; gap: 14px; padding-right: 48px">
+<div class="rm-bell" style="background: {{rem.soft}}; color: {{rem.color}}"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></div>
+<div>
+<div style="font-size: 12px; font-weight: 800; letter-spacing: .08em; color: {{rem.color}}">{{rem.month}} {{rem.day}}</div>
+<h2 style="margin: 2px 0 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 25px; line-height: 1.1">Remind me about {{rem.name}}</h2>
+</div>
+</div>
+<p style="margin: 16px 0 20px; font-size: 15px; color: #4A4F66; line-height: 1.55">We'll send one friendly nudge a week before, with that occasion's best offers. That's it, promise.</p>
+
+<sc-if value="{{showChannels}}" hint-placeholder-val="{{false}}">
+<div class="rm-seg" role="group" aria-label="Remind me by" style="margin-bottom: 16px">
+<button class="{{emailTab}}" onClick="{{useEmail}}">Email</button>
+<button class="{{waTab}}" onClick="{{useWa}}">WhatsApp</button>
+</div>
+</sc-if>
+
+<sc-if value="{{isEmail}}" hint-placeholder-val="{{true}}">
+<label for="rm-email" style="display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px">Your email</label>
+<input id="rm-email" class="rm-in {{badCls}}" type="email" autocomplete="email" placeholder="you@example.com" value="{{email}}" onChange="{{onEmail}}">
+</sc-if>
+<sc-if value="{{isWa}}" hint-placeholder-val="{{false}}">
+<label for="rm-phone" style="display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px">Your WhatsApp number</label>
+<div style="display: flex; gap: 8px">
+<span class="rm-pre">+94</span>
+<input id="rm-phone" class="rm-in {{badCls}}" type="tel" autocomplete="tel-national" placeholder="71 234 5678" value="{{phone}}" onChange="{{onPhone}}">
+</div>
+</sc-if>
+<sc-if value="{{hasErr}}" hint-placeholder-val="{{false}}">
+<p role="alert" style="margin: 8px 0 0; font-size: 13px; font-weight: 600; color: #B42318">{{err}}</p>
+</sc-if>
+
+<button class="rm-check {{allCls}}" aria-pressed="{{allPressed}}" onClick="{{toggleAll}}" style="margin-top: 12px">
+<span class="bx"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></span>
+Also remind me about the other occasions
+</button>
+
+<button class="rm-go" onClick="{{submitRem}}" style="margin-top: 14px; background: {{accent}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>Set my reminder</button>
+<p style="margin: 12px 0 0; font-size: 12px; color: #6B6F85; text-align: center">No spam, just gift nudges. Unsubscribe anytime.</p>
+</sc-if>
+
+<sc-if value="{{remDone}}" hint-placeholder-val="{{false}}">
+<div class="rm-done" role="status">
+<span class="conf k1" style="background: #D6245F"></span>
+<span class="conf k2" style="background: #FFD84D; animation-delay: .05s"></span>
+<span class="conf k3" style="background: #5B8BD9; animation-delay: .1s"></span>
+<span class="conf k4" style="background: #25D366; animation-delay: .02s"></span>
+<span class="conf k5" style="background: #F2A7BE; animation-delay: .12s"></span>
+<span class="conf k6" style="background: #D9A441; animation-delay: .08s"></span>
+<div class="big-bell" style="background: {{rem.soft}}; color: {{rem.color}}">
+<svg aria-hidden="true" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+<span class="ok"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></span>
+</div>
+<h2 style="margin: 22px 0 8px; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 28px">You're on the list!</h2>
+<p style="margin: 0 auto; font-size: 15px; color: #4A4F66; line-height: 1.55; max-width: 340px">{{doneMsg}}</p>
+<button class="rm-go" onClick="{{closeRem}}" style="margin-top: 22px; background: #1B1F3B">Done</button>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<!-- Cart drawer -->
+<sc-if value="{{cartOpen}}" hint-placeholder-val="{{false}}">
+<div class="cd-layer">
+<button class="cd-back" aria-label="Close basket" onClick="{{closeCart}}"></button>
+<aside class="cdr" role="dialog" aria-label="Your basket">
+<div class="cd-head">
+<span style="width: 42px; height: 42px; border-radius: 12px; background: #FDE7EE; color: {{accent}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h14l-1.4 9.1a2 2 0 0 1-2 1.9H8.4a2 2 0 0 1-2-1.9z"></path><path d="m9 10 3-6 3 6"></path></svg></span>
+<div><div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 22px; line-height: 1">Your basket</div><div class="{{cartTotalCls}}" style="font-size: 13px; color: #6B6F85; margin-top: 4px">{{cartCountLabel}}</div></div>
+<button class="cd-x" aria-label="Close basket" onClick="{{closeCart}}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+</div>
+
+<sc-if value="{{cartEmptyView}}" hint-placeholder-val="{{false}}">
+<div style="padding: 64px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px">
+<svg class="cd-sway" aria-hidden="true" width="140" height="140" viewBox="0 0 60 60"><circle cx="18" cy="13" r="6" fill="#C68E5E"></circle><circle cx="42" cy="13" r="6" fill="#C68E5E"></circle><circle cx="30" cy="24" r="14" fill="#C68E5E"></circle><ellipse cx="30" cy="29" rx="7" ry="5" fill="#F3DFC9"></ellipse><circle cx="25" cy="21.5" r="1.8" fill="#3B2A22"></circle><circle cx="35" cy="21.5" r="1.8" fill="#3B2A22"></circle><circle cx="30" cy="27" r="1.6" fill="#3B2A22"></circle><path d="M27 32q3-1.6 6 0" stroke="#3B2A22" stroke-width="1.2" fill="none" stroke-linecap="round"></path><path d="M14 40h32l-3 15H17z" fill="#F2B4C8" stroke="#D6245F" stroke-width="1.5" stroke-linejoin="round"></path><path d="M21 40c0-7 18-7 18 0" stroke="#D6245F" stroke-width="2" fill="none"></path></svg>
+<h3 style="margin: 6px 0 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 26px">Nothing here yet…</h3>
+<p style="margin: 0; font-size: 15px; color: #4A4F66; line-height: 1.55; max-width: 280px">Your basket is feeling a little lonely. Let's find something sweet for it.</p>
+<a href="Shop.dc.html" class="cd-cta" style="margin-top: 8px; background: {{accent}}">Browse gifts</a>
+</div>
+</sc-if>
+
+<sc-if value="{{cartSentView}}" hint-placeholder-val="{{false}}">
+<div style="padding: 64px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px">
+<div class="sent-ic"><svg aria-hidden="true" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></div>
+<h3 style="margin: 10px 0 0; font-family: Fredoka, sans-serif; font-weight: 700; font-size: 28px">Your order is on its way to WhatsApp!</h3>
+<p style="margin: 0; font-size: 15px; color: #4A4F66; line-height: 1.6; max-width: 320px">Just press send in WhatsApp. We'll reply to confirm availability, delivery and payment.</p>
+<button class="cd-cta" onClick="{{keepShopping}}" style="margin-top: 8px; background: #1B1F3B">Keep shopping</button>
+<a href="{{waRetry}}" target="_blank" rel="noopener" style="font-size: 14px; font-weight: 700; min-height: 44px; display: inline-flex; align-items: center">WhatsApp didn't open? Try again</a>
+</div>
+</sc-if>
+
+<sc-if value="{{cartFull}}" hint-placeholder-val="{{false}}">
+<div class="cd-body">
+<sc-for list="{{cartLines}}" as="l" hint-placeholder-count="2">
+<div class="cl {{l.cls}}" style="animation-delay: {{l.delay}}">
+<div class="cl-row">
+<span class="cl-th" style="background: {{l.tint}}"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg></span>
+<div style="flex: 1; min-width: 0">
+<div style="font-weight: 700; font-size: 15px; line-height: 1.3">{{l.name}}</div>
+<div style="font-size: 13px; color: #6B6F85; margin-top: 2px">{{l.unitLabel}}</div>
+<sc-if value="{{l.hasDetails}}" hint-placeholder-val="{{false}}">
+<button class="det-btn {{l.detBtnCls}}" onClick="{{l.toggleDet}}" aria-expanded="{{l.detExp}}">{{l.detLabel}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+</sc-if>
+</div>
+<button class="cl-del" aria-label="Remove {{l.name}}" onClick="{{l.remove}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"></path></svg></button>
+</div>
+<sc-if value="{{l.hasDetails}}" hint-placeholder-val="{{false}}">
+<div class="det {{l.detCls}}"><div><ul>
+<sc-for list="{{l.details}}" as="d" hint-placeholder-count="2"><li>{{d}}</li></sc-for>
+</ul></div></div>
+</sc-if>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px">
+<div class="cq"><button aria-label="One less {{l.name}}" onClick="{{l.dec}}" disabled="{{l.decOff}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h14"></path></svg></button><span class="n">{{l.qty}}</span><button aria-label="One more {{l.name}}" onClick="{{l.inc}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button></div>
+<div style="font-weight: 800; font-size: 16px">{{l.lineTotal}}</div>
+</div>
+</div>
+</sc-for>
+
+<div class="cd-sec">
+<div class="cd-lab"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>When should it arrive?</div>
+<div class="dchips">
+<sc-for list="{{dates}}" as="d" hint-placeholder-count="5">
+<button class="dchip {{d.cls}}" onClick="{{d.pick}}"><span class="w">{{d.w}}</span><span class="d">{{d.d}}</span></button>
+</sc-for>
+</div>
+</div>
+
+<div class="cd-sec">
+<label for="cd-note" class="cd-lab"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.7 7.5 3.8 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.2 0 5.3 3 4.2 6.2C19.5 15.4 12 20 12 20z"></path></svg>Gift note (optional)</label>
+<textarea id="cd-note" class="cd-note" placeholder="Happy birthday! Love you lots." value="{{cNote}}" onChange="{{onCNote}}"></textarea>
+</div>
+
+<div class="cd-sec">
+<div class="cd-lab"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>How would you like to pay?</div>
+<div class="pchips">
+<sc-for list="{{payOpts}}" as="p" hint-placeholder-count="2">
+<button class="pchip {{p.cls}}" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}">{{p.label}}<span class="s">{{p.sub}}</span></button>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div class="cd-foot">
+<sc-if value="{{hasUndo}}" hint-placeholder-val="{{false}}">
+<div class="undo" role="status"><span>Removed {{undoName}}</span><button onClick="{{undoIt}}">Undo</button></div>
+</sc-if>
+<div style="display: flex; justify-content: space-between; font-size: 14px; color: #4A4F66"><span>Delivery</span><span>Confirmed on WhatsApp</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px">
+<span style="font-weight: 700; font-size: 15px">Total</span>
+<span class="{{cartTotalCls}}" style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 28px">{{cartTotal}}</span>
+</div>
+<div style="text-align: right; margin: 2px 0 12px"><span class="koko">{{cartKoko}} with <span class="koko-tag">KOKO</span></span></div>
+<a class="send" href="{{waHref}}" target="_blank" rel="noopener" onClick="{{sendOrder}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"></path></svg>Send order on WhatsApp</a>
+<p style="margin: 10px 0 0; font-size: 12px; color: #6B6F85; text-align: center; line-height: 1.5">No payment now. We'll confirm availability, delivery fee and payment in the chat.</p>
+</div>
+</sc-if>
+
+<sc-if value="{{cartSending}}" hint-placeholder-val="{{false}}">
+<div class="sending" role="status">
+<svg aria-hidden="true" width="260" height="200" viewBox="0 0 260 200" style="overflow: visible">
+<path class="trail" d="M20 180 C 80 150, 120 120, 150 100" stroke="#D6245F" stroke-width="3" fill="none" stroke-linecap="round"></path>
+<g class="plane" style="transform-origin: 150px 100px"><path d="M110 100 L190 70 L160 130 L148 108 Z" fill="#25D366"></path><path d="M148 108 L190 70 L140 104 Z" fill="#17A34A"></path><path d="M148 108 L152 124 L160 130 Z" fill="#128C3E"></path></g>
+</svg>
+<div style="font-family: Fredoka, sans-serif; font-weight: 700; font-size: 22px">Sending your order…</div>
+<div style="font-size: 14px; color: #6B6F85">Opening WhatsApp</div>
+</div>
+</sc-if>
+</aside>
+</div>
+</sc-if>
+
+<sc-for list="{{flights}}" as="f" hint-placeholder-count="0">
+<div class="fly-x" aria-hidden="true" style="left: {{f.sx}}px; top: {{f.sy}}px; transform: {{f.tx}}">
+<div class="fly-y" style="transform: {{f.ty}}">
+<div class="fly-tok" style="background: {{f.tint}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg></div>
+</div>
+</div>
+</sc-for>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#D6245F","options":["#D6245F","#E5336B","#B8235A"]},"offerEnd":{"editor":"text","default":"2026-10-31T23:59:00+05:30","section":"Offer"},"whatsappReminders":{"editor":"boolean","default":false,"section":"Reminders"},"$preview":{"width":1440,"height":3700}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cart: [], cartOpen: false, cartGen: 0, removing: {}, undo: null, boxDet: {}, cNote: '', cDate: 0, cPay: 'full', sending: false, sent: false, lastWa: '', 
+      now: Date.now(), taps: 0, open: false, copied: false, reminders: {},
+      panicOn: false, panicGen: 0, basket: 0, flights: [], scrolled: false,
+      remId: null, remDone: false, channel: 'email', email: '', phone: '', err: '', errGen: 0, alsoAll: false
+    };
+    this.setRoot = (el) => { this._root = el; };
+    this.setCart = (el) => { this._cart = el; };
+    this._timers = [];
+  }
+  later(fn, ms) {
+    this._timers.push(setTimeout(fn, ms));
+  }
+  componentDidMount() {
+    this._tick = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    this.onScroll = () => {
+      const sc = (window.scrollY || 0) > 40;
+      if (sc !== this.state.scrolled) this.setState({ scrolled: sc });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+  componentWillUnmount() {
+    clearInterval(this._tick);
+    this._timers.forEach((t) => clearTimeout(t));
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+  }
+  fly(line, el) {
+    const tint = line.tint;
+    const root = this._root;
+    const cart = this._cart;
+    if (!el || !root || !cart) {
+      this.cartAdd(line);
+      return;
+    }
+    const r = root.getBoundingClientRect();
+    const b = el.getBoundingClientRect();
+    const c = cart.getBoundingClientRect();
+    const bx = b.left + b.width / 2;
+    const by = b.top + b.height / 2;
+    const id = (this._fid = (this._fid || 0) + 1);
+    const f = {
+      id, tint, moved: false,
+      sx: Math.round(bx - r.left - 28), sy: Math.round(by - r.top - 28),
+      dx: Math.round(c.left + c.width / 2 - bx), dy: Math.round(c.top + c.height / 2 - by)
+    };
+    this.setState({ flights: this.state.flights.concat([f]) });
+    this.later(() => this.setState({ flights: this.state.flights.map((x) => (x.id === id ? { ...x, moved: true } : x)) }), 30);
+    this.later(() => this.cartAdd(line), 790);
+    this.later(() => this.setState({ flights: this.state.flights.filter((x) => x.id !== id) }), 900);
+  }
+  cartAdd(line) {
+    const cart = this.state.cart.slice();
+    const i = cart.findIndex((x) => x.key === line.key);
+    if (i >= 0) cart[i] = { ...cart[i], qty: cart[i].qty + line.qty };
+    else cart.push({ ...line });
+    this.setState({ cart, basket: this.state.basket + 1, lastAdd: line.qty, cartGen: this.state.cartGen + 1, sent: false });
+  }
+  cartSet(key, fn) {
+    this.setState({ cart: this.state.cart.map((x) => (x.key === key ? fn(x) : x)), cartGen: this.state.cartGen + 1 });
+  }
+  cartRemove(key) {
+    if (this.state.removing[key]) return;
+    this.setState({ removing: { ...this.state.removing, [key]: true } });
+    this.later(() => {
+      const idx = this.state.cart.findIndex((x) => x.key === key);
+      if (idx < 0) return;
+      const line = this.state.cart[idx];
+      const removing = { ...this.state.removing };
+      delete removing[key];
+      this.setState({ cart: this.state.cart.filter((x) => x.key !== key), removing, undo: { line, idx }, cartGen: this.state.cartGen + 1 });
+      clearTimeout(this._undoT);
+      this._undoT = setTimeout(() => this.setState({ undo: null }), 4500);
+    }, 320);
+  }
+  cartUndo() {
+    const u = this.state.undo;
+    if (!u) return;
+    const cart = this.state.cart.slice();
+    cart.splice(Math.min(u.idx, cart.length), 0, u.line);
+    clearTimeout(this._undoT);
+    this.setState({ cart, undo: null, cartGen: this.state.cartGen + 1 });
+  }
+  cartVals(accent) {
+    const s = this.state;
+    const money = (n) => 'LKR ' + n.toLocaleString('en-US');
+    const lines = s.cart;
+    const count = lines.reduce((a, l) => a + l.qty, 0);
+    const total = lines.reduce((a, l) => a + l.price * l.qty, 0);
+    const today = new Date();
+    const dates = [];
+    for (let i = 1; i <= 5; i++) {
+      const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() + i);
+      dates.push({
+        w: i === 1 ? 'Tomorrow' : d.toLocaleDateString('en-GB', { weekday: 'short' }),
+        d: d.getDate() + ' ' + d.toLocaleDateString('en-GB', { month: 'short' }),
+        full: d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
+      });
+    }
+    const di = Math.min(s.cDate, 4);
+    const msgLines = lines.map((l, i) => (i + 1) + '. ' + l.name + ' × ' + l.qty + ' — ' + money(l.price * l.qty) +
+      (l.details && l.details.length ? '\n' + l.details.map((d) => '    • ' + d).join('\n') : ''));
+    const text = "Hi GiftsByDeesh! I'd like to place an order:\n\n" + msgLines.join('\n') +
+      '\n\nDelivery date: ' + dates[di].full +
+      (s.cNote.trim() ? '\nGift note: "' + s.cNote.trim() + '"' : '') +
+      '\nPayment: ' + (s.cPay === 'koko' ? 'KOKO (3 instalments)' : 'Pay in full') +
+      '\nTotal: ' + money(total) + ' (+ delivery, to be confirmed)';
+    const waHref = 'https://wa.me/94721770653?text=' + encodeURIComponent(text);
+    return {
+      cartOpen: s.cartOpen,
+      openCart: () => this.setState({ cartOpen: true, sent: false }),
+      closeCart: () => this.setState({ cartOpen: false, sent: false }),
+      keepShopping: () => this.setState({ cartOpen: false, sent: false }),
+      cartCount: count,
+      cartCountLabel: count === 0 ? 'Empty for now' : count + (count === 1 ? ' item' : ' items') + ' · ' + money(total),
+      cartEmptyView: !s.sent && lines.length === 0,
+      cartFull: !s.sent && lines.length > 0,
+      cartSentView: s.sent,
+      cartLines: lines.map((l, i) => {
+        const open = !!s.boxDet[l.key];
+        const hasDet = !!(l.details && l.details.length);
+        return {
+          name: l.name, tint: l.tint, qty: l.qty,
+          unitLabel: l.qty > 1 ? money(l.price) + ' each' : (l.sub || 'Hand-wrapped with love'),
+          lineTotal: money(l.price * l.qty),
+          cls: s.removing[l.key] ? 'out' : '',
+          delay: Math.min(i, 8) * 60 + 'ms',
+          hasDetails: hasDet,
+          details: l.details || [],
+          detLabel: open ? 'Hide details' : 'See what\'s inside',
+          detCls: open ? 'on' : '', detBtnCls: open ? 'on' : '', detExp: open ? 'true' : 'false',
+          toggleDet: () => this.setState({ boxDet: { ...this.state.boxDet, [l.key]: !open } }),
+          inc: () => this.cartSet(l.key, (x) => ({ ...x, qty: x.qty + 1 })),
+          dec: () => this.cartSet(l.key, (x) => ({ ...x, qty: Math.max(1, x.qty - 1) })),
+          decOff: l.qty <= 1,
+          remove: () => this.cartRemove(l.key)
+        };
+      }),
+      dates: dates.map((d, i) => ({ w: d.w, d: d.d, cls: i === di ? 'on' : '', pick: () => this.setState({ cDate: i }) })),
+      payOpts: [
+        { id: 'full', label: 'Pay in full', sub: 'Details shared in chat' },
+        { id: 'koko', label: 'KOKO instalments', sub: '3 × ' + money(Math.ceil(total / 3)) + ', interest-free' }
+      ].map((p) => ({ ...p, cls: s.cPay === p.id ? 'on' : '', pressed: s.cPay === p.id ? 'true' : 'false', pick: () => this.setState({ cPay: p.id }) })),
+      cNote: s.cNote,
+      onCNote: (e) => this.setState({ cNote: e.target.value.slice(0, 200) }),
+      cartTotal: money(total),
+      cartTotalCls: s.cartGen ? (s.cartGen % 2 ? 'pa' : 'pb') : '',
+      cartKoko: 'or 3 × ' + money(Math.ceil(total / 3)),
+      hasUndo: !!s.undo,
+      undoName: s.undo ? s.undo.line.name : '',
+      undoIt: () => this.cartUndo(),
+      waHref,
+      waRetry: s.lastWa || waHref,
+      cartSending: s.sending,
+      sendOrder: () => {
+        this.setState({ sending: true, lastWa: waHref });
+        this.later(() => this.setState({ sending: false, sent: true, cart: [], cNote: '', boxDet: {}, undo: null, cartGen: this.state.cartGen + 1 }), 1500);
+      }
+    };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#D6245F';
+    const s = this.state;
+    const money = (n) => 'LKR ' + n.toLocaleString('en-US');
+    const pad = (n) => (n < 10 ? '0' : '') + n;
+
+    const end = Date.parse(this.props.offerEnd ?? '2026-10-31T23:59:00+05:30');
+    const diff = isNaN(end) ? 0 : Math.max(0, end - s.now);
+    const secs = Math.floor(diff / 1000);
+    const cd = {
+      d: pad(Math.floor(secs / 86400)), h: pad(Math.floor((secs % 86400) / 3600)),
+      m: pad(Math.floor((secs % 3600) / 60)), s: pad(secs % 60)
+    };
+
+    const lines = ['Psst… tap me!', 'Ooh, it rattled…', 'Something is wiggling in here!', 'SURPRISE!'];
+    const bubble = s.open ? lines[3] : lines[Math.min(s.taps, 2)];
+    let giftCls = 'idle';
+    if (s.open) giftCls = 'open';
+    else if (s.taps) giftCls = s.taps % 2 ? 'shA' : 'shB';
+
+    const comboDefs = [
+      { id: 'sweet', name: 'The Sweetheart', desc: 'Kinder Joy Bouquet + Pink Mini Teddy. Instant heart-eyes.', was: 5500, now: 4900, tint: '#FDE7EE', a: 'egg', b: 'teddy', ab: '#FDE7E4', bb: '#FCE4EC' },
+      { id: 'bday', name: 'Birthday Bash', desc: 'Kinder Gift Box + a helium balloon. Party in a box.', was: 4250, now: 3800, tint: '#E9F0FB', a: 'box', b: 'balloon', ab: '#FFF', bb: '#DCE6F8' },
+      { id: 'racer', name: 'Little Racer', desc: 'Hot Wheels Gift Set + 3 Kinder Joys. Vroom, then snacks.', was: 6850, now: 6200, tint: '#FFF4E3', a: 'car', b: 'egg', ab: '#DCE4F3', bb: '#FDE7E4' }
+    ];
+    const tok = (shape, bg) => ({
+      bg, isEgg: shape === 'egg', isBox: shape === 'box', isCar: shape === 'car',
+      isTeddy: shape === 'teddy', isBalloon: shape === 'balloon'
+    });
+
+    const occDefs = [
+      { id: 'val', name: "Valentine's Day", month: 'FEB', day: '14', color: '#D6245F', soft: '#FDE7EE', joke: 'Chocolate says it better than you do.' },
+      { id: 'avu', name: 'Sinhala & Tamil New Year', month: 'APR', day: '13', color: '#9A6A12', soft: '#FBF0D2', joke: 'Sweet treats for the whole family table.' },
+      { id: 'mom', name: "Mother's Day", month: 'MAY', day: '[DATE]', color: '#7A57A0', soft: '#F1EAF8', joke: 'She deserves more than a phone call.' },
+      { id: 'dad', name: "Father's Day", month: 'JUN', day: '[DATE]', color: '#3B6CC0', soft: '#E6EEFA', joke: 'Upgrade from socks this year. Please.' },
+      { id: 'xmas', name: 'Christmas', month: 'DEC', day: '25', color: '#2E7D5B', soft: '#E3F2EA', joke: "Santa's taking pre-orders. So are we." }
+    ];
+    const showChannels = this.props.whatsappReminders === true;
+    const channel = showChannels ? s.channel : 'email';
+    const remDef = occDefs.find((o) => o.id === s.remId) || occDefs[0];
+    const contact = channel === 'email' ? s.email.trim() : '+94 ' + s.phone.trim();
+    const submitRem = () => {
+      const st = this.state;
+      const ch = this.props.whatsappReminders === true ? st.channel : 'email';
+      let err = '';
+      if (ch === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(st.email.trim())) err = 'Hmm, that email looks a little off. Mind checking it?';
+      if (ch === 'wa' && st.phone.replace(/\D/g, '').length < 9) err = 'That number looks too short — try 9 digits after +94.';
+      if (err) { this.setState({ err, errGen: st.errGen + 1 }); return; }
+      const rem = { ...st.reminders };
+      if (st.alsoAll) occDefs.forEach((o) => { rem[o.id] = true; });
+      else rem[st.remId] = true;
+      this.setState({ reminders: rem, remDone: true, err: '' });
+    };
+
+    const pickDefs = [
+      { id: 'kgb', name: 'Kinder Gift Box', note: 'Fits every age. Literally everyone.', price: 3500, tint: '#FCE6CF' },
+      { id: 'kjb', name: 'Kinder Joy Bouquet', note: 'Looks like you planned it for weeks.', price: 4000, tint: '#F7D3DE' },
+      { id: 'apl', name: 'Avocado Plushie', note: 'Weird, cute, unforgettable.', price: 2800, tint: '#D8EDE2' }
+    ];
+
+    return {
+      ...this.cartVals(accent),
+      accent,
+      basket: s.cart.reduce((a, l) => a + l.qty, 0),
+      badgeCls: s.basket ? (s.basket % 2 ? 'bA' : 'bB') : '',
+      navCartCls: s.basket ? (s.basket % 2 ? 'cA' : 'cB') : '',
+      headCls: s.scrolled ? 'shrunk' : '',
+      setRoot: this.setRoot,
+      setCart: this.setCart,
+      flights: s.flights.map((f) => ({
+        sx: f.sx, sy: f.sy, tint: f.tint,
+        tx: 'translateX(' + (f.moved ? f.dx : 0) + 'px)',
+        ty: 'translateY(' + (f.moved ? f.dy : 0) + 'px)'
+      })),
+
+      live: diff > 0,
+      ended: diff <= 0,
+      cd,
+      secCls: secs % 2 ? 'pa' : 'pb',
+
+      bubble,
+      bubbleCls: (s.taps + (s.open ? 1 : 0)) % 2 ? 'bA' : 'bB',
+      giftCls,
+      open: s.open,
+      tapDots: [0, 1, 2].map((i) => ({ bg: s.open || s.taps > i ? accent : '#EBD9DF' })),
+      tapGift: () => {
+        if (this.state.open) return;
+        const t = this.state.taps + 1;
+        if (t >= 3) this.setState({ taps: t, open: true });
+        else this.setState({ taps: t });
+      },
+      copy: () => {
+        try { if (navigator.clipboard) navigator.clipboard.writeText('SWEET10'); } catch (e) {}
+        this.setState({ copied: true });
+        this.later(() => this.setState({ copied: false }), 2000);
+      },
+      copyLabel: s.copied ? 'Copied!' : 'Copy code',
+      copyBg: s.copied ? '#17663A' : '#1B1F3B',
+      resetGift: () => this.setState({ taps: 0, open: false, copied: false }),
+
+      combos: comboDefs.map((c) => ({
+        name: c.name, desc: c.desc, tint: c.tint,
+        was: money(c.was), now: money(c.now), save: money(c.was - c.now),
+        a: tok(c.a, c.ab), b: tok(c.b, c.bb),
+        koko: 'or 3 × ' + money(Math.ceil(c.now / 3)),
+        add: (e) => this.fly({ key: 'combo-' + c.id, name: c.name + ' combo', price: c.now, qty: 1, tint: c.tint, details: [c.desc], sub: 'You save ' + money(c.was - c.now) }, e && e.currentTarget)
+      })),
+
+      occasions: occDefs.map((o) => {
+        const on = !!s.reminders[o.id];
+        return {
+          ...o,
+          cls: on ? 'on' : '',
+          pressed: on ? 'true' : 'false',
+          label: on ? 'Reminder set' : 'Remind me',
+          toggle: () => {
+            if (on) this.setState({ reminders: { ...this.state.reminders, [o.id]: false } });
+            else this.setState({ remId: o.id, remDone: false, err: '', alsoAll: false });
+          }
+        };
+      }),
+
+      remOpen: !!s.remId,
+      remForm: !!s.remId && !s.remDone,
+      remDone: s.remDone,
+      rem: remDef,
+      closeRem: () => this.setState({ remId: null, remDone: false, err: '' }),
+      showChannels,
+      isEmail: channel === 'email',
+      isWa: channel === 'wa',
+      emailTab: channel === 'email' ? 'on' : '',
+      waTab: channel === 'wa' ? 'on' : '',
+      useEmail: () => this.setState({ channel: 'email', err: '' }),
+      useWa: () => this.setState({ channel: 'wa', err: '' }),
+      email: s.email,
+      phone: s.phone,
+      onEmail: (e) => this.setState({ email: e.target.value, err: '' }),
+      onPhone: (e) => this.setState({ phone: e.target.value, err: '' }),
+      hasErr: !!s.err,
+      err: s.err,
+      badCls: s.err ? 'bad' : '',
+      rmShake: s.err ? (s.errGen % 2 ? 'eA' : 'eB') : '',
+      allCls: s.alsoAll ? 'on' : '',
+      allPressed: s.alsoAll ? 'true' : 'false',
+      toggleAll: () => this.setState({ alsoAll: !this.state.alsoAll }),
+      submitRem,
+      doneMsg: (s.alsoAll ? "We'll nudge you a week before every occasion on the calendar, at " : "We'll nudge you a week before " + remDef.name + ', at ') + contact + '.',
+
+      panicOn: s.panicOn,
+      panicLabel: s.panicOn ? 'PHEW' : 'PANIC',
+      quakeCls: s.panicGen ? (s.panicGen % 2 ? 'sqA' : 'sqB') : '',
+      panic: () => this.setState({ panicOn: true, panicGen: this.state.panicGen + 1 }),
+      calm: () => this.setState({ panicOn: false }),
+      picks: pickDefs.map((p, i) => ({
+        name: p.name, note: p.note, price: money(p.price), tint: p.tint, delay: (0.25 + i * 0.12) + 's',
+        koko: 'or 3 × ' + money(Math.ceil(p.price / 3)),
+        add: (e) => this.fly({ key: p.id, name: p.name, price: p.price, qty: 1, tint: p.tint }, e && e.currentTarget)
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
