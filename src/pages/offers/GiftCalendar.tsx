@@ -1,11 +1,31 @@
 import { useState } from 'react';
 import { Bell } from 'lucide-react';
 import { calendar } from '../../data/offers';
+import { cancelReminder, loadSaved } from '../../lib/reminders';
 import { ReminderModal } from './ReminderModal';
 
+const toMap = (ids: string[]) => Object.fromEntries(ids.map((id) => [id, true])) as Record<string, boolean>;
+
 export function GiftCalendar() {
-  const [reminders, setReminders] = useState<Record<string, boolean>>({});
+  const [reminders, setReminders] = useState<Record<string, boolean>>(() => toMap(loadSaved()?.occasions ?? []));
   const [remId, setRemId] = useState<string | null>(null);
+  const [busy, setBusy] = useState<string | null>(null);
+  const [notice, setNotice] = useState('');
+
+  const cancel = async (id: string) => {
+    const saved = loadSaved();
+    if (!saved || busy) return;
+    setBusy(id);
+    setNotice('');
+    try {
+      setReminders(toMap(await cancelReminder(saved, id)));
+      setNotice(`Reminder for ${calendar.find((o) => o.id === id)?.name} cancelled.`);
+    } catch (e) {
+      setNotice((e as Error).message);
+    } finally {
+      setBusy(null);
+    }
+  };
 
   return (
     <section className="container sec-t-sm sec-b">
@@ -32,8 +52,9 @@ export function GiftCalendar() {
               <button
                 className={`rem ${on ? 'on' : ''}`}
                 aria-pressed={on}
+                aria-busy={busy === o.id}
                 aria-label={on ? `Reminder set for ${o.name}. Tap to cancel` : `Remind me about ${o.name}`}
-                onClick={() => (on ? setReminders((r) => ({ ...r, [o.id]: false })) : setRemId(o.id))}
+                onClick={() => (on ? cancel(o.id) : setRemId(o.id))}
               >
                 <Bell className="bell" size={16} strokeWidth={2.2} aria-hidden="true" />
                 {on ? 'Reminder set' : 'Remind me'}
@@ -42,19 +63,13 @@ export function GiftCalendar() {
           );
         })}
       </div>
+      <p className="cal-notice" role="status">{notice}</p>
 
       {remId && (
         <ReminderModal
           occasion={calendar.find((o) => o.id === remId)!}
           onClose={() => setRemId(null)}
-          onSaved={(all) =>
-            setReminders((r) => {
-              const next = { ...r };
-              if (all) calendar.forEach((o) => { next[o.id] = true; });
-              else next[remId] = true;
-              return next;
-            })
-          }
+          onSaved={(ids) => { setReminders(toMap(ids)); setNotice(''); }}
         />
       )}
     </section>

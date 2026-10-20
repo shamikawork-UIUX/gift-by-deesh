@@ -66,6 +66,8 @@ function Drawer() {
     }, 320);
   };
 
+  // The basket is only emptied once the customer confirms they pressed send in WhatsApp,
+  // so nothing is lost if WhatsApp didn't open or they backed out.
   const send = () => {
     setSending(true);
     setLastUrl(url);
@@ -73,12 +75,15 @@ function Drawer() {
       setSending(false);
       setSent(true);
       setOpenDetails({});
-      clear();
     }, 1500);
+  };
+  const confirmSent = () => {
+    clear();
+    requestClose();
   };
 
   const popCls = flip(gen, 'pa', 'pb');
-  const view = sent ? 'sent' : lines.length === 0 ? 'empty' : 'full';
+  const view = sent && lines.length ? 'sent' : lines.length === 0 ? 'empty' : 'full';
 
   return (
     <div className={`cd-layer ${closing ? 'closing' : ''}`}>
@@ -107,9 +112,10 @@ function Drawer() {
         {view === 'sent' && (
           <div className="cd-state" role="status">
             <div className="sent-ic"><Check size={48} strokeWidth={2.6} aria-hidden="true" /></div>
-            <h3>Your order is on its way to WhatsApp!</h3>
+            <h3>Your order is ready in WhatsApp!</h3>
             <p>Just press send in WhatsApp. We'll reply to confirm availability, delivery and payment.</p>
-            <button className="btn btn-ink" onClick={requestClose}>Keep shopping</button>
+            <button className="btn btn-ink" onClick={confirmSent}>I've sent it · clear my basket</button>
+            <button className="btn btn-outline" onClick={() => setSent(false)}>Not yet · back to my basket</button>
             <a href={lastUrl} target="_blank" rel="noopener" className="cd-retry">WhatsApp didn't open? Try again</a>
           </div>
         )}
@@ -189,6 +195,7 @@ function Drawer() {
                   </button>
                 </div>
               </fieldset>
+              <p className="cd-fine cd-fine-body">No payment now. We'll confirm availability, delivery fee and payment in the chat.</p>
             </div>
 
             <div className="cd-foot">

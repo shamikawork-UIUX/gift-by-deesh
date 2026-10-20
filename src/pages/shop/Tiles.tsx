@@ -25,7 +25,7 @@ export function GuideTile({ onPick }: { onPick: () => void }) {
   return (
     <button className="guide-btn" onClick={onPick}>
       <div style={{ flex: '1 1 auto', minWidth: 0 }}>
-        <p className="eyebrow" style={{ color: '#FFD6E2' }}>GIFT GUIDE</p>
+        <p className="eyebrow" style={{ color: '#fff' }}>GIFT GUIDE</p>
         <div className="guide-t">Sweet gifts under LKR 5,000</div>
         <p className="guide-p">Big smiles, small budget. Tap to filter the shop to our favourite little treats.</p>
         <span className="guide-cta">Show me <ArrowRight size={18} strokeWidth={2.2} aria-hidden="true" /></span>

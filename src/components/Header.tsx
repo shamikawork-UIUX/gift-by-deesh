@@ -51,7 +51,7 @@ export function Header() {
         </nav>
 
         <div className="head-actions">
-          <Link to="/shop" className="head-icon" aria-label="Search gifts">
+          <Link to="/shop" state={{ focusSearch: true }} className="head-icon" aria-label="Search gifts">
             <Search size={20} aria-hidden="true" />
           </Link>
           <button

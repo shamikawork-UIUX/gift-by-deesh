@@ -3,3 +3,5 @@ dist
 *.local
 .DS_Store
 *.tsbuildinfo
+# Local SQLite database (customer contact details — never commit)
+data/

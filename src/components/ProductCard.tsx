@@ -15,7 +15,7 @@ interface Props {
   onHint: () => void;
 }
 
-/** Product card with hover photo swap and a slide-up "Add to basket" button. */
+/** Product card with hover photo swap and an "Add to basket" button that is always visible and widens on hover. */
 export function ProductCard({ product: p, badge, added, hinted, onAdd, onHint }: Props) {
   return (
     <article className="pcard">
@@ -36,8 +36,8 @@ export function ProductCard({ product: p, badge, added, hinted, onAdd, onHint }:
         </button>
         <div className="add">
           <button onClick={onAdd} style={{ background: added ? 'var(--ink)' : 'var(--pink)' }}>
-            <Plus size={16} strokeWidth={2.6} aria-hidden="true" />
-            {added ? 'Add one more' : 'Add to basket'}
+            <Plus size={18} strokeWidth={2.6} aria-hidden="true" />
+            <span className="add-lbl">{added ? 'Add one more' : 'Add to basket'}</span>
             <span className="sr-only">: {p.name}</span>
           </button>
         </div>

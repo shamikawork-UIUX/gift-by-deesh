@@ -8,12 +8,15 @@
 .pcard:hover .alt { opacity: 1; }
 .pbadge { position: absolute; top: 14px; left: 14px; color: #fff; font-size: 12px; font-weight: 700; padding: 6px 11px; border-radius: 999px; }
 
-.pcard .add { position: absolute; left: 12px; right: 12px; bottom: 12px; transform: translateY(130%); transition: transform .3s var(--ease-out); }
-.pcard:hover .add, .pcard:focus-within .add { transform: translateY(0); }
+/* At rest: a round "+" in the corner. On hover / keyboard focus: widens into the full "Add to basket" pill. */
+.pcard .add { position: absolute; right: 12px; bottom: 12px; left: calc(100% - 60px); transition: left .3s var(--ease-out); }
+.pcard:hover .add, .pcard:focus-within .add { left: 12px; }
 .pcard .add button {
   width: 100%; min-height: 48px; border: none; border-radius: 999px; color: #fff; font-weight: 700; font-size: 14px;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
+  display: flex; align-items: center; justify-content: center; gap: 0; box-shadow: 0 8px 18px -8px rgba(214, 36, 95, .6);
 }
+.pcard .add-lbl { max-width: 0; opacity: 0; overflow: hidden; white-space: nowrap; transition: max-width .3s var(--ease-out), opacity .2s ease, margin .3s ease; }
+.pcard:hover .add-lbl, .pcard:focus-within .add-lbl { max-width: 200px; opacity: 1; margin-left: 8px; }
 
 .heart {
   position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; border: none;
@@ -36,7 +39,7 @@
 .pcard-amt { font-weight: 700; font-size: 15px; }
 .pcard-koko { padding: 0 20px 18px; margin-top: -8px; }
 
-@media (hover: none) { .pcard .add { transform: none; } }
+@media (hover: none) { .pcard .add { left: 12px; } .pcard .add-lbl { max-width: 200px; opacity: 1; margin-left: 8px; } }
 @media (max-width: 900px) { .pcard { flex-basis: 72%; scroll-snap-align: start; } }
 @media (hover: none) { .pcard:hover { transform: none; box-shadow: none; } .heart .tip { display: none; } }
 @media (max-width: 600px) {

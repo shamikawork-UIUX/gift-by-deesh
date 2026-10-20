@@ -5,7 +5,7 @@
   display: flex; align-items: center; gap: 18px; width: 100%; text-align: left; background: none; border: none;
   border-bottom: 1px solid #EAD7DD; padding: 22px 4px; color: #9C8790; transition: color .25s ease, padding .25s ease;
 }
-.occ .num { font-size: 13px; font-weight: 700; letter-spacing: .08em; width: 28px; }
+.occ .num { font-size: 13px; font-weight: 700; letter-spacing: .08em; width: 28px; color: #7A6870; }
 .occ .t { font-family: var(--font-display); font-weight: 600; font-size: 40px; line-height: 1.05; flex: 1; }
 .occ .ar {
   width: 48px; height: 48px; flex: 0 0 48px; border-radius: 50%; background: var(--pink); color: #fff;
@@ -14,7 +14,7 @@
 .occ:hover { color: #6E5560; }
 .occ.on { color: var(--ink); padding-left: 14px; }
 .occ.on .ar { opacity: 1; transform: none; }
-.occ.on .num { color: var(--pink); }
+.occ.on .num { color: var(--pink-text); }
 
 .occ-ph { flex: 1.1 1 0; min-width: 0; min-height: 520px; border-radius: 32px; transition: background .4s ease; }
 .occ-card {
@@ -49,8 +49,9 @@
   .occ .num, .occ .ar { display: none; }
   .occ .t { font-family: var(--font-body); font-size: 14px; font-weight: 600; }
   .occ.on { padding-left: 16px; background: var(--ink); border-color: var(--ink); color: #fff; }
-  .occ-ph { min-height: 360px; border-radius: 24px; }
-  .occ-card { left: 12px; right: 12px; bottom: 12px; padding: 18px; border-radius: 18px; }
+  .occ-ph { flex: none; min-height: 0; border-radius: 24px; display: flex; flex-direction: column; padding: 0 12px 12px; }
+  .occ-ph > .ph-in { flex: none; position: relative; inset: auto; height: 200px; padding-bottom: 12px !important; }
+  .occ-card { position: relative; left: auto; right: auto; bottom: auto; padding: 18px; border-radius: 18px; }
   .occ-card-t { font-size: 22px; }
   .occ-card-s { font-size: 14px; }
   .occ-cta { margin-left: 0; width: 100%; }
