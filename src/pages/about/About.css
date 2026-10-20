@@ -32,7 +32,7 @@
 .icon-btn.arrow-lg { width: 48px; height: 48px; }
 .split { display: flex; gap: 36px; align-items: stretch; }
 .chapters { flex: 0 0 230px; display: flex; flex-direction: column; gap: 6px; padding-top: 20px; }
-.chap-dot { display: flex; align-items: center; gap: 10px; border: none; background: none; padding: 6px 4px; min-height: 44px; font-size: 14px; font-weight: 700; color: #7D6E75; text-align: left; transition: color .2s ease; }
+.chap-dot { display: flex; align-items: center; gap: 10px; border: none; background: none; padding: 6px 4px; min-height: 44px; font-size: 14px; font-weight: 700; color: #6F6066; text-align: left; transition: color .2s ease; }
 .chap-dot .n { width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%; border: 2px solid #E6D3DA; display: flex; align-items: center; justify-content: center; font-size: 13px; background: #fff; transition: all .3s ease; }
 .chap-dot:hover, .chap-dot.on { color: var(--ink); }
 .chap-dot.on .n { background: var(--pink); border-color: var(--pink); color: #fff; transform: scale(1.1); }

@@ -1,4 +1,5 @@
-import { RotateCcw, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronDown, RotateCcw, Sparkles } from 'lucide-react';
 import { occasionOptions, whoOptions } from '../../data/products';
 import { flip, money } from '../../lib/format';
 import { BUDGET_MAX, BUDGET_MIN, type Filters } from './ShopPage';
@@ -11,17 +12,25 @@ interface Props {
 }
 
 export function GiftFinder({ filters, gen, setFilter, reset }: Props) {
+  // Phones only: the questions fold away so gifts show sooner. Always open on wider screens (see Shop.css).
+  const [open, setOpen] = useState(false);
+  const active = [filters.who !== 'any', filters.occ !== 'any', filters.budget < BUDGET_MAX].filter(Boolean).length;
+
   return (
     <section className="container finder-sec" style={{ paddingTop: 32 }}>
-      <div className="finder-card">
+      <div className={`finder-card ${open ? '' : 'is-folded'}`}>
         <div className="finder-head">
           <div className="finder-title">
             <span className="finder-ic"><Sparkles size={20} aria-hidden="true" /></span>
             <h2>Gift Finder</h2>
           </div>
           <button className="finder-reset" onClick={reset}><RotateCcw size={16} strokeWidth={2.2} aria-hidden="true" />Start over</button>
+          <button className={`finder-toggle ${open ? 'on' : ''}`} aria-expanded={open} aria-controls="finder-body" onClick={() => setOpen((o) => !o)}>
+            {open ? 'Hide' : active ? `Refine · ${active} set` : 'Refine'}
+            <ChevronDown size={16} strokeWidth={2.4} aria-hidden="true" />
+          </button>
         </div>
-        <div className="finder">
+        <div id="finder-body" className={`finder ${open ? '' : 'folded'}`}>
           <div role="group" aria-labelledby="f-who">
             <div id="f-who" className="finder-q">1 · WHO'S IT FOR?</div>
             <div className="chips">

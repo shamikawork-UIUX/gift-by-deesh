@@ -17,9 +17,18 @@ export const site = {
 export const announcements: Record<string, string> = {
   '/': 'Thoughtful gifts, delivered with love across Sri Lanka',
   '/shop': `Order by ${site.cutoff.time} for next-day delivery in ${site.cutoff.area}`,
-  '/offers': 'Use code SWEET10 for 10% off your first order',
+  '/offers': 'Bouquet Week is on · plus a surprise deal hiding in the gift box below',
   '/about': 'Thoughtful gifts, delivered with love across Sri Lanka',
 };
+
+/** Browser tab titles per route. */
+export const pageTitles: Record<string, string> = {
+  '/': 'GiftsByDeesh — Thoughtful gifts, delivered with love',
+  '/shop': 'Shop Gifts · GiftsByDeesh',
+  '/offers': 'Offers & Deals · GiftsByDeesh',
+  '/about': 'About & Contact · GiftsByDeesh',
+};
+export const notFoundTitle = 'Page not found · GiftsByDeesh';
 
 export const navLinks = [
   { to: '/', label: 'Home' },

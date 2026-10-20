@@ -4,6 +4,8 @@
   --pink-soft: #FDE7EE;
   --pink-hover: #FDEDF2;
   --pink-light: #F7A9C1;
+  /* Pink for small text on light backgrounds (passes 4.5:1 on white, cream and blush) */
+  --pink-text: #C41E55;
   --ink: #1B1F3B;
   --body: #4A4F66;
   --muted: #6B6F85;
@@ -75,7 +77,7 @@ img { max-width: 100%; display: block; }
 .sec-b { padding-bottom: var(--sec-y); }
 .sec-t-sm { padding-top: var(--sec-y-sm); }
 .sec-b-sm { padding-bottom: 40px; }
-.eyebrow { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--pink); }
+.eyebrow { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--pink-text); }
 .h2 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 44px; line-height: 1.05; }
 .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
 .sec-lede { margin: 0; font-size: 16px; color: var(--body); line-height: 1.55; max-width: 380px; }
@@ -202,4 +204,4 @@ img { max-width: 100%; display: block; }
   padding: 12px 18px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: top .2s ease;
 }
 .skip-link:focus { top: 12px; color: #fff; }
-main:focus { outline: none; }
+main:focus, main:focus-visible { outline: none; }

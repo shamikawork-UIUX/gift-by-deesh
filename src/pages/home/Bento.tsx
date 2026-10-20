@@ -47,8 +47,11 @@ export function Bento() {
             <PhotoLabel label="Photo — Kinder gifts" color="#7A4E22" size={28} style={{ paddingBottom: 60 }} />
           </div>
           <div className="bento-foot">
-            <div className="bento-t" style={{ fontSize: 24 }}>Kinder Gifts</div>
-            <div className="reveal">Boxes &amp; hampers</div>
+            <div>
+              <div className="bento-t" style={{ fontSize: 24 }}>Kinder Gifts</div>
+              <div className="reveal">Boxes &amp; hampers</div>
+            </div>
+            <span className="go go-ink"><ArrowRight size={18} strokeWidth={2.2} aria-hidden="true" /></span>
           </div>
         </Link>
 
@@ -57,8 +60,11 @@ export function Bento() {
             <PhotoLabel label="Photo — Hot Wheels" color="#C9CCE0" size={28} style={{ paddingBottom: 60 }} />
           </div>
           <div className="bento-foot">
-            <div className="bento-t" style={{ fontSize: 24, color: '#fff' }}>Hot Wheels</div>
-            <div className="reveal" style={{ color: 'var(--navy-text)' }}>Sets for little racers</div>
+            <div>
+              <div className="bento-t" style={{ fontSize: 24, color: '#fff' }}>Hot Wheels</div>
+              <div className="reveal" style={{ color: 'var(--navy-text)' }}>Sets for little racers</div>
+            </div>
+            <span className="go go-light"><ArrowRight size={18} strokeWidth={2.2} aria-hidden="true" /></span>
           </div>
         </Link>
       </div>

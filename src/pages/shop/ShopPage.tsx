@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { products, vibeOptions, type Occasion, type Vibe, type Who } from '../../data/products';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Search } from 'lucide-react';
+import { occasionOptions, products, vibeOptions, whoOptions, type Occasion, type Product, type Vibe, type Who } from '../../data/products';
 import { GiftFinder } from './GiftFinder';
 import { Toolbar } from './Toolbar';
 import { ShopCard } from './ShopCard';
@@ -16,11 +17,40 @@ export interface Filters {
   budget: number;
   vibe: Vibe | 'all';
   sort: SortKey;
+  /** Free-text search */
+  q: string;
 }
 
-export const BUDGET_MIN = 2000;
+// Slider starts at the cheapest gift (rounded down to the 500 step) so every position can match something.
+export const BUDGET_MIN = Math.floor(Math.min(...products.map((p) => p.price)) / 500) * 500;
 export const BUDGET_MAX = 15000;
-const DEFAULTS: Filters = { who: 'any', occ: 'any', budget: BUDGET_MAX, vibe: 'all', sort: 'pop' };
+const DEFAULTS: Filters = { who: 'any', occ: 'any', budget: BUDGET_MAX, vibe: 'all', sort: 'pop', q: '' };
+
+/** Extra words people search with, per vibe ("chocolate" should find the Kinder bouquets). */
+const vibeWords: Record<Vibe, string> = {
+  sweet: 'chocolate chocolates sweet sweets treats kinder',
+  cuddly: 'teddy teddies bear plush plushie soft cuddly toy',
+  playful: 'toy toys car cars playful kids fun',
+  fancy: 'fancy luxury premium chocolate',
+};
+
+const label = <T extends string>(opts: { id: T; label: string }[], id: T) => opts.find((o) => o.id === id)?.label ?? '';
+
+function searchText(p: Product) {
+  return [
+    p.name, p.note, p.vibe, vibeWords[p.vibe],
+    ...p.who.map((w) => label(whoOptions, w)),
+    ...p.occ.map((o) => label(occasionOptions, o)),
+  ].join(' ').toLowerCase();
+}
+
+/** Every word typed must appear somewhere in the product's text. */
+function matchesQuery(p: Product, q: string) {
+  const words = q.toLowerCase().split(/\s+/).filter(Boolean);
+  if (!words.length) return true;
+  const text = searchText(p);
+  return words.every((w) => text.includes(w));
+}
 
 function readFilters(p: URLSearchParams): Filters {
   const budget = Number(p.get('budget'));
@@ -30,6 +60,7 @@ function readFilters(p: URLSearchParams): Filters {
     budget: budget >= BUDGET_MIN && budget <= BUDGET_MAX ? budget : DEFAULTS.budget,
     vibe: (p.get('vibe') as Filters['vibe']) || DEFAULTS.vibe,
     sort: (p.get('sort') as SortKey) || DEFAULTS.sort,
+    q: p.get('q') ?? DEFAULTS.q,
   };
 }
 
@@ -40,6 +71,13 @@ export function ShopPage() {
   const [gen, setGen] = useState(1);
   const [qvId, setQvId] = useState<string | null>(null);
   const prevSearch = useRef(params.toString());
+  const searchRef = useRef<HTMLInputElement>(null);
+  const location = useLocation();
+
+  // The header search icon links here with { focusSearch: true }.
+  useEffect(() => {
+    if ((location.state as { focusSearch?: boolean } | null)?.focusSearch) searchRef.current?.focus();
+  }, [location.key, location.state]);
 
   useEffect(() => {
     const s = params.toString();
@@ -71,12 +109,13 @@ export function ShopPage() {
         (filters.who === 'any' || p.who.includes(filters.who)) &&
         (filters.occ === 'any' || p.occ.includes(filters.occ)) &&
         p.price <= filters.budget &&
-        (filters.vibe === 'all' || p.vibe === filters.vibe),
+        (filters.vibe === 'all' || p.vibe === filters.vibe) &&
+        matchesQuery(p, filters.q),
     );
     if (filters.sort === 'low') return l.sort((a, b) => a.price - b.price);
     if (filters.sort === 'high') return l.sort((a, b) => b.price - a.price);
     return l.sort((a, b) => a.pop - b.pop);
-  }, [filters.who, filters.occ, filters.budget, filters.vibe, filters.sort]);
+  }, [filters.who, filters.occ, filters.budget, filters.vibe, filters.sort, filters.q]);
 
   const anim = gen % 2 ? 'inA' : 'inB';
   const cells: { key: string; node: JSX.Element; wide?: boolean }[] = [];
@@ -100,6 +139,20 @@ export function ShopPage() {
           <h1 className="shop-h1">Find their perfect <span>gift</span></h1>
           <p className="sec-lede">Answer three quick questions, or just browse. Every gift is hand-wrapped and delivered islandwide.</p>
         </div>
+        <div className="shop-search" role="search">
+          <Search size={20} aria-hidden="true" />
+          <label htmlFor="shop-q" className="sr-only">Search gifts</label>
+          <input
+            id="shop-q"
+            ref={searchRef}
+            type="search"
+            placeholder="Search, e.g. teddy or Ferrero"
+            autoComplete="off"
+            enterKeyHint="search"
+            value={filters.q}
+            onChange={(e) => setFilter({ q: e.target.value })}
+          />
+        </div>
       </section>
 
       <GiftFinder filters={filters} gen={gen} setFilter={setFilter} reset={reset} />
@@ -115,7 +168,7 @@ export function ShopPage() {
             ))}
           </div>
         ) : (
-          <EmptyState onReset={reset} />
+          <EmptyState onReset={reset} query={filters.q.trim()} />
         )}
       </section>
 

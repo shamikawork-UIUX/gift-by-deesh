@@ -64,10 +64,11 @@
 .cd-sec { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 14px; margin: 0; min-width: 0; }
 .cd-lab { font-size: 14px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; padding: 0; float: left; width: 100%; }
 .cd-lab + * { clear: both; }
-.dchips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; }
+/* Wraps instead of scrolling sideways, so no date is ever cut off at the edge */
+.dchips { display: grid; grid-template-columns: repeat(auto-fill, minmax(62px, 1fr)); gap: 8px; }
 .dchip {
-  flex: 0 0 auto; min-width: 74px; min-height: 56px; border: 1.5px solid var(--line-2); background: #fff; border-radius: 14px;
-  padding: 6px 10px; color: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all .2s ease;
+  min-width: 0; min-height: 56px; border: 1.5px solid var(--line-2); background: #fff; border-radius: 14px;
+  padding: 6px 4px; color: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all .2s ease;
 }
 .dchip .w { font-size: 12px; font-weight: 800; }
 .dchip .d { font-size: 12px; color: var(--muted); }
@@ -100,6 +101,8 @@
 }
 .send:hover { transform: translateY(-2px); color: var(--wa-ink); }
 .cd-fine { margin: 10px 0 0; font-size: 12px; color: var(--muted); text-align: center; line-height: 1.5; }
+.cd-fine-body { display: none; }
+.cd-state .btn { width: 100%; max-width: 320px; }
 
 .cd-state { padding: 64px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
 .cd-state h3 { margin: 6px 0 0; font-family: var(--font-display); font-weight: 700; font-size: 26px; }
@@ -131,6 +134,11 @@
   .cd-body { padding: 14px var(--gutter); }
   .cd-foot { padding: 12px var(--gutter) calc(14px + env(safe-area-inset-bottom)); }
   .cd-total { font-size: 24px; }
+  /* Slimmer sticky footer on phones: the fine print moves into the scrolling body */
+  .cd-foot .cd-fine { display: none; }
+  .cd-fine-body { display: block; margin: 4px 0 0; }
+  .cd-total-row { margin-top: 2px; }
+  .cd-koko { margin-bottom: 10px; }
   .cd-note { font-size: 16px; }
   .cd-state { padding: 48px 24px; }
 }

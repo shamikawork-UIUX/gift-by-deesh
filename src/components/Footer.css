@@ -28,7 +28,7 @@
   .foot-brand { grid-column: 1 / -1; max-width: none; }
   .foot-col { font-size: 13px; gap: 4px; }
   .foot-col strong { margin-bottom: 4px; }
-  .foot-col a { min-height: 36px; display: flex; align-items: center; }
+  .foot-col a { min-height: 44px; display: flex; align-items: center; }
   .foot-col:last-child { grid-column: 1 / -1; }
   .foot-base { padding: 16px var(--gutter); font-size: 12px; }
 }

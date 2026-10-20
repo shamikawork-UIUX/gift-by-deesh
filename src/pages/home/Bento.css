@@ -14,13 +14,15 @@
 }
 .bento-pill { display: inline-block; background: var(--pink-soft); color: var(--pink-dark); font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; margin-bottom: 10px; }
 .bento-side { position: absolute; left: 28px; top: 28px; bottom: 28px; width: 42%; display: flex; flex-direction: column; justify-content: space-between; }
-.bento-foot { position: absolute; left: 22px; right: 22px; bottom: 22px; }
+.bento-foot { position: absolute; left: 22px; right: 22px; bottom: 22px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.bento-foot .go { flex: 0 0 44px; }
 .bento-tile .reveal { font-size: 14px; color: var(--body); margin-top: 6px; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .35s ease, opacity .35s ease; }
 .bento-tile:hover .reveal, .bento-tile:focus-visible .reveal { max-height: 40px; opacity: 1; }
 
 .go { border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; transform: rotate(-45deg); transition: transform .3s ease; }
 .go-lg { flex: 0 0 52px; width: 52px; height: 52px; background: var(--pink); }
 .go-ink { width: 44px; height: 44px; background: var(--ink); }
+.go-light { width: 44px; height: 44px; background: #fff; color: var(--ink); }
 .bento-tile:hover .go { transform: translateX(4px) rotate(-45deg); }
 
 @media (hover: none) { .bento-tile .reveal { max-height: 40px; opacity: 1; } }

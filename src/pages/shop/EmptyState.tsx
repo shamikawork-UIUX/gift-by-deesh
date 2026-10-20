@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export function EmptyState({ onReset }: { onReset: () => void }) {
+export function EmptyState({ onReset, query }: { onReset: () => void; query?: string }) {
   return (
     <div className="shop-empty">
       <svg className="empty-bear" aria-hidden="true" width="120" height="120" viewBox="0 0 40 40">
@@ -12,8 +12,8 @@ export function EmptyState({ onReset }: { onReset: () => void }) {
         <path d="M17.5 29q2.5-2 5 0" stroke="#3B2A22" strokeWidth="1.3" fill="none" strokeLinecap="round" />
         <ellipse cx="14" cy="23.5" rx="1" ry="1.6" fill="#7FB4E8" />
       </svg>
-      <h2>Nothing here yet…</h2>
-      <p>Try a bigger budget or a different occasion. Or build a box that fits exactly.</p>
+      <h2>{query ? `No gifts match “${query}”` : 'Nothing here yet…'}</h2>
+      <p>{query ? 'Try another word, like “teddy”, “Kinder” or “Hot Wheels”. Or build a box with exactly what they love.' : 'Try a bigger budget or a different occasion. Or build a box that fits exactly.'}</p>
       <div className="shop-empty-ctas">
         <button className="btn btn-pink" onClick={onReset}>Show all gifts</button>
         <Link to="/#build" className="btn btn-outline">Build a box</Link>

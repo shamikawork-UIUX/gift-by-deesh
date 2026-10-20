@@ -11,7 +11,7 @@ export function Hero() {
         alt="Kinder Joy chocolate bouquet wrapped in pink with a ribbon, next to a cream teddy bear"
         width={1942}
         height={809}
-        fetchPriority="high"
+        {...{ fetchpriority: 'high' }}
       />
       <div className="container home-hero-in">
         <div className="home-hero-copy">

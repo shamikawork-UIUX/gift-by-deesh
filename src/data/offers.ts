@@ -6,8 +6,8 @@ export const weeklyOffer = { tag: 'THIS WEEK', title: 'Bouquet Week · 15% off a
 
 export const coupon = { code: 'SWEET10', label: '10% off your first order', short: '10%' };
 
-/** Set to true once WhatsApp reminders are supported. */
-export const whatsappReminders = false;
+/** Offer WhatsApp as a reminder channel (numbers are saved by server/index.mjs). */
+export const whatsappReminders = true;
 
 export interface Combo {
   id: string;
@@ -26,11 +26,23 @@ export const combos: Combo[] = [
   { id: 'racer', name: 'Little Racer', desc: 'Hot Wheels Gift Set + 3 Kinder Joys. Vroom, then snacks.', was: 6850, now: 6200, tint: '#FFF4E3', a: { shape: 'car', bg: '#DCE4F3' }, b: { shape: 'egg', bg: '#FDE7E4' } },
 ];
 
+/** Day of the month of the nth Sunday (month is 0-based), for the next upcoming year. */
+function nextNthSunday(month: number, n: number, today = new Date()) {
+  const dayFor = (year: number) => {
+    const firstSunday = 1 + ((7 - new Date(year, month, 1).getDay()) % 7);
+    return firstSunday + (n - 1) * 7;
+  };
+  const y = today.getFullYear();
+  const thisYear = new Date(y, month, dayFor(y), 23, 59);
+  return String(thisYear >= today ? dayFor(y) : dayFor(y + 1));
+}
+
+// Sri Lanka marks Mother's Day on the 2nd Sunday of May and Father's Day on the 3rd Sunday of June.
 export const calendar = [
   { id: 'val', name: "Valentine's Day", month: 'FEB', day: '14', color: '#D6245F', soft: '#FDE7EE', joke: 'Chocolate says it better than you do.' },
   { id: 'avu', name: 'Sinhala & Tamil New Year', month: 'APR', day: '13', color: '#9A6A12', soft: '#FBF0D2', joke: 'Sweet treats for the whole family table.' },
-  { id: 'mom', name: "Mother's Day", month: 'MAY', day: '[DATE]', color: '#7A57A0', soft: '#F1EAF8', joke: 'She deserves more than a phone call.' },
-  { id: 'dad', name: "Father's Day", month: 'JUN', day: '[DATE]', color: '#3B6CC0', soft: '#E6EEFA', joke: 'Upgrade from socks this year. Please.' },
+  { id: 'mom', name: "Mother's Day", month: 'MAY', day: nextNthSunday(4, 2), color: '#7A57A0', soft: '#F1EAF8', joke: 'She deserves more than a phone call.' },
+  { id: 'dad', name: "Father's Day", month: 'JUN', day: nextNthSunday(5, 3), color: '#3B6CC0', soft: '#E6EEFA', joke: 'Upgrade from socks this year. Please.' },
   { id: 'xmas', name: 'Christmas', month: 'DEC', day: '25', color: '#2E7D5B', soft: '#E3F2EA', joke: "Santa's taking pre-orders. So are we." },
 ];
 export type CalendarOccasion = (typeof calendar)[number];

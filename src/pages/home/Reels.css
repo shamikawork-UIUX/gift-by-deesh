@@ -9,11 +9,11 @@
 .reels { display: flex; align-items: center; justify-content: center; gap: 18px; }
 .reel {
   flex: 0 0 200px; height: 356px; border-radius: 26px; overflow: hidden; position: relative; border: none; padding: 0;
-  transform: scale(.86); opacity: .55; transition: all .45s var(--ease-out); text-align: left; display: block; text-decoration: none; color: #fff;
+  transform: scale(.86); opacity: .75; transition: all .45s var(--ease-out); text-align: left; display: block; text-decoration: none; color: #fff;
 }
 .reel:hover { opacity: .8; color: #fff; }
 .reel.on { flex-basis: 260px; height: 462px; transform: none; opacity: 1; box-shadow: 0 30px 60px -28px rgba(27, 31, 59, .45); }
-.reel-len { position: absolute; top: 14px; left: 14px; background: rgba(255, 255, 255, .85); color: var(--ink); font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px; }
+.reel-len { position: absolute; top: 14px; left: 14px; background: #fff; color: var(--ink); font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px; }
 .play {
   position: absolute; top: 50%; left: 50%; margin: -30px 0 0 -30px; width: 60px; height: 60px; border-radius: 50%;
   background: rgba(255, 255, 255, .95); color: var(--pink); display: flex; align-items: center; justify-content: center; transition: transform .3s ease;
@@ -23,10 +23,10 @@
 .reel-t { display: block; font-family: var(--font-display); font-weight: 600; font-size: 19px; line-height: 1.15; }
 .reel-s { display: block; font-size: 13px; color: #F1E4EA; margin-top: 6px; }
 
-.reel-dots { display: flex; justify-content: center; gap: 4px; margin-top: 28px; }
-.dot { width: 28px; height: 28px; border: none; padding: 0; background: none; display: flex; align-items: center; justify-content: center; }
+.reel-dots { display: flex; justify-content: center; gap: 0; margin-top: 20px; }
+.dot { width: 44px; height: 44px; border: none; padding: 0; background: none; display: flex; align-items: center; justify-content: center; }
 .dot::before { content: ''; width: 10px; height: 10px; border-radius: 999px; background: #E6D3DA; transition: all .3s ease; }
-.dot.on { width: 40px; }
+.dot.on { width: 56px; }
 .dot.on::before { width: 28px; background: var(--pink); }
 
 @media (max-width: 900px) {
