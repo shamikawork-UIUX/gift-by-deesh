@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { coupon } from '../../data/offers';
+import { useSettings } from '../../store/catalog';
 import { Bow } from '../../components/Shapes';
 import { useTimers } from '../../hooks/useTimers';
 import { Confetti } from './Confetti';
@@ -7,6 +7,8 @@ import { Confetti } from './Confetti';
 const lines = ['Psst… tap me!', 'Ooh, it rattled…', 'Something is wiggling in here!', 'SURPRISE!'];
 
 export function UnwrapDeal() {
+  const settings = useSettings();
+  const coupon = { code: settings.couponCode, label: settings.couponLabel, short: settings.couponShort };
   const [taps, setTaps] = useState(0);
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { favouriteTabs } from '../../data/home';
-import { productById } from '../../data/products';
+import type { Product } from '../../data/products';
+import { useProducts } from '../../store/catalog';
 import { ProductCard } from '../../components/ProductCard';
 import { useFlyToBasket } from '../../hooks/useFlyToBasket';
 import { useHint } from '../../store/hint';
@@ -20,7 +21,11 @@ export function Favourites() {
   const sendHint = useHint((s) => s.send);
 
   const current = favouriteTabs.find((t) => t.id === tab)!;
-  const items = current.items.map((it) => ({ product: productById(it.id)!, badge: 'badge' in it ? it.badge : undefined }));
+  const all = useProducts();
+  const items = current.items.flatMap((it) => {
+    const product = all.find((p) => p.id === it.id);
+    return product ? [{ product, badge: 'badge' in it ? it.badge : undefined } as { product: Product; badge?: string }] : [];
+  });
   const maxOff = Math.max(0, items.length - VISIBLE);
   const off = Math.min(offset, maxOff);
 

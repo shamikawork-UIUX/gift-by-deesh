@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CalendarDays, Check, ChevronDown, CreditCard, Gift, Heart, MessageCircle, Minus, Plus, ShoppingBasket, Trash2, X } from 'lucide-react';
 import { cartCount, cartTotal, useCart } from '../store/cart';
-import { checkoutUrl, deliveryOptions } from '../lib/checkout';
+import { checkoutUrl, deliveryOptions, newOrderRef, recordOrder } from '../lib/checkout';
+import { useSettings } from '../store/catalog';
 import { flip, kokoPart, money } from '../lib/format';
 import { useExit, useFocusTrap } from '../hooks/useDialog';
 import { useTimers } from '../hooks/useTimers';
@@ -33,6 +34,9 @@ function Drawer() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [lastUrl, setLastUrl] = useState('');
+  // One reference per basket: re-sending after "Not yet" updates the same saved order.
+  const [orderRef, setOrderRef] = useState(newOrderRef);
+  const settings = useSettings();
   const [gen, setGen] = useState(0);
   const firstRender = useRef(true);
 
@@ -40,7 +44,8 @@ function Drawer() {
   const total = cartTotal(lines);
   const dates = useMemo(() => deliveryOptions(), []);
   const picked = dates.find((d) => d.iso === deliveryDate) ?? dates[0];
-  const url = checkoutUrl({ lines, deliveryDate: picked.date, note, pay });
+  const order = { ref: orderRef, lines, deliveryDate: picked.date, note, pay };
+  const url = checkoutUrl(order, settings.orderWhatsApp);
 
   useEffect(() => {
     if (firstRender.current) { firstRender.current = false; return; }
@@ -69,6 +74,7 @@ function Drawer() {
   // The basket is only emptied once the customer confirms they pressed send in WhatsApp,
   // so nothing is lost if WhatsApp didn't open or they backed out.
   const send = () => {
+    recordOrder(order);
     setSending(true);
     setLastUrl(url);
     later(() => {
@@ -79,6 +85,7 @@ function Drawer() {
   };
   const confirmSent = () => {
     clear();
+    setOrderRef(newOrderRef());
     requestClose();
   };
 

@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
 import { panicPicks } from '../../data/offers';
-import { productById } from '../../data/products';
-import { site } from '../../data/site';
+import { useProducts, useSettings } from '../../store/catalog';
 import { Koko } from '../../components/PriceBlock';
 import { useFlyToBasket } from '../../hooks/useFlyToBasket';
 import { money } from '../../lib/format';
 
 export function PanicButton() {
+  const products = useProducts();
+  const settings = useSettings();
+  const picks = panicPicks.flatMap((pk) => { const p = products.find((x) => x.id === pk.id); return p ? [{ pk, p }] : []; });
   const [on, setOn] = useState(false);
   const [gen, setGen] = useState(0);
   const fly = useFlyToBasket();
@@ -46,10 +48,9 @@ export function PanicButton() {
             </div>
             <div style={{ flex: '1 1 420px', minWidth: 0 }}>
               <h3 className="calm-t">Relax. We've got you.</h3>
-              <p className="calm-p">Three crowd-pleasers, wrapped and ready. Order by {site.cutoff.time} for same-day delivery in {site.cutoff.area}.</p>
+              <p className="calm-p">Three crowd-pleasers, wrapped and ready. Order by {settings.cutoffTime} for same-day delivery in {settings.cutoffArea}.</p>
               <ul className="picks">
-                {panicPicks.map((pk, i) => {
-                  const p = productById(pk.id)!;
+                {picks.map(({ pk, p }, i) => {
                   return (
                     <li key={p.id} className="pick" style={{ animationDelay: `${0.25 + i * 0.12}s` }}>
                       <span className="pick-sw" style={{ background: p.tint }} aria-hidden="true" />

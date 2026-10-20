@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Search } from 'lucide-react';
-import { occasionOptions, products, vibeOptions, whoOptions, type Occasion, type Product, type Vibe, type Who } from '../../data/products';
+import { useProducts } from '../../store/catalog';
+import { occasionOptions, products as builtInProducts, vibeOptions, whoOptions, type Occasion, type Product, type Vibe, type Who } from '../../data/products';
 import { GiftFinder } from './GiftFinder';
 import { Toolbar } from './Toolbar';
 import { ShopCard } from './ShopCard';
@@ -22,7 +23,7 @@ export interface Filters {
 }
 
 // Slider starts at the cheapest gift (rounded down to the 500 step) so every position can match something.
-export const BUDGET_MIN = Math.floor(Math.min(...products.map((p) => p.price)) / 500) * 500;
+export const BUDGET_MIN = Math.floor(Math.min(...builtInProducts.map((p) => p.price)) / 500) * 500;
 export const BUDGET_MAX = 15000;
 const DEFAULTS: Filters = { who: 'any', occ: 'any', budget: BUDGET_MAX, vibe: 'all', sort: 'pop', q: '' };
 
@@ -70,6 +71,7 @@ export function ShopPage() {
   const filters = readFilters(params);
   const [gen, setGen] = useState(1);
   const [qvId, setQvId] = useState<string | null>(null);
+  const products = useProducts();
   const prevSearch = useRef(params.toString());
   const searchRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
@@ -115,7 +117,7 @@ export function ShopPage() {
     if (filters.sort === 'low') return l.sort((a, b) => a.price - b.price);
     if (filters.sort === 'high') return l.sort((a, b) => b.price - a.price);
     return l.sort((a, b) => a.pop - b.pop);
-  }, [filters.who, filters.occ, filters.budget, filters.vibe, filters.sort, filters.q]);
+  }, [products, filters.who, filters.occ, filters.budget, filters.vibe, filters.sort, filters.q]);
 
   const anim = gen % 2 ? 'inA' : 'inB';
   const cells: { key: string; node: JSX.Element; wide?: boolean }[] = [];

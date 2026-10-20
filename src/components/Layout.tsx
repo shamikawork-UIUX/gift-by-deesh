@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { announcements, notFoundTitle, pageTitles } from '../data/site';
+import { useCatalog } from '../store/catalog';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { CartDrawer } from './CartDrawer';
@@ -36,12 +37,18 @@ function RouteAnnouncer() {
 
 export function Layout() {
   const { pathname } = useLocation();
+  const settings = useCatalog((s) => s.settings);
+  const loadCatalog = useCatalog((s) => s.load);
+  useEffect(() => { void loadCatalog(); }, [loadCatalog]);
+  const announcement = pathname === '/shop'
+    ? `Order by ${settings.cutoffTime} for next-day delivery in ${settings.cutoffArea}`
+    : announcements[pathname] ?? announcements['/'];
   return (
     <>
       <ScrollManager />
       <RouteAnnouncer />
       <a href="#main" className="skip-link">Skip to content</a>
-      <div className="announce">{announcements[pathname] ?? announcements['/']}</div>
+      <div className="announce">{announcement}</div>
       <Header />
       <main id="main" tabIndex={-1}>
         <Outlet />

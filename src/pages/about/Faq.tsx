@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { CircleHelp, Plus } from 'lucide-react';
 import { faqs } from '../../data/faqs';
+import { fillSettings, useSettings } from '../../store/catalog';
 
 export function Faq() {
   const [open, setOpen] = useState(0);
+  const settings = useSettings();
   return (
     <section id="faq" className="faq-sec">
       <div style={{ textAlign: 'center', marginBottom: 32 }}>
@@ -23,7 +25,7 @@ export function Faq() {
                 </button>
               </h3>
               <div className="faq-a" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}>
-                <div><p>{f.a}</p></div>
+                <div><p>{fillSettings(f.a, settings)}</p></div>
               </div>
             </div>
           );
