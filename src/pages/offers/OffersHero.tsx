@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { offerEnd, weeklyOffer } from '../../data/offers';
+import { weeklyOffer } from '../../data/offers';
+import { offerEndIso, useSettings } from '../../store/catalog';
 import { ShapeSvg } from '../../components/Shapes';
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -24,7 +25,8 @@ function useCountdown(endIso: string) {
 }
 
 export function OffersHero() {
-  const cd = useCountdown(offerEnd);
+  const settings = useSettings();
+  const cd = useCountdown(offerEndIso(settings));
 
   return (
     <section id="top" className="of-hero">
@@ -37,7 +39,7 @@ export function OffersHero() {
           <div className="of-weekly">
             <div className="of-weekly-head">
               <span className="of-tag">{weeklyOffer.tag}</span>
-              <span className="of-weekly-t">{weeklyOffer.title}</span>
+              <span className="of-weekly-t">{settings.weeklyOfferTitle}</span>
             </div>
             {cd.live ? (
               <div className="of-weekly-row">
@@ -62,7 +64,7 @@ export function OffersHero() {
           <div className="fl f3" style={{ left: '34%', top: '32%' }}><div className="ftok" style={{ width: 168, height: 168, background: '#F4E6D6' }}><ShapeSvg shape="teddy" /></div></div>
           <div className="fl f4" style={{ left: '6%', bottom: '10%' }}><div className="ftok" style={{ width: 96, height: 96, background: '#DCE4F3' }}><ShapeSvg shape="car" /></div></div>
           <div className="fl f5" style={{ right: '8%', bottom: '14%' }}><div className="ftok" style={{ width: 110, height: 110, background: '#fff' }}><ShapeSvg shape="heart" /></div></div>
-          <div className="fl" style={{ right: '30%', top: '2%' }}><div className="spin">{weeklyOffer.badge}</div></div>
+          <div className="fl" style={{ right: '30%', top: '2%' }}><div className="spin">{settings.weeklyOfferBadge}</div></div>
         </div>
       </div>
     </section>

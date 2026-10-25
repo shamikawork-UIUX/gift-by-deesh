@@ -1,11 +1,12 @@
 # GiftsByDeesh
 
-Website for **GiftsByDeesh** (House of Deesh (Pvt) Ltd) — Kinder chocolate bouquets, teddy bears, Hot Wheels sets and custom gift boxes, delivered islandwide in Sri Lanka. Orders are sent to the shop on **WhatsApp** (no online payment yet).
+Website and admin dashboard for **GiftsByDeesh** (House of Deesh (Pvt) Ltd) — Kinder chocolate bouquets, teddy bears, Hot Wheels sets and custom gift boxes, delivered islandwide in Sri Lanka. Orders are sent to the shop on **WhatsApp** (no online payment yet) and tracked in the dashboard.
 
-- **Frontend:** Vite + React 18 + TypeScript, React Router, Zustand, plain CSS, `lucide-react` icons
-- **API:** `server/index.mjs` — zero dependencies (Node's built-in `http` + `node:sqlite`), stores gift-reminder sign-ups
+- **Website:** Vite + React 18 + TypeScript, React Router, Zustand, plain CSS, `lucide-react` icons
+- **Admin dashboard:** `/admin` — orders, products, customers, reminders, team & roles, shop settings, activity log. See **[docs/ADMIN-DASHBOARD.md](docs/ADMIN-DASHBOARD.md)**.
+- **Server:** `server/` — zero dependencies (Node's built-in `http` + `node:sqlite`)
 
-Pages: `/` Home · `/shop` Shop Gifts · `/offers` Offers · `/about` About & Contact
+Pages: `/` Home · `/shop` Shop Gifts · `/offers` Offers · `/about` About & Contact · `/admin` Dashboard
 
 ## Requirements
 
@@ -15,63 +16,72 @@ Pages: `/` Home · `/shop` Shop Gifts · `/offers` Offers · `/about` About & Co
 
 ```bash
 npm install          # first time only
-npm run dev          # website  → http://localhost:5173
-npm run api          # API      → http://localhost:8787 (Vite proxies /api to it)
+npm run dev          # website + dashboard → http://localhost:5173 (and /admin)
+npm run api          # server → http://localhost:8787 (Vite proxies /api and /uploads to it; restarts on changes)
 ```
 
-Run `dev` and `api` in two terminals. The website works without the API, but "Remind me" on the Offers page needs it.
+Run `dev` and `api` in two terminals. Without the API the shop still renders (built-in catalogue), but orders aren't saved, reminders don't work and the dashboard can't sign in.
 
-To use the admin list of reminder sign-ups, start the API with a token:
-
-```bash
-ADMIN_TOKEN=choose-a-long-secret npm run api      # macOS / Linux / Git Bash
-$env:ADMIN_TOKEN="choose-a-long-secret"; npm run api   # PowerShell
-```
+First visit to **http://localhost:5173/admin** → create the owner account.
 
 ## Production
 
 ```bash
-npm run build        # type-check + build the site into dist/
-npm start            # serves dist/ AND the API on one port (PORT, default 8787)
+npm run build                                          # type-check + build into dist/
+NODE_ENV=production SETUP_CODE=choose-a-secret npm start   # site + dashboard + API on one port
 ```
 
-The reminders API needs a host that runs Node (e.g. Render, Railway, a VPS). A static-only host (Netlify, GitHub Pages) can serve the site but not the reminders.
+Needs a host that runs Node (Render, Railway, a VPS…). A static-only host can't run the orders, dashboard or reminders.
 
 | Env var | Default | Purpose |
 |---|---|---|
-| `PORT` | `8787` | Port for the API / production server |
-| `DB_PATH` | `data/giftsbydeesh.db` | SQLite database file |
-| `ADMIN_TOKEN` | *(unset)* | Enables `GET /api/reminders`. Without it the admin list is switched off |
+| `PORT` | `8787` | Server port |
+| `NODE_ENV` | — | `production` turns on `Secure` cookies and requires `SETUP_CODE` for first-run setup |
+| `SETUP_CODE` | — | Code to type on the dashboard's first-run screen to create the owner (required in production) |
+| `PUBLIC_ORIGIN` | — | Site URL, e.g. `https://giftsbydeesh.lk`, if a reverse proxy rewrites the Host header |
+| `DATA_DIR` | `data/` | Folder for the database and uploaded photos |
+| `DB_PATH` | `data/giftsbydeesh.db` | SQLite file |
+| `COOKIE_SECURE` | — | `1` forces `Secure` cookies outside production |
+
+`data/` holds orders, customer phone numbers and team accounts. It is **git-ignored — never commit it, and back it up**.
 
 ## API
 
-| Method | Path | Who | What |
-|---|---|---|---|
-| `GET` | `/api/health` | anyone | `{ ok: true }` |
-| `POST` | `/api/reminders` | public | Save a sign-up: `{ channel: "whatsapp" \| "email", contact, occasions: ["val", …] }` |
-| `POST` | `/api/reminders/cancel` | public | Remove occasions from a sign-up (same body) |
-| `GET` | `/api/reminders` | admin | List sign-ups. Header `Authorization: Bearer $ADMIN_TOKEN` |
+Public (used by the website):
 
-WhatsApp numbers are stored as `94XXXXXXXXX` (Sri Lankan mobiles only). One row per contact; signing up again merges occasions. Each row records `consent_at`. No IP address or device data is stored. Public endpoints are rate-limited (20 requests / minute / IP).
+| Method | Path | What |
+|---|---|---|
+| `GET` | `/api/health` | `{ ok: true }` |
+| `GET` | `/api/catalog` | Visible products + shop settings (hours, cut-off, coupon…) |
+| `POST` | `/api/orders` | Save a website order: `{ ref: "GBD-XXXXXX", lines, deliveryDate, note, pay }` |
+| `POST` | `/api/reminders` · `/api/reminders/cancel` | Reminder sign-up / cancel |
 
-The database lives in `data/` and is **git-ignored** — it holds customer contact details, never commit it.
+Admin (`/api/admin/*`, cookie session, permission-checked): `session`, `setup`, `login`, `logout`, `account`, `account/password`, `pulse`, `overview`, `orders` (list / detail / create / update), `products` (+ `image`), `customers`, `reminders`, `users` (+ `reset-password`), `settings`, `activity`. See `server/routes-admin.mjs`.
 
 ## Project layout
 
 ```
-server/index.mjs      API + production static server
-src/components/       shared UI (header, cart drawer, product card, tab bar …)
-src/pages/<page>/     one folder per page and its sections
-src/data/*.ts         products, prices, offers, FAQs, site details — edit content here
-src/lib/checkout.ts   builds the WhatsApp order (swap for a payment gateway later)
-src/lib/reminders.ts  reminder sign-ups (swap for Mailchimp / Brevo later)
-src/store/            Zustand stores (cart is saved in localStorage)
-reference/            original interactive prototypes (visual spec)
-docs/QA-UPDATE.md     QA audit findings and the fixes made
+server/index.mjs          HTTP server: routing, same-origin check, /uploads, serves dist/
+server/db.mjs             SQLite schema (migrations), seed, settings
+server/auth.mjs           passwords, sessions, roles & PERMISSIONS
+server/routes-public.mjs  storefront API
+server/routes-admin.mjs   dashboard API
+server/seed/products.json catalogue loaded into the database on first run
+src/admin/                the dashboard (Shell, pages/, ui/, lib/, admin.css)
+src/components/           shared storefront UI (header, cart drawer, product card…)
+src/pages/<page>/         storefront pages
+src/store/catalog.ts      products + settings from the API (falls back to src/data)
+src/data/*.ts             built-in content (fallback catalogue, offers, FAQs, box builder…)
+src/lib/checkout.ts       builds the WhatsApp order + saves a copy (swap for a payment gateway later)
+src/lib/reminders.ts      reminder sign-ups
+docs/                     QA-UPDATE.md (audit fixes), ADMIN-DASHBOARD.md (dashboard guide & flows)
 ```
+
+**Products and shop settings are edited in the dashboard** (they live in the database). `src/data/products.ts` is only the fallback the shop shows if the server can't be reached; the box builder items, combos, panic picks and favourites tabs are still edited in `src/data/*.ts`.
 
 ## Content still to fill in
 
-These placeholders are intentionally visible as `[…]` until the client supplies them: `[TIME]` and `[AREA]` (delivery cut-off, `src/data/site.ts`), `[DAYS]`, `[HOURS]` (opening hours), `[Founder name]`, story chapter `[YEAR]`s and text, the FAQ delivery days, payment methods, heat/melting policy, and all product photos (`public/images/`).
+In the dashboard → **Shop settings**: `[TIME]`, `[AREA]`, `[X–Y]` delivery days, `[DAYS]`/`[HOURS]` opening hours (fields still showing a placeholder are highlighted).
+In the code: `[Founder name]`, story chapter `[YEAR]`s and text, payment methods, heat/melting policy. Product photos: upload them per product in the dashboard.
 
-See [`CLAUDE.md`](CLAUDE.md) for the full build brief and [`docs/QA-UPDATE.md`](docs/QA-UPDATE.md) for the latest QA changes.
+See [`CLAUDE.md`](CLAUDE.md) for the build brief, [`docs/QA-UPDATE.md`](docs/QA-UPDATE.md) for the QA fixes and [`docs/ADMIN-DASHBOARD.md`](docs/ADMIN-DASHBOARD.md) for the dashboard.

@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { Check, Heart, Minus, Plus, ShoppingBasket, X } from 'lucide-react';
-import { addOns, productById, sizeOptions } from '../../data/products';
-import { PhotoLabel } from '../../components/Placeholder';
+import { addOns, sizeOptions, type Product } from '../../data/products';
+import { ProductPhoto } from '../../components/Placeholder';
+import { useProduct } from '../../store/catalog';
 import { Koko } from '../../components/PriceBlock';
 import { useExit, useFocusTrap } from '../../hooks/useDialog';
 import { useFlyToBasket } from '../../hooks/useFlyToBasket';
@@ -13,7 +14,12 @@ type SizeId = (typeof sizeOptions)[number]['id'];
 
 /** Quick view = centred modal (the cart is a side drawer). */
 export function QuickView({ id, onClose }: { id: string; onClose: () => void }) {
-  const p = productById(id)!;
+  const product = useProduct(id);
+  // The shop only opens quick view for products it is showing, so this is just a guard.
+  return product ? <QuickViewDialog p={product} onClose={onClose} /> : null;
+}
+
+function QuickViewDialog({ p, onClose }: { p: Product; onClose: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const [closing, requestClose] = useExit(onClose, 260);
   useFocusTrap(ref, requestClose);
@@ -55,7 +61,7 @@ export function QuickView({ id, onClose }: { id: string; onClose: () => void }) 
       <div ref={ref} className="qv" role="dialog" aria-modal="true" aria-labelledby="qv-title">
         <button className="qv-close" onClick={requestClose} aria-label="Close"><X size={16} strokeWidth={2.6} aria-hidden="true" /></button>
         <div className="qv-img" style={{ background: p.tint }}>
-          <PhotoLabel label={`Photo — ${p.name}`} size={34} className="simg-ph" />
+          <ProductPhoto image={p.image} name={p.name} label={`Photo — ${p.name}`} size={34} className="simg-ph" />
           {wrapped && <WrapOverlay paper={p.paper} />}
           <WrapToggle wrapped={wrapped} onChange={setWrapped} />
         </div>

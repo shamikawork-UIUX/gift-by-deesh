@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Candy, Gift, MapPin, MessageCircle } from 'lucide-react';
 import { contactCards } from '../../data/about';
 import { site } from '../../data/site';
+import { useSettings } from '../../store/catalog';
 import { whatsAppLink } from '../../lib/checkout';
 import { InstagramIcon, TikTokIcon } from '../../components/Shapes';
 import { useTimers } from '../../hooks/useTimers';
@@ -9,6 +10,7 @@ import { useTimers } from '../../hooks/useTimers';
 export function Contact() {
   const [copied, setCopied] = useState('');
   const later = useTimers();
+  const settings = useSettings();
 
   const copy = async (id: string, number: string) => {
     try { await navigator.clipboard?.writeText(number); } catch { /* clipboard blocked */ }
@@ -23,7 +25,7 @@ export function Contact() {
           <p className="eyebrow">CONTACT</p>
           <h2 className="h2">Say hi — we reply fast</h2>
         </div>
-        <div className="open-now"><span className="open-dot" aria-hidden="true" />{site.hours}</div>
+        <div className="open-now"><span className="open-dot" aria-hidden="true" />{settings.shopHours}</div>
       </div>
       <div className="chats">
         {contactCards.map((c) => (
@@ -53,7 +55,7 @@ export function Contact() {
       <div className="info-row">
         <div className="info-card">
           <span className="info-ic" style={{ background: '#E6EEFA', color: '#3B6CC0' }}><MapPin size={22} aria-hidden="true" /></span>
-          <div><div className="info-t">Islandwide delivery</div><div className="info-s">Next-day in {site.cutoff.area} if you order by {site.cutoff.time}.</div></div>
+          <div><div className="info-t">Islandwide delivery</div><div className="info-s">Next-day in {settings.cutoffArea} if you order by {settings.cutoffTime}.</div></div>
         </div>
         <a href={site.instagram.url} target="_blank" rel="noopener" className="info-card">
           <span className="info-ic" style={{ background: 'var(--pink-soft)', color: 'var(--pink)' }}><InstagramIcon size={22} /></span>

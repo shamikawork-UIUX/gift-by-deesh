@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Heart, Plus } from 'lucide-react';
 import { occName, whoName, type Product } from '../../data/products';
-import { PhotoLabel } from '../../components/Placeholder';
+import { ProductPhoto } from '../../components/Placeholder';
 import { PriceBlock } from '../../components/PriceBlock';
 import { Bow } from '../../components/Shapes';
 import { useFlyToBasket } from '../../hooks/useFlyToBasket';
@@ -40,7 +40,7 @@ export function ShopCard({ product: p, onOpen }: { product: Product; onOpen: () 
     <article className="scard">
       <div className="simg" style={{ background: p.tint }}>
         <button className="simg-btn" aria-label={`Quick view ${p.name}`} onClick={onOpen}>
-          <PhotoLabel label={`Photo — ${p.name}`} className="simg-ph" />
+          <ProductPhoto image={p.image} name={p.name} label={`Photo — ${p.name}`} className="simg-ph" />
         </button>
         {wrapped && <WrapOverlay paper={p.paper} />}
         <span className="qv-hint" aria-hidden="true">Quick view</span>

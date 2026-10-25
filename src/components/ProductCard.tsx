@@ -2,7 +2,7 @@ import type { MouseEvent } from 'react';
 import { Heart, Plus } from 'lucide-react';
 import type { Product } from '../data/products';
 import { money } from '../lib/format';
-import { PhotoLabel } from './Placeholder';
+import { PhotoLabel, ProductPhoto } from './Placeholder';
 import { Koko } from './PriceBlock';
 import './ProductCard.css';
 
@@ -20,8 +20,8 @@ export function ProductCard({ product: p, badge, added, hinted, onAdd, onHint }:
   return (
     <article className="pcard">
       <div className="ph pcard-img" style={{ background: p.tint }}>
-        <PhotoLabel label={`${p.name} — front`} />
-        <PhotoLabel label={`${p.name} — wrapped / in hand`} className="ph-in alt" style={{ background: p.tint2 }} />
+        <ProductPhoto image={p.image} name={p.name} label={`${p.name} — front`} />
+        {!p.image && <PhotoLabel label={`${p.name} — wrapped / in hand`} className="ph-in alt" style={{ background: p.tint2 }} />}
         {badge && (
           <span className="pbadge" style={{ background: badge === 'New' ? 'var(--ink)' : 'var(--pink)' }}>{badge}</span>
         )}

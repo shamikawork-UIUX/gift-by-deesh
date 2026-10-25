@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { site } from '../data/site';
+import { useSettings } from '../store/catalog';
 import { Wordmark } from './Logo';
 import { InstagramIcon, TikTokIcon } from './Shapes';
 import './Footer.css';
 
 export function Footer({ note }: { note?: string }) {
+  const settings = useSettings();
   return (
     <footer className="site-foot">
       <div className="foot-in">
@@ -35,7 +37,7 @@ export function Footer({ note }: { note?: string }) {
           <strong>Get in Touch</strong>
           <a href={`https://wa.me/${site.contacts.gifts.wa}`} target="_blank" rel="noopener">Gifts: {site.contacts.gifts.number}</a>
           <a href={`https://wa.me/${site.contacts.chocolate.wa}`} target="_blank" rel="noopener">Chocolate: {site.contacts.chocolate.number}</a>
-          <span>{site.hours}</span>
+          <span>{settings.shopHours}</span>
         </div>
       </div>
       <div className="foot-base">
